@@ -1,0 +1,29 @@
+[26-Apr-2025 12:59:15 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 7
+[26-Apr-2025 13:00:58 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 7
+[26-Apr-2025 13:01:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 7
+[26-Apr-2025 13:01:55 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 7
+[26-Apr-2025 13:03:04 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 7
+[26-Apr-2025 13:06:21 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 /home1/actlhhvu/public_html/kvrbilling/dbfiles/login_process1.php(6): require_once()
+#1 /home1/actlhhvu/public_html/kvrbilling/index.php(1): include('/home1/actlhhvu...')
+#2 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:06:49 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 /home1/actlhhvu/public_html/kvrbilling/dbfiles/login_process1.php(6): require_once()
+#1 /home1/actlhhvu/public_html/kvrbilling/index.php(1): include('/home1/actlhhvu...')
+#2 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:06:53 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 /home1/actlhhvu/public_html/kvrbilling/dbfiles/login_process1.php(6): require_once()
+#1 /home1/actlhhvu/public_html/kvrbilling/index.php(1): include('/home1/actlhhvu...')
+#2 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:18:59 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308
+[26-Apr-2025 13:18:59 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308
+[26-Apr-2025 13:19:11 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308
+[26-Apr-2025 13:19:11 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308
+[26-Apr-2025 13:20:14 UTC] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308
+[26-Apr-2025 13:20:14 UTC] PHP Warning:  mysqli_close() expects parameter 1 to be mysqli, null given in /home1/actlhhvu/public_html/kvrbilling/template/sidemenu.php on line 308

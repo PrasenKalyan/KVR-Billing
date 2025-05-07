@@ -1,0 +1,24 @@
+[26-Apr-2025 13:05:30 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:05:37 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:05:42 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:05:46 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:05:53 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
+[26-Apr-2025 13:06:17 UTC] PHP Fatal error:  Uncaught Error: Object of class mysqli could not be converted to string in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php:8
+Stack trace:
+#0 {main}
+  thrown in /home1/actlhhvu/public_html/kvrbilling/dbconnection/connection.php on line 8
