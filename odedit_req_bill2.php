@@ -1,33 +1,30 @@
 <?php //include('config.php');
 session_start();
+$stn="OD";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
  $name=$_SESSION['user'];
 //include('org1.php');
-
-
 include'dbfiles/org.php';
 //include'dbfiles/iqry_acyear.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include'template/headerfile.php'; ?>
-     <style>
+<?php include'template/headerfile.php'; ?>
+ <style>
 .frmSearch {border: 1px solid #a8d4b1;background-color: #c6f7d0;margin: 2px 0px;padding:40px;border-radius:4px;}
 #country-list{float:left;list-style:none;margin-top:-3px;padding:0;width:190px;position: absolute;}
 #country-list li{padding: 10px; background: #f0f0f0; border-bottom: #bbb9b9 1px solid;}
 #country-list li:hover{background:#ece3d2;cursor: pointer;}
 </style>
-
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-	 <script src="js/jquery.min.js"></script>
-  <script src="js/jquery.validate.min.js"></script>
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
+<script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/minified/jquery-ui.min.css" type="text/css" /> 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script> 
-
-    <style>
+<style>
         strong{
             color:red;
         }
@@ -37,7 +34,7 @@ include'dbfiles/org.php';
 	    var curval= document.getElementById("ftype"+i).value;
 	$.ajax({          
         	type: "GET",
-        	url: "getftypedescriptionauto.php",
+        	url: "getodftypedescriptionauto.php",
         	data:{keyword: curval, id: i},
         	success: function(data){
         		$("#suggesstion-box"+i).show();
@@ -149,6 +146,7 @@ xmlhttp.send();
  
  });
  
+ 
  function calculateTotal31(){
 	subTotal = 0 ; total = 0; 
 	$('.tet2').each(function(){
@@ -164,7 +162,6 @@ xmlhttp.send();
 	
 	//$('#bamount').val( subTotal.toFixed(2) );
 }
- 
  
 function test6(){
      var tbase=$('#tbase').val();
@@ -212,7 +209,7 @@ function test6(){
      //alert('hi');
  }
  
- 
+
 
  function calculateTotal33(){
 	subTotal = 0 ; total = 0; 
@@ -228,8 +225,6 @@ function test6(){
      $('#totamount1').val( kk.toFixed(2) );
      
 }
-
- 
 
  
  $(document).on('keyup', '.txt21', function(){
@@ -306,6 +301,7 @@ function test6(){
 }
  
  </script>
+ 
  <script>
  function checkAvailability() {
 //$("#loaderIcon").show();
@@ -325,7 +321,7 @@ error:function (){}
  
 </script>
     <body class="no-skin">
-        <?php include 'template/logo.php'; ?>
+        <?php include'template/logo.php'; ?>
 
         <div class="main-container ace-save-state" id="main-container">
             <script type="text/javascript">
@@ -343,7 +339,7 @@ error:function (){}
                 </script>
 
                 <!-- /.sidebar-shortcuts -->
-                <?php include 'template/sidemenu.php' ?>
+                <?php include'template/sidemenu.php' ?>
                 <!-- /.nav-list -->
 
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -380,7 +376,7 @@ error:function (){}
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                          Edit To be raised Invoice
+                         OD  Edit To be raised Invoice
 
                             </h1>
                         </div>
@@ -389,7 +385,6 @@ error:function (){}
                         
                  <?php  $id=$_GET['id'];
                         $id1=$_GET['id1'];
-
 						$sq=mysqli_query($link,"select * from odrequest_amnt where quet_num='$id'");
 						$r=mysqli_fetch_array($sq);
 						
@@ -406,40 +401,58 @@ error:function (){}
   <input type="hidden" name="state" value="<?php echo $r['state'];?>">
                                             <table class="table table-striped table-bordered table-hover">
 											
-											  <tr><td align="right">QuoteNumber</td><td align="left">
-											  <input  type="text" readonly required class="form-control" value="<?php echo $id?>"  name="qt_no" id="qt_no"></td>
-                                        <td align="right">Bill Received Date</td><td><input type="date" required value="<?php echo $r1['bill_date'];?>"   name="bill_date" id="inv_date" class="form-control"></td>
+											  <tr><td align="right">Quotation Number</td><td align="left">
+											  <input  type="text" readonly  class="form-control" value="<?php echo $id?>" required  name="qt_no" id="qt_no"></td>
+                                        <td align="right">Bill Received Date</td><td><input type="date" value="<?php echo $r1['bill_date'];?>" required   name="bill_date" id="inv_date" class="form-control"></td>
                                         </tr>
 											
                                            
 										
 										
-										  <tr><td align="right">Invoice Num</td><td align="left">
-										<input type="text" name="inv_no" id="inv_no"  class="form-control" onkeyup="checkAvailability()" required value="<?php echo $r1['inv_num'];?>">
+										  <tr><td align="right">Invoice Number</td><td align="left">
+										<input type="text" name="inv_no" 
+										id="inv_no"  class="form-control" value="<?php echo $r1['inv_num'];?>" onkeyup="checkAvailability()" required>
 										<div id="uname_response"></div>
 										</td>	
                                         <td align="right">Invoice Date</td><td><input type="date" name="inv_date" 
-										id="sub_type"  class="form-control" required value="<?php echo date('Y-m-d');?>"></td>
+										id="sub_type"  class="form-control" value="<?php echo date('Y-m-d');?>"></td>
                                         </tr>
 										
 										  <tr><td align="right">Note</td><td align="left">
-										<textarea name="note" required class="form-control"><?php echo $r1['note1'];?></textarea></td>	
-                                        <td align="right">Invoice Submited Date</td><td>
-										<input type="date" required name="inv_sub_date" 
-										id="sub_type"  class="form-control" value="<?php echo date('Y-m-d');?>">
+										<textarea name="note" class="form-control" required><?php echo $r1['note1'];?></textarea></td>	
+                                        <td align="right">Invoice Submitted Date</td><td>
+										<input type="date" name="inv_sub_date" 
+										id="sub_type"  class="form-control" required value="<?php echo date('Y-m-d');?>">
 										</td>
                                         </tr>
 											<tr><td align="right">Service Period</td><td align="left">
-										<input type="text" required name="speriod" id="speriod" class="form-control" /></td>	
+										<input type="text" name="speriod" id="speriod" required class="form-control" /></td>	
                                         <td align="right">Format Type</td><td>
-										<input id="ftype1" required type="text" class="form-control" name="ftype" onkeyup='s3(1)' >
+										<input id="ftype1" type="text" class="form-control"  name="ftype" value="<?php echo $r2['frm_type'];?>" >
+										<tr><td align="right">Company Name</td><td align="left">
+										<input type="text" name="com_name" id="com_name" required class="form-control" value="<?php echo $rs1['com_name'];?>" /></td>
+                                        </tr>
 										<div id='suggesstion-box1'>
 
 										</td>
                                         </tr>
+										<?php
+
+$id = $_REQUEST['id'];
+$query = mysqli_query($link, "SELECT tot_base FROM add_odqot WHERE quet_num = '$id'");
+$r1 = mysqli_fetch_assoc($query);
+$tot_base = $r1['tot_base'];
+?>
+										<tr>
+  <td align="right">Total Base Amount</td>
+  <td align="left">
+    <input type="text" name="tot_base" id="tot_base" class="form-control" readonly 
+           value="<?php echo $tot_base; ?>">
+  </td>
+</tr>
 										<tr><td align="right">Total Base Amount</td><td align="left">
-										<input type="text" required name="tbase" id="tbase" class="form-control" readonly /></td>	
-											<td align="right">File Upload</td>
+										<input type="text" name="tbase" id="tbase" class="form-control" required readonly /></td>
+										<td align="right">File Upload</td>
 										<td><input type="file" name="img3" id="img3" class="form-control" /></td>
                                         </tr>
 										<tr><td align="right">28 % Gst</td><td align="left">
@@ -504,7 +517,7 @@ error:function (){}
 											$bill_date=$_POST['bill_date'];
 											$inv_no=$_POST['inv_no'];
 											$inv_date=$_POST['inv_date'];
-											$id1=$_POST['id1'];
+											// $id1=$_POST['id1'];
 											$state=$_POST['state'];
 											$note=$_POST['note'];
 																						$speriod=$_POST['speriod'];
@@ -515,6 +528,7 @@ error:function (){}
 											$gst12=$_POST['gst12'];
 											$gst5=$_POST['gst5'];
 											$gst0=$_POST['gst0'];
+											$com_name=$_POST['com_name'];
 
 											
 											
@@ -523,7 +537,6 @@ error:function (){}
 										else {
 											$st="Un Paid";
 										}
-											
 												$iname4 = $_FILES['img3']['name'];
 			 if($iname4!= ""){
 	$code2 = md5(rand());
@@ -536,19 +549,18 @@ error:function (){}
 	$iname5 = ($iname5);
 	}else{
 	 $iname5 = ($img3);
-	}	
-										 $yt=	"update  odqot_bill set quet_num='$qt_no',bill_date='$bill_date',
+	}		
+											
+												$sq=mysqli_query($link,"update  odqot_bill set quet_num='$qt_no',bill_date='$bill_date',
 												inv_num='$inv_no',inv_date='$inv_date',note1='$note',inv_sub_date='$inv_sub_date',status='RUn Paid',
 												speriod='$speriod',ftype='$ftype',tbase='$tbase',gst28='$gst28',gst18='$gst18',gst12='$gst12',gst5='$gst5',
-												gst0='$gst0',total='$total',file='$iname5'   where id='$id1' and quet_num='$id'";
-											//exit;
-												$sq=mysqli_query($link,$yt) or die(mysqli_error($link));
+												gst0='$gst0', com_name = '$com_name',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'");
 												
 											
-										//	if($state=='AP'){
+											
 												$s=mysqli_query($link,"update add_odqot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='Raised Invoice List' where quet_num='$qt_no'");
-										//	} 
+											
 											
 											print "<script>";
 			print "alert('Invoice Sucessfully Updated');";
@@ -697,10 +709,15 @@ $(".delete").on('click', function() {
 </body>
 </html>
 <?php 
+
 }else
 {
 session_destroy();
+
 session_unset();
+
 header('Location:index.php?authentication failed');
+
 }
+
 ?>

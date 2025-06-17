@@ -1,5 +1,6 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
@@ -7,45 +8,6 @@ if($_SESSION['user'])
 //include('org1.php');
 include'dbfiles/org.php';
 //include'dbfiles/iqry_acyear.php';
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$qotbill ='qot_bill';
-		$request_amnt ='request_amnt';
-       
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qotbill ='tgqot_bill';
-		$request_amnt ='tgrequest_amnt';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qotbill ='tnqot_bill';
-	  $request_amnt ='tnrequest_amnt';
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qotbill ='klqot_bill';
-		$request_amnt ='klrequest_amnt';	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qotbill ='knqot_bill';
-	  $request_amnt ='knrequest_amnt';
-      	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qotbill ='odqot_bill';
-	  $request_amnt ='odrequest_amnt';	
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -260,10 +222,10 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state;?> Document Required List </a>
+                                <a href="#"><?php echo $stn;?> Document Required List </a>
                             </li>
                             <li>
-                                <a href="qot_list.php?state=<?php echo $state;?>"><?php echo $state;?> Document Required List</a>
+                                <a href="qot_list.php?state=<?php echo $stn;?>"><?php echo $stn;?> Document Required List</a>
                             </li>
                             <li>
                                 <a href="">Edit Document Required </a>
@@ -278,7 +240,7 @@ xmlhttp.send();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                               <?php echo $state; ?> Edit Document Required
+                               <?php echo $stn; ?> Edit Document Required
 
                             </h1>
                         </div>
@@ -286,7 +248,7 @@ xmlhttp.send();
                       
                         
                  <?php  $id=$_GET['id'];
-						$sq=mysqli_query($link,"select * from ".$request_amnt." where quet_num='$id'");
+						$sq=mysqli_query($link,"select * from request_amnt where quet_num='$id'");
 						$r=mysqli_fetch_array($sq);
 						
 						?>             <!-- PAGE CONTENT BEGINS -->
@@ -295,7 +257,7 @@ xmlhttp.send();
                                 <!-- PAGE CONTENT BEGINS -->
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <?php $ssq=mysqli_query($link,"select * from ".$qotbill." where quet_num='$id'");
+                                        <?php $ssq=mysqli_query($link,"select * from qot_bill where quet_num='$id'");
 													   $r1=mysqli_fetch_array($ssq);?>
  <form name="frm" method="post" action="" enctype="multipart/form-data">
  <input type="hidden" name="ids" value="<?php echo $id?>">
@@ -322,8 +284,18 @@ xmlhttp.send();
 										
 										</td>
                                         </tr>
-                                         <tr><td align="right">Upload File</td><td align="left">
+                                         <tr><td align="right">Upload File1</td><td align="left">
 									<input type="file" name="ufile" id="ufile" class="form-control"/>
+										
+										</td>
+                                        </tr>
+										<tr><td align="right">Upload File2</td><td align="left">
+									<input type="file" name="ufile1" id="ufile1" class="form-control"/>
+										
+										</td>
+                                        </tr>
+										<tr><td align="right">Upload File3</td><td align="left">
+									<input type="file" name="ufile2" id="ufile2" class="form-control"/>
 										
 										</td>
                                         </tr>
@@ -372,33 +344,61 @@ xmlhttp.send();
                                         	}else{
                                         	 $iname1 = ($img1);
                                         	}		
-                                        	
+                                        	$iname = $_FILES['ufile1']['name'];
+                                        			 if($iname!= ""){
+                                        	$code = md5(rand());
+                                        	 $iname =$code. $_FILES['ufile1']['name'];
+                                        	$tmp = $_FILES['ufile1']['tmp_name'];
+                                        	 $dir = "upload";
+                                        		       $destination =  $dir . '/' . $iname;
+                                        		         move_uploaded_file($tmp, $destination);
+                                        	 $iname2 =$code. $_FILES['ufile1']['name'];
+                                        	$iname2 = ($iname2);
+											
+                                        	}else{
+                                        	 $iname2 = ($img2);
+                                        	}
+											$iname = $_FILES['ufile2']['name'];
+                                        			 if($iname!= ""){
+                                        	$code = md5(rand());
+                                        	 $iname =$code. $_FILES['ufile2']['name'];
+                                        	$tmp = $_FILES['ufile2']['tmp_name'];
+                                        	 $dir = "upload";
+                                        		       $destination =  $dir . '/' . $iname;
+                                        		         move_uploaded_file($tmp, $destination);
+                                        	 $iname3 =$code. $_FILES['ufile2']['name'];
+                                        	$iname3 = ($iname3);
+											
+                                        	}else{
+                                        	 $iname3 = ($img3);
+                                        	}
                                         	
 												
 												if(($req=="") or ($req=="No")){
 
-												$sq=mysqli_query($link,"update  ".$request_amnt." set bill_status='payment pending',req='$req',note='$note',docr_status='' where quet_num='$qt_no'");
+												$sq=mysqli_query($link,"update  request_amnt set bill_status='payment pending',req='$req', not_file='$iname1', not_file1='$iname2',not_file2='$iname3',note='$note',docr_status='' where quet_num='$qt_no'");
 												
-							                    $k2=mysqli_query($link,"select * from ".$qotbill." where quet_num='$qt_no'") or die(mysqli_error($link));
+							                    $k2=mysqli_query($link,"select * from qot_bill where quet_num='$qt_no'") or die(mysqli_error($link));
 									            if(mysqli_num_rows($k2)==0)
 									            {
-												$sq=mysqli_query($link,"insert into ".$qotbill." (quet_num,bill_date,inv_num,inv_date,note,inv_sub_date,status,state,user)
+												$sq=mysqli_query($link,"insert into qot_bill (quet_num,bill_date,inv_num,inv_date,note,inv_sub_date,status,state,user)
 												values('$qt_no','$bill_date','$inv_no','$inv_date','$note','$inv_sub_date','payment pending','$state','$name')");
 									            }
-												$s=mysqli_query($link,"update ".$qottable." set
+
+												$s=mysqli_query($link,"update add_qot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='To Be Raise Invoice' where quet_num='$qt_no'");
 										
 												}else{
-												 	$sq=mysqli_query($link,"update  ".$request_amnt." set bill_status='payment pending',req='$req',note='$note',docr_status='',not_file='$iname1' where quet_num='$qt_no'");
+												 	$sq=mysqli_query($link,"update  request_amnt set bill_status='payment pending',req='$req',note='$note',docr_status='', not_file='$iname1', not_file1='$iname2',not_file2='$iname3', where quet_num='$qt_no'");
 												   
-												$s=mysqli_query($link,"update ".$qottable." set
+												$s=mysqli_query($link,"update add_qot set
 												invoice_status='Not Required',status='Not Required' where quet_num='$qt_no'");
 										
 												}
 										
 											print "<script>";
                                 			print "alert('Bill Sucessfully Updated');";
-                                			print "self.location='bill_list.php?state=$state';";
+                                			print "self.location='bill_list.php?state=$stn';";
                                 			print "</script>";
 										}?>
 									

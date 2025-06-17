@@ -59,7 +59,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:AF1');
  $objPHPExcel->getActiveSheet()->getStyle("A1:AF1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
  $objPHPExcel->getActiveSheet()->getStyle("A1:AF1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JTECHNO ASSOCIATES');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PROPERTY PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:AF1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->getActiveSheet()->mergeCells('A4:AF4');
  $objPHPExcel->getActiveSheet()->getStyle("A4:AF4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
@@ -131,21 +131,21 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:AF6")->getFill()->setFillType(PHPEx
 $objPHPExcel->getActiveSheet()->getStyle("A6:AF6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
 
   $y="SELECT * FROM ".$qottable1."    ORDER BY id desc";    
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $i=1;
 $rowCount	=	7;
 while($row10	=	$result->fetch_assoc()){
     $id1=$row10['id1'];
     $id2=$row10['id'];
     $y10="SELECT * FROM ".$qottable." where id='$id1'";
-    $result10			=	$db->query($y10) or die(mysql_error());
+    $result10			=	$db->query($y10) or die(mysqli_close($link));
     $row	=	$result10->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, mb_strtoupper($i,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, mb_strtoupper($row['quet_num'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, mb_strtoupper($scode=$row['store_code'],'UTF-8'));
 	
 	$ds="select * from dpr where store_code='$scode'";
-	$result1=$db->query($ds) or die(mysql_error());
+	$result1=$db->query($ds) or die(mysqli_close($link));
 	$row1=$result1->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, mb_strtoupper($row1['store_name'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, mb_strtoupper($row1['coordinator'],'UTF-8'));
@@ -162,7 +162,7 @@ while($row10	=	$result->fetch_assoc()){
 	$objPHPExcel->getActiveSheet()->SetCellValue('P'.$rowCount, mb_strtoupper($row['ro_date'],'UTF-8'));
 
 		$ds1="select * from ".$qottable1." where id1='$id1' and id='$id2'";
-	$result2=$db->query($ds1) or die(mysql_error());
+	$result2=$db->query($ds1) or die(mysqli_close($link));
 	$row2=$result2->fetch_assoc();
 	
 		$objPHPExcel->getActiveSheet()->SetCellValue('Q'.$rowCount, mb_strtoupper($row2['desc1'],'UTF-8'));

@@ -78,18 +78,26 @@ if($qt_no1!=''){
 	 $empemail=$tr['emp_email'];
 	 
 	 
-	  $a="INSERT INTO `add_odqot`(`store_code`, `inv_date`, `quet_num`, `tot_base`, `tot_ser`, `tot_gst`, `net`,  `ses`,falt_no,falt_date,falt_desc,status,img1,img2,img3)
+	   $a="INSERT INTO `add_odqot`(`store_code`, `inv_date`, `quet_num`, `tot_base`, `tot_ser`, `tot_gst`, `net`,  `ses`,falt_no,falt_date,falt_desc,status,img1,img2,img3)
 	 VALUES ('$store_code','$inv_date','','$tot','$tot_serv','$tot_gst','$net','$ses','$falt_no','$falt_date','$falt_desc','Ro Required','$iname1','$iname3','$iname5')";
 	$sq=mysqli_query($link,$a);
 	 $sno=mysqli_insert_id($link);
 	 
 
-$sqq=mysqli_query($link,"select `count` as ids from qutcount where state='OD' ");
-	$rr=mysqli_fetch_array($sqq);
-	$idd=$rr['ids'];
-	$cc=$idd+1;
-	 $qt_nox=23240000+1+$idd;
-	 $qt_no="QJFMOD$qt_nox";  
+	 $sqq=mysqli_query($link,"select `count` as ids from qutcount where state='OD' ");
+	 $rr=mysqli_fetch_array($sqq);
+	 $idd=$rr['ids'];
+	 $cc=$idd+1;
+	 $service = $_POST['service']; 
+	 if ($service == "House Cleaning") {
+		 $qt_nox = 20250000 + 1 + $idd;
+		 $qt_no = "QHCOD" . $qt_nox;
+	 } else {
+		 
+		 $qt_nox = 20250000 + 1 + $idd;
+		 $qt_no = "QKVROD" . $qt_nox;
+	 }  
+	  
 	 if($qt_no1!=''){
 	     $ac=mysqli_query($link,"update add_odqot set quet_num='$qt_no1' where id='$sno'");
 	 }else{
@@ -123,9 +131,9 @@ $remarks=$_POST['remarks'][$i];
 $brand=$_POST['brand'][$i];
 $model=$_POST['model'][$i];
 
- $query = "INSERT INTO add_odqot1 ( `desc1`, `hsn`, `gst`, `uom`, `qty`, `gst_amnt`, `rate`, `base_amt`,`date`,`id1`,item_id,serv_fee,cap,serv_amt,serv_code,serv_cap,brand,model,remarks) 
+ $query = "INSERT INTO add_odqot1 ( `desc1`, `hsn`, `gst`, `uom`, `qty`, `gst_amnt`, `rate`, `base_amt`,`date`,`id1`,item_id,serv_fee,cap,serv_amt,serv_code,serv_cap,brand,model) 
 	VALUES 
- ('".addslashes($pname)."','$hsn','$gst','$uom','$qty','$gst_amnt','$price','$amnt','$date','$sno','$id','$serv_amt','$cap','$serv_amnt','$serv_code','$serv_codex','$brand','$model','$remarks')";
+ ('".addslashes($pname)."','$hsn','$gst','$uom','$qty','$gst_amnt','$price','$amnt','$date','$sno','$id','$serv_amt','$cap','$serv_amnt','$serv_code','$serv_codex','$brand','$model')";
  $res=mysqli_query($link,$query) or die(mysqli_error($link));
 }
      
@@ -136,7 +144,7 @@ $model=$_POST['model'][$i];
 	if($res){
 	   
 	print "<script>";
-	print "alert('Sucessfully Saved');";
+	print "alert('Successfully Saved');";
 	print "self.location='odqot_list.php';";
 	print "</script>";
 	}
@@ -419,7 +427,7 @@ $remarks=$_POST['remarks'][$i];
 //}
 	//}
 	//exit;
-	if($sq){
+	if($res){
 	print "<script>";
 	print "alert('Sucessfully Updated');";
 	print "self.location='odqot_list.php';";

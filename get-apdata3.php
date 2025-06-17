@@ -29,6 +29,8 @@ while($row = mysqli_fetch_array($result))
   
   echo ":" .trim($row['afm']);
    echo ":" . $row['company_name'];
+   echo ":" . $row['frm_type'];
+   
   //$d1= date("Y-m-d", strtotime($d));
 	  //echo ":" . $d1;
   //echo "</tr>";

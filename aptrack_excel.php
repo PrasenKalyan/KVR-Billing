@@ -69,14 +69,14 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:BJ1');
  $objPHPExcel->getActiveSheet()->getStyle("A1:BJ1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
  $objPHPExcel->getActiveSheet()->getStyle("A1:BJ1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JTECHNO ASSOCIATES');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:BJ1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->getActiveSheet()->mergeCells('A4:BJ4');
  $objPHPExcel->getActiveSheet()->getStyle("A4:BJ4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
         $objPHPExcel->getActiveSheet()->getStyle("A4:BJ4")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
 
- $objPHPExcel->getActiveSheet()->setCellValue('A4', $state.' TRACKER LIST');
+ $objPHPExcel->getActiveSheet()->setCellValue('A4', $state.'AP TRACKER LIST');
  $objPHPExcel->getActiveSheet()->getStyle("A4:BJ4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->setActiveSheetIndex(0);
 $objPHPExcel->getActiveSheet()->SetCellValue('A6', 'SNo');

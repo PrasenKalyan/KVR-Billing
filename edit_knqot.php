@@ -412,7 +412,7 @@ calculateTotal1();
 
 <?php 
 $sql="select distinct store_code from dpr where state='KN' ";  // Query to collect records
-$r1=mysqli_query($link,$sql) or die(mysql_error());
+$r1=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r1)) {
 echo  "<option value=\"$row[store_code]\"/>"; // Format for adding options 
 }
@@ -464,10 +464,11 @@ $a="select * from dpr where store_code='$str'";
 										<textarea  required name="falt_desc" id="falt_no" class="form-control" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?>><?php echo $r['falt_desc'];?></textarea></td>
 										<td align="right">Format Type</td><td align="left">
 										<input type="text" required name="frm_type" id="frm_type" class="form-control" value="<?php echo $r['frm_type'];?>" /></td>
-                                        
-                                        
-                                       
                                         </tr>
+										<tr>
+											<td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text" name="vendor" id="vendor" class="form-control" value="<?php echo $r['vendor'];?>" /></td>
+										</tr>
 										 <tr><td align="right">Type of Work</td><td align="left">
 										<input type="text" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?> name="type_of_work" 
 										id="type_of_work"  class="form-control" value="<?php echo $r['type_of_work'];?>"></td>	

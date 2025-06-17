@@ -1,10 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-
-
-<title>KVR BEST</title>
- <script type="text/javascript">
+<title>KVR BEST PROPERTY MANAGEMENT PVT.LTD</title>
+<script type="text/javascript">
             function printt()
             {
                 document.getElementById("prt").style.display="none";
@@ -15,16 +13,14 @@
             {
                 window.close();
             }
-        </script>
+</script>
 <style type="text/css">
-    table { page-break-inside:auto;page-break-inside:auto;border-color:#fff;font-family: "Times New Roman", Times, serif;font: size 12px;  }
-     /* changing the pixel size from 12 to 10px */
+    table { page-break-inside:auto;page-break-inside:auto;border-color:#fff;font-family: "Times New Roman", Times, serif;font-size:12px;  }
     tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group }
     tfoot { display:table-footer-group }
     thead,tfoot{border:none !important;border-color:#fff;}
-    
-    tr.noBorder th {
+   tr.noBorder th {
   border:none !important;
   border-color:#fff;
 }
@@ -62,19 +58,16 @@ header {
   text-align: center;
 }
 
-/* @page {
+@page {
   size: A4;
-  margin: 11mm 9mm 11mm 5mm; */
-  /* scale: ; */
-  /* margin: 1.1cm -2mm 1.1cm -3mm; */
-  /* margin: 11mm 9mm 11mm 5mm; actual code for margin in A4 Paper  */
+  margin: 11mm 9mm 11mm 5mm;
   
-  /* @bottom {
+  @bottom {
 	content: "Page " counter(page) " of " counter(pages)
-    } */
-/* } */
+    }
+}
 
-/* @media print {
+@media print {
   footer {
     position: fixed;
     bottom: 0;
@@ -89,118 +82,19 @@ header {
   }
 
   html, body {
-    width: 210mm; */
-	/* width: 200mm; changed width from 210mm to 200 */
-    /* height: 297mm;
+    width: 210mm;
+    height: 297mm;
   }
-} */
-/* Adding new CSS code to print new Quot with attractive graphics  */
-/* body {
-  background: rgb(204,204,204); 
-} */
-.page[size="A4"] {
-  background: dark;
-  width: 21cm;
-  height: 29.7cm;
-  padding-right: 20px;
-  display: block;
-  margin: 0 auto;
-  /* transform: scale(0.7); */
-  margin-bottom: 0.5cm;
-  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
-}
-@media print {
-  /* body, page[size="A4"] {
-    margin: 0 auto;
-	object-fit: contain;
-	transition: none !important;
-    -webkit-transition: none !important;
-    -moz-transition: none !important; */
-	/* margin: 1.1cm 9mm 1.1cm -3mm; */
-	/* display: block; */
-	/* scale: - 1 1; */
-	/* box-shadow: 0 0 0.5cm rgba(0,0,0,0.5); */
-    /* box-shadow: 0; */
-	
-  /* } */
 }
 .pagenum:before { content: counter(page); }
-/* Adding div to scale the Printing page  */
-.scale1demo {
-  width: 500px;
-  height: 100px;
-}
 </style>
 </head>
 <body>
-    <div class="page" >
+    <div class="page">
 <?php //include('config.php');
 include('dbconnection/connection.php');
-$state=$_GET['state'];
-if($state=='AP'){
-	$qottable ='add_qot';
-	$qottable1 ='add_qot1';
- 
-}
-elseif($state=='TG'){
-	$qottable ='add_tgqot';
-	$qottable1 ='add_tgqot1';
- 
-}
- elseif($state=='TN'){
-  $qottable ='add_tngqot';
-  $qottable1 ='add_tnqot1';
-}
-elseif($state=='KL'){
-	$qottable ='add_klqot';
-	$qottable1 ='add_klqot1';
-  
-}
-else if($state=='KN'){
-  $qottable ='add_knqot';
-  $qottable1 ='add_knqot1';
-
-}
-elseif($state=='OD'){
-  $qottable ='add_odqot';
-  $qottable1 ='add_odqot1';
-
-}
-$bid=$_GET['id'];
-$loc=$_GET['loc'];
-$q=mysqli_query($link,"select * from add_bill1 where id='$bid'") or die(mysqli_close($link));
-$r=mysqli_fetch_array($q);
- $service_no=$r['service_no'];
-$invdate1=$r['date'];
-
-$invdate = date('d-M-y', strtotime( $invdate1 ));
-
-
- $store_name=$r['store_name']; 
-    $state=$r['state'];
-	$state_code=$r['state_code'];
-	$addr=$r['addr'];
-	$ses=$r['ses'];
-	$gst_in=$r['gst_in'];
-	$tot=$r['tot'];
-	$tot_gst=$r['tot_gst'];
-	$net=$r['net'];
-	$date=$r['date'];
-	$store_code=$r['store_code'];
-	$inv_no=$r['inv_no'];
-	$mnth=date('M', strtotime( $date ));
-	$y=date('y', strtotime( $date ));
-
 ?>
-
-
-
-
-
    <header>
-   
-   
-   
    <!-- style="width:100%;height:120px;"-->
       <!-- <img src="jyothi.jpg" style="width:100%;height:120px;"/>-->
     </header>
@@ -221,7 +115,7 @@ $invdate = date('d-M-y', strtotime( $invdate1 ));
     border-top: 0px;
     border-bottom: 0px;">
   <?php $id=$_GET['id'];
-$sq=mysqli_query($link,"select * from ".$qottable." where id='$id'");
+$sq=mysqli_query($link,"select * from add_qot where id='$id'");
 $r=mysqli_fetch_array($sq);
 $store_code=$r['store_code'];
 include('dbconnection/connection.php');
@@ -245,38 +139,10 @@ $r1=mysqli_fetch_array($ssq1);
  
 ?>    
 <?php $sqy=mysqli_query($link,"select * from organization where id='1'");
-			$state=$_GET['state'];
 			$r2y=mysqli_fetch_array($sqy);
-			 if($state=='AP'){
-			$address=$r2y['ap_address'];
-			$gst=$r2y['ap_gst'];
-
-			}
-			elseif($state=='TG'){
-				$address=$r2y['tg_address'];
-				$gst=$r2y['tg_gst'];
-
-			}
-			elseif($$tate=='TN'){
-				$address=$r2y['tn_address'];
-				$gst=$r2y['tn_gst'];
-
-			}
-			elseif($state=='KL'){
-				$address=$r2y['kl_address'];
-				$gst=$r2y['kl_gst'];
-			}
-			elseif($state=='KN'){
-				$address=$r2y['kn_address'];
-				$gst=$r2y['kn_gst'];
-
-			}
-			elseif($state=='OD'){
-				$address=$r2y['od_address'];
-				$gst=$r2y['od_gst'];
-
-			}
-			$vendor_name1=$r2y['vendor_name1'];
+			$vendor_name1=$r2y['vendor_name2'];
+			$kn_address=$r2y['kn_address'];
+			$kn_gst=$r2y['kn_gst'];
 			?>
 			<br>
 <div style="border:0px solid #000;">
@@ -474,8 +340,7 @@ $r1=mysqli_fetch_array($ssq1);
 
 
 <th style="width:120px;" colspan="1">Base Amount</th>
-<th style="width:120px;" colspan="1">Service
-Fee -6% (In Rs)</th>
+<th style="width:120px;" colspan="1">Service Fee -6% (In Rs)</th>
 <th style="width:120px;" colspan="1">Total Base Amount</th>
 
 <th style="width:120px; border-right-color: #000 !important;">GST Rate (18 %)</th>
@@ -490,7 +355,7 @@ Fee -6% (In Rs)</th>
 include_once('dbconnection/connection.php');
 $bid=$r['id'];
 
-	 $aa="select * from ".$qottable1." where  id1='$bid' ";
+	 $aa="select * from add_qot1 where  id1='$bid' ";
  
 $t=mysqli_query($link,$aa) or die(mysqli_error($link));
 $i=1;

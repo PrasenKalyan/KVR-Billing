@@ -13,7 +13,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:R1');
  $objPHPExcel->getActiveSheet()->getStyle("A1:R1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
  $objPHPExcel->getActiveSheet()->getStyle("A1:R1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JYOTHI FACILITY MANAGEMENT PVT.LTD');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:R1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->getActiveSheet()->mergeCells('A4:R4');
  $objPHPExcel->getActiveSheet()->getStyle("A4:R4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
@@ -63,17 +63,17 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:R6")->getFill()->setFillType(PHPExc
           $objPHPExcel->getActiveSheet()->getColumnDimension('R')->setWidth(22);
  
 $objPHPExcel->getActiveSheet()->getStyle("A6:R6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $i=1;
 $rowCount	=	7;
 while($row	=	$result->fetch_assoc()){
     	$qtno=$row['quet_num'];
     		$a="select store_code,ro_no,ro_date,falt_desc,id,tot_base,tot_ser,tot_gst,net from add_klqot where quet_num='$qtno'";
-    		$result1=$db->query($a) or die(mysql_error());
+    		$result1=$db->query($a) or die(mysqli_close($link));
     		$row1	=	$result1->fetch_assoc();
     		$str_code=$row1['store_code'];
     		$ds="select * from dpr where store_code='$str_code'";
-        	$result2=$db->query($ds) or die(mysql_error());
+        	$result2=$db->query($ds) or die(mysqli_close($link));
 	        $row2=$result2->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, mb_strtoupper($i,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, mb_strtoupper($qtno,'UTF-8'));
@@ -91,7 +91,7 @@ while($row	=	$result->fetch_assoc()){
 	$objPHPExcel->getActiveSheet()->SetCellValue('N'.$rowCount, mb_strtoupper($row1['net'],'UTF-8'));
 	$ac=$row['ac_det'];
     $yt="select approve_amnt,ac_det,transfer_date from klrequest_amnt where quet_num='$qtno' and  confirm='Yes'";
-    $result4=$db->query($yt) or die(mysql_error());
+    $result4=$db->query($yt) or die(mysqli_close($link));
     $array='';
                                         while($row4=$result4->fetch_assoc()){
                                             $at=$row4['approve_amnt'];
@@ -103,11 +103,11 @@ while($row	=	$result->fetch_assoc()){
                                         }
 	$objPHPExcel->getActiveSheet()->SetCellValue('O'.$rowCount, $array);
 	 $a10="select sum(approve_amnt) as req_amnt from klrequest_amnt where quet_num='$qtno' and  confirm='Yes' ";
-	$result10=$db->query($a10) or die(mysql_error());
+	$result10=$db->query($a10) or die(mysqli_close($link));
 	 	$row3=$result10->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('P'.$rowCount, mb_strtoupper($row3['req_amnt'],'UTF-8'));
 	 $a11="select transfer_date from klrequest_amnt where quet_num='$qtno' and  confirm='Yes' order by id desc limit 1 ";
-	$result11=$db->query($a11) or die(mysql_error());
+	$result11=$db->query($a11) or die(mysqli_close($link));
 	 	$row4=$result11->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('Q'.$rowCount, mb_strtoupper($row4['transfer_date'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('R'.$rowCount, mb_strtoupper($row['user'],'UTF-8'));

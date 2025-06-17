@@ -435,8 +435,27 @@ error:function (){}
 										<div id='suggesstion-box1'>
 
 										</td>
+										<tr><td align="right">Company Name</td><td align="left">
+										<input type="text" name="com_name" id="com_name" required class="form-control" value="<?php echo $r1['com_name'];?>" /></td>
                                         </tr>
-										<tr><td align="right">Total Base Amount</td><td align="left">
+                                        </tr>
+										<?php
+
+$id = $_REQUEST['id'];
+$query = mysqli_query($link, "SELECT tot_base FROM add_tgqot WHERE quet_num = '$id'");
+$r1 = mysqli_fetch_assoc($query);
+$tot_base = $r1['tot_base'];
+?>
+										<tr>
+  <td align="right">Total Base Amount</td>
+  <td align="left">
+    <input type="text" name="tot_base" id="tot_base" class="form-control" readonly 
+           value="<?php echo $tot_base; ?>">
+  </td>
+  
+</tr>
+										<tr>
+											<td align="right">Total Base Amount</td><td align="left">
 										<input type="text" name="tbase" id="tbase" required class="form-control" readonly /></td>
 										<td align="right">File Upload</td>
 										<td><input type="file" name="img3" id="img3" class="form-control" /></td>
@@ -494,6 +513,7 @@ error:function (){}
                                                 <i class="ace-icon fa fa-save bigger-110"></i>
                                                 Update
                                             </button>
+											
 										
 										<?php 
 										if(isset($_POST['update'])){
@@ -503,7 +523,7 @@ error:function (){}
 											$bill_date=$_POST['bill_date'];
 											$inv_no=$_POST['inv_no'];
 											$inv_date=$_POST['inv_date'];
-											$id1=$_POST['id1'];
+											// $id1=$_POST['id1'];
 											$state=$_POST['state'];
 											$note=$_POST['note'];
 																						$speriod=$_POST['speriod'];
@@ -514,6 +534,7 @@ error:function (){}
 											$gst12=$_POST['gst12'];
 											$gst5=$_POST['gst5'];
 											$gst0=$_POST['gst0'];
+											$com_name = $_POST['com_name'];
 
 											
 											
@@ -541,13 +562,13 @@ error:function (){}
 												$sq=mysqli_query($link,"update  tgqot_bill set quet_num='$qt_no',bill_date='$bill_date',
 												inv_num='$inv_no',inv_date='$inv_date',note1='$note',inv_sub_date='$inv_sub_date',status='RUn Paid',
 												speriod='$speriod',ftype='$ftype',tbase='$tbase',gst28='$gst28',gst18='$gst18',gst12='$gst12',gst5='$gst5',
-												gst0='$gst0',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'");
+												gst0='$gst0', com_name='$com_name',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'");
 												
 											
-											if($state=='TG'){
+											
 												$s=mysqli_query($link,"update add_tgqot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='Raised Invoice List' where quet_num='$qt_no'");
-											} 
+											
 											
 											print "<script>";
 			print "alert('Invoice Sucessfully Updated');";

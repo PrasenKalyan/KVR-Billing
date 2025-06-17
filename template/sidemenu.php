@@ -407,6 +407,7 @@ if($name=="admin"){
 									echo "<b style='color:red;'>(".mysqli_num_rows($k8).")</b>";
 									?>
 								</a>
+								
 							</li>
 							
 							<li class="">
@@ -706,217 +707,7 @@ if($name=="admin"){
 						<!-- KN tracker End-->
 
 
-				<!-- KL Tracker Start -->
-					
-					
-						 <li class="">
-						<a href="#" class="dropdown-toggle">
-						    <img src="images/kl.png">
-							<!-- <i class="menu-icon fa fa-file-excel-o"></i> -->
-							<span class="menu-text">
-								KL Tracker
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-						<li class="">
-								<a href="klqot_list.php">
-								  
-									<i class="menu-icon fa fa-caret-right"></i>
-									KL Quotations
-									<?php $k=mysqli_query($link,"select * from add_klqot") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".$k1=mysqli_num_rows($k).")</b>";
-									?>
-								</a>
-
-								
-							</li>
-							
-							<li class="">
-							<a href="roqot_list.php?state=KL">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-									RO Required
-										<?php $k2=mysqli_query($link,"select * from add_klqot where status='Ro Required'") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k2).")</b>";
-									?>
-								</a>
-			
-							</li>
-							<li class="">
-							<a href="klwtsqot_list.php">
-							
-									<i class="menu-icon fa fa-caret-right"></i>
-									Work To Be Started
-									<?php $k3=mysqli_query($link,"select * from add_klqot where status='work to be started'") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k3).")</b>";
-									?>
-								</a>
-			
-							</li>
-							
-								<li class="">
-							<a href="klreq_list.php">
-								  
-									<i class="menu-icon fa fa-caret-right"></i>
-									Requested Amount List
-										<?php $k4=mysqli_query($link,"select distinct quet_num from klrequest_amnt where confirm='Pending'") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k4).")</b>";
-									?>
-								</a>
-			
-							</li>
-							
-							
-								<li class="">
-							<a href="klreq_list1.php">
-								   
-									<i class="menu-icon fa fa-caret-right"></i>
-									Amount Approved List
-										<?php $k5=mysqli_query($link,"select * from klrequest_amnt where confirm='Yes' and status=''") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k5).")</b>";
-									?>
-								</a>
-			
-							</li>
-						
-							
-							<li class="">
-							<a href="klbill_list.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-									Document Required List
-									<?php $k6=mysqli_query($link,"select distinct quet_num from klrequest_amnt where status='Amount Transferred' and bill_status='' or docr_status='Cancel'") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k6).")</b>";
-									?>
-								</a>
-			
-							</li>
-							
-                           
-                           	<li class="">
-						<a href="klbill_list2.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-									To Be Raise Invoice
-									<?php $k7=mysqli_query($link,"select * from klqot_bill where status='payment pending' ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k7).")</b>";
-									?>
-								</a>
-			
-							</li>
-                            	<li class="">
-								<a href="klbill_list31.php">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Raised Invoice List
-									<?php $k8=mysqli_query($link,"select * from klqot_bill where status='RUn Paid' ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k8).")</b>";
-									?>
-								</a>
-			
-							</li>
-                           	
-                           
-                           
-                            <li class="">
-							<a href="klbill_list3.php">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Payment Pending Invoice 
-									<?php $k8=mysqli_query($link,"select * from klqot_bill where status='Un Paid' ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k8).")</b>";
-									?>
-								</a>
-							</li>
-							
-							<li class="">
-								<a href="klbill_list4.php">
-							
-									<i class="menu-icon fa fa-caret-right"></i>
-									Payment Received 
-										<?php $k9=mysqli_query($link,"select * from klpayment  ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k9).")</b>";
-									?>
-								</a>
-
-							</li>
-							
-								<li class="">
-							<a href="klwork1.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-									Mark Not Required 
-									<?php $k10=mysqli_query($link,"select * from klrequest_amnt where req='yes' and docr_status!='Cancel'  ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($k10).")</b>";
-									?>
-								</a>
-
-							</li>
-							
-							
-								<li class="">
-								<a href="klwork2.php">
-								   
-									<i class="menu-icon fa fa-caret-right"></i>
-								GST Bills Pending 
-								<?php $kk11=mysqli_query($link,"select * from klrequest_amnt where gsttype='With Gst' and gstatus!='approved'  ") or die(mysqli_error($link));
-									echo "<b style='color:red;'>(".mysqli_num_rows($kk11).")</b>";
-									?>
-								</a>
-								
-								</a>
-
-							</li>
-								<li class="">
-							<a href="klaaexcel.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-								Amount Approved Excel
-								</a>
-
-							</li>
-								<li class="">
-							<a href="klraexcel.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-								Requested Amount Excel
-								</a>
-
-							</li>
-							
-							<li class="">
-							<a href="kltrack.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-								Tracker
-								</a>
-
-							</li>
-								
-							<li class="">
-							<a href="qutdetails_kl_excel.php?user=<?php echo $name; ?>">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-								Quotation Details
-								</a>
-
-							</li>
-						
-						<li class="">
-							<a href="kl_mis_qot.php">
-								    
-									<i class="menu-icon fa fa-caret-right"></i>
-								KL Quotation Miscellaneous  Excel
-								</a>
-
-							</li>
-                           
-						</ul>
-					</li> 
-						<!-- KL tracker End-->
+				
 
 						<!-- OD Tracker Start -->
 
@@ -1130,7 +921,7 @@ if($name=="admin"){
 					</li> 
 						<!-- OD tracker End-->
 						
-					<!-- tg tracken -->
+					<!-- tg tracker start -->
 				<li class="">
 						<a href="#" class="dropdown-toggle">
 						    <img src="images/ts.png">
@@ -1341,42 +1132,227 @@ if($name=="admin"){
 					</li>	
 					
 					
-					<!-- tg tracken -->
+					<!-- tg tracker end -->
 					
-				
-					
-					
-					
-				<!-- tn tracker start-->
-					
-				
-					
-					<!-- tn tracker-->
+				<!-- KL Tracker Start -->
 					
 					
+						 <li class="">
+						<a href="#" class="dropdown-toggle">
+						    <img src="images/kl.png">
+							<!-- <i class="menu-icon fa fa-file-excel-o"></i> -->
+							<span class="menu-text">
+								KL Tracker
+							</span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+
+						<ul class="submenu">
+						<li class="">
+								<a href="klqot_list.php">
+								  
+									<i class="menu-icon fa fa-caret-right"></i>
+									KL Quotations
+									<?php $k=mysqli_query($link,"select * from add_klqot") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".$k1=mysqli_num_rows($k).")</b>";
+									?>
+								</a>
+
+								
+							</li>
+							
+							<li class="">
+							<a href="roqot_list.php?state=KL">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+									RO Required
+										<?php $k2=mysqli_query($link,"select * from add_klqot where status='Ro Required'") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k2).")</b>";
+									?>
+								</a>
+			
+							</li>
+							<li class="">
+							<a href="klwtsqot_list.php">
+							
+									<i class="menu-icon fa fa-caret-right"></i>
+									Work To Be Started
+									<?php $k3=mysqli_query($link,"select * from add_klqot where status='work to be started'") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k3).")</b>";
+									?>
+								</a>
+			
+							</li>
+							
+								<li class="">
+								<a href="klreq_list.php">
+								  
+								  <i class="menu-icon fa fa-caret-right"></i>
+								  Requested Amount List
+									  <?php $k4=mysqli_query($link,"select distinct quet_num from klrequest_amnt where confirm='Pending'") or die(mysqli_error($link));
+								  echo "<b style='color:red;'>(".mysqli_num_rows($k4).")</b>";
+								  ?>
+							  </a>
+			
+							</li>
+							
+							
+								<li class="">
+								<a href="klreq_list1.php">
+								   
+								   <i class="menu-icon fa fa-caret-right"></i>
+								   Amount Approved List
+									   <?php $k5=mysqli_query($link,"select * from klrequest_amnt where confirm='Yes' and status=''") or die(mysqli_error($link));
+								   echo "<b style='color:red;'>(".mysqli_num_rows($k5).")</b>";
+								   ?>
+							   </a>
+			
+							</li>
 						
+							
+							<li class="">
+							<a href="klbill_list.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+									Document Required List
+									<?php $k6=mysqli_query($link,"select distinct quet_num from klrequest_amnt where status='Amount Transferred' and bill_status='' or docr_status='Cancel'") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k6).")</b>";
+									?>
+								</a>
+			
+							</li>
+							
+                           
+                           	<li class="">
+						<a href="klbill_list2.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+									To Be Raise Invoice
+									<?php $k7=mysqli_query($link,"select * from klqot_bill where status='payment pending' ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k7).")</b>";
+									?>
+								</a>
+			
+							</li>
+                            	<li class="">
+								<a href="klbill_list31.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Raised Invoice List
+									<?php $k8=mysqli_query($link,"select * from klqot_bill where status='RUn Paid' ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k8).")</b>";
+									?>
+								</a>
+			
+							</li>
+                           	
+                           
+                           
+                            <li class="">
+							<a href="klbill_list3.php">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Payment Pending Invoice 
+									<?php $k8=mysqli_query($link,"select * from klqot_bill where status='Un Paid' ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k8).")</b>";
+									?>
+								</a>
+							</li>
+							
+							<li class="">
+								<a href="klbill_list4.php">
+							
+									<i class="menu-icon fa fa-caret-right"></i>
+									Payment Received 
+										<?php $k9=mysqli_query($link,"select * from klpayment  ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k9).")</b>";
+									?>
+								</a>
+
+							</li>
+							
+								<li class="">
+							<a href="klwork1.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+									Mark Not Required 
+									<?php $k10=mysqli_query($link,"select * from klrequest_amnt where req='yes' and docr_status!='Cancel'  ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($k10).")</b>";
+									?>
+								</a>
+
+							</li>
+							
+							
+								<li class="">
+								<a href="klwork2.php">
+								   
+									<i class="menu-icon fa fa-caret-right"></i>
+								GST Bills Pending 
+								<?php $kk11=mysqli_query($link,"select * from klrequest_amnt where gsttype='With Gst' and gstatus!='approved'  ") or die(mysqli_error($link));
+									echo "<b style='color:red;'>(".mysqli_num_rows($kk11).")</b>";
+									?>
+								</a>
+								
+								</a>
+
+							</li>
+								<li class="">
+							<a href="klaaexcel.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+								Amount Approved Excel
+								</a>
+
+							</li>
+								<li class="">
+							<a href="klraexcel.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+								Requested Amount Excel
+								</a>
+
+							</li>
+							
+							<li class="">
+							<a href="kltrack.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+								Tracker
+								</a>
+
+							</li>
+								
+							<li class="">
+							<a href="qutdetails_kl_excel.php?user=<?php echo $name; ?>">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+								Quotation Details
+								</a>
+
+							</li>
 						
-						<!-- Odissah Tracker Start -->
+						<li class="">
+							<a href="kl_mis_qot.php">
+								    
+									<i class="menu-icon fa fa-caret-right"></i>
+								KL Quotation Miscellaneous  Excel
+								</a>
+
+							</li>
+                           
+						</ul>
+					</li> 
+						<!-- KL tracker End-->
 					
-					
-					<!-- Odissah Tracker End -->
-					
-					
-					
-					
-					
-					
-					
-					
-					
-	
 					
 					
 					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-inr"></i>
 							<span class="menu-text">
-								Expesnses
+								Expenses
 							</span>
 
 							<b class="arrow fa fa-angle-down"></b>
@@ -1445,7 +1421,7 @@ if($name=="admin"){
 								<a href="tgexpenseslist.php">
 									<i class="menu-icon fa fa-caret-right"></i>
 								TG	Expenses List
-												<?php $kt90=mysqli_query($link,"select * from expenses where state='TG'") or die(mysqli_error($link));
+												<?php $kt90=mysqli_query($link,"select * from expenses where state='TS'") or die(mysqli_error($link));
 									echo "<b style='color:red;'>(".mysqli_num_rows($kt90).")</b>";
 									?>
 							

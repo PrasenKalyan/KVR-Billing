@@ -124,6 +124,7 @@ include'dbfiles/org.php';
                                                     <th>S No</th>
 													<th>Date</th>
 													 <th>State</th>
+                                                     <th>Quotation Number</th>
 													<th>Description</th>
 													<th>Amount</th>
 													
@@ -153,6 +154,7 @@ include'dbfiles/org.php';
 											    <td><?php echo $i; ?></td>
 											     <td><?php echo date('d-m-Y',strtotime($k1['edate'])); ?></td>
 											     <td><?php echo $k1['state']; ?></td>
+                                                 <td><?php echo $k1['quet_no'];?></td>
 											     <td><?php echo $k1['expdesc']; ?></td>
 											     <td><?php echo $k1['amount']; ?></td>
 											     <td><a href="expenses/<?php echo $k1['file']; ?>" target="_blank"> View</a></td>

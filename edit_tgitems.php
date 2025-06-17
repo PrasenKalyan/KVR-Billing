@@ -104,7 +104,7 @@ function report()
                         
                           <?php
 							$id=$_GET['id'];
-							$y=mysqli_query($link,"select * from titems where id='$id'");
+							$y=mysqli_query($link,"select * from ritems where id='$id'");
 							$t1=mysqli_fetch_array($y);
 
 						  ?>

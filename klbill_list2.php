@@ -112,14 +112,15 @@ include'dbfiles/org.php';
                   
                 <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search   " onkeyup="myFunction()">
                   </div>
-                  <div class="col-sm-2"><b><a href="qut_klrasise_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
-			<!--	   <div class="col-sm-3">
+                  	   <div class="col-sm-3">
                   
                <button class="btn btn-info" type="submit" name="bsearch" id="bsearch">
                                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                                 Search
                                             </button>
-                  </div>-->
+                  </div>
+                  <div class="col-sm-2"><b><a href="qut_klrasise_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
+			
 				</div>
 										
 										</form>
@@ -158,11 +159,8 @@ include'dbfiles/org.php';
                                                        <th>Total Amount</th>
                                                        <th>User</th>
                                                       <th>Edit</th>
+                                                      <th>Document Download</th>
 														
-                                                          
-                                                        
-                                                      
-                                                      
                                                     </tr>
                                                 </thead>
 
@@ -174,12 +172,12 @@ include'dbfiles/org.php';
 											 $y="SELECT * FROM klqot_bill where status='payment pending'  and quet_num like  '%$bsearch%'  ";
 											} else {
 											    
-											      if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys')){
+											      
 											    
 													 $y="SELECT * FROM klqot_bill where status='payment pending'   ";
-											      }else{
-											         $y="SELECT * FROM klqot_bill where status='payment pending' and user='$tsadmin'  ";
-											    }
+											    //   }else{
+											    //      $y="SELECT * FROM klqot_bill where status='payment pending' and user='$tsadmin'  ";
+											    // }
 											    
 											    
 											    
@@ -283,24 +281,30 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                                             echo $rss1['emp_name']; ?></td>
                                                         <td class="hidden-480">
                                                             
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')){ ?>
+                                                             
                                                              <a href="kledit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="klraise_delete.php?id=<?php echo $rs1['id'];?>">
                                                         <img src="images/Icon_Delete.png"></a>
 														
-                                                       <?php }else{?>
-                                                       <img src="images/edit.gif">
-                                                       <img src="images/Icon_Delete.png">
-                                                       <?php }?>
-                                                           
-                                                        
-                                                        
-                                                        
+                                                       
+                                                       
+                                        
                                                         </td>
 														
+                                                       <td class="hidden-480">
+                                                            
+                                                            <a href="kldoc.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                             <a href="kldoc1.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file1']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="kldoc2.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file2']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
                                                        
+                                                         </td>
 														
 														
 													

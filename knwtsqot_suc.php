@@ -13,16 +13,26 @@ if(isset($_POST['submit'])){
 	$falt_no=$_POST['falt_no'];
 	$falt_date=$_POST['falt_date'];
     $falt_desc=$_POST['falt_desc'];
+	// $work_stat = $_POST['work_stat'];
+	$wd = $_POST['wd'];
 
 	$t=mysqli_query($link,"select * from employee where username='$ses'") or die(mysqli_close($link));
 	$tr=mysqli_fetch_array($t);
 	 $empemail=$tr['emp_email'];
-	  $a="INSERT INTO `add_knqot`(`store_code`, `inv_date`, `quet_num`, `tot_base`, `tot_ser`, `tot_gst`, `net`,  `ses`,falt_no,falt_date,falt_desc,status)
-	 VALUES ('$store_code','$inv_date','','$tot','$tot_serv','$tot_gst','$net','$ses','$falt_no','$falt_date','$falt_desc','Ro Required')";
+	  echo $a="INSERT INTO `add_knqot`(`store_code`, `inv_date`, `quet_num`, `tot_base`, `tot_ser`, `tot_gst`, `net`,  `ses`,falt_no,falt_date,falt_desc,status,`wd`)
+	 VALUES ('$store_code','$inv_date','','$tot','$tot_serv','$tot_gst','$net','$ses','$falt_no','$falt_date','$falt_desc','Ro Required', '$wd')";
 	$sq=mysqli_query($link,$a);
 	 $sno=mysqli_insert_id($link);
 	 
+	 mysqli_query($link, $query);
 
+	 if ($wd === 'approve') {
+		header("Location: knreq_list.php");
+		exit();
+	} elseif ($wd === 'cancel') {
+		header("Location: knwtsqot_list.php");
+		exit();
+	}
 $sqq=mysqli_query($link,"select max(id) as ids from add_knqot ");
 	$rr=mysqli_fetch_array($sqq);
 	$idd=$rr['ids'];
@@ -131,6 +141,7 @@ $gst_type2=$_POST['gst_type2'];
 $gst_amount=$_POST['gst_amount'];
 $gst_amount1=$_POST['gst_amount1'];
 $gst_amount2=$_POST['gst_amount2'];
+// $wd=$r['wd'];
 
 $mark=$_POST['mark'];
 $iname = $_FILES['img1']['name'];

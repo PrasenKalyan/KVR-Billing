@@ -1,57 +1,12 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
 $state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-        $stn="AP";
-		$request_amnt ='request_amnt';
-	 
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qottable1 ='add_tgqot1';
-		$request_amnt ='tgrequest_amnt';
-        $stn="TG";	 
-	}
-	
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qottable1 ='add_klqot1';
-		$request_amnt ='klrequest_amnt';
-        $stn="KL";	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qottable1 ='add_knqot1';
-	  $request_amnt ='knrequest_amnt';
-      $stn="KN";
-	}
-    else if($state=='TN'){
-        $qottable ='add_tnqot';
-        $qottable1 ='add_tnqot1';
-        $request_amnt ='tnrequest_amnt';
-        $stn="TN";
-      }
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qottable1 ='add_odqot1';
-	  $request_amnt ='odrequest_amnt';
-      $stn="OD";
-	
-	}
-
-//include('org1.php');
-//$y=mysqli_query($link,"select * from employee where emp_name='$name'");
-//$y1=mysqli_fetch_array($y);
-//$email=$y1['emp_email'];
-//include'dbfiles/org.php';
-//include'dbfiles/iqry_acyear.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +65,7 @@ $state=$_GET['state'];
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state; ?> Request Amount List</a>
+                                <a href="#"><?php echo $stn; ?> Request Amount List</a>
                             </li>
                           
                             <!--<li class="active">Blank Page</li>-->
@@ -129,7 +84,7 @@ $state=$_GET['state'];
 									<!--<a href="addbill.php"><button type="button" class="btn-success btn-sm ">Add New</button></a>-->
                                        
                                         <div class="table-header">
-                                       <?php echo $state; ?> Request Amount Approve List
+                                       <?php echo $stn; ?> Request Amount List
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -197,7 +152,7 @@ $state=$_GET['state'];
 											// $y="select a.store_name,a.city,b.quet_num,b.store_code,b.inv_date,b.id
 											 //from ".$qottable." b,dpr a where a.store_code=b.store_code order by b.id desc ";
 											// $y="select * from add_qot2 where  ro_date='$date'";
-												$y="select * from ".$request_amnt." where confirm!='Yes' order by id desc";
+												$y="select * from request_amnt where confirm!='Yes' order by id desc";
 												
 												?>
                                         
@@ -283,8 +238,8 @@ $state=$_GET['state'];
                                                           
 														  <?php 
 									$state=$rs1['state'];
-										if($state=='AP' or $state=='TG' or $state=='KL' or $state=='TN' or $state=='KN' or $state=='OD'){
-										 $a="select * from ".$qottable." where quet_num='$qot' and ro_date='$date'  ";
+										if($state=='AP'){
+										 $a="select * from add_qot where quet_num='$qot' and ro_date='$date'  ";
 										} 
 										$ssq=mysqli_query($link,$a);
 										$r1=mysqli_fetch_array($ssq);
@@ -310,7 +265,7 @@ $state=$_GET['state'];
 										?>
 										<?php
 														 $qotnum=$rs1['quet_num'];
-												            $tyy="select sum(req_amnt+gstamt) as samt from ".$request_amnt." where quet_num='$qotnum' and confirm='Pending'";
+												            $tyy="select sum(req_amnt+gstamt) as samt from request_amnt where quet_num='$qotnum' and confirm='Pending'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
                                                 $ty1=mysqli_fetch_array($ty);
                                                             
@@ -318,8 +273,8 @@ $state=$_GET['state'];
                                         
 ?>
 														<td><center><input type="checkbox" name="checkboxrow" value="<?php echo $rs1['quet_num'].'::'.$treq; ?>" />&nbsp;</center></td>
-										 <td><center><input type="checkbox" name="row<?php echo $i?>" />&nbsp;</center></td>
-										 <td><?php echo $i; ?></td>
+                                                        <!-- <td><center><input type="checkbox" name="row<?php echo $i?>" />&nbsp;</center></td> -->
+                                                        <td><?php echo $i; ?></td>
 														<td class="hidden-480"><?php echo $qot; ?></td>
                                                         <td class="hidden-480"><?php echo $r3['superwisor']; ?></td>
 														 <td class="hidden-480"><?php echo $r3['coordinator']; ?></td>
@@ -455,11 +410,11 @@ $state=$_GET['state'];
 												<?php 
 											include('dbconnection/connection.php');
 												//	$y="select distinct quet_num,state from ".$request_amnt." where confirm!='Yes' order by id desc";
-											if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri')){
-											    	$y="select distinct quet_num,state,user from ".$request_amnt." where confirm!='Yes' order by id desc";
-											}else{
-											    	$y="select distinct quet_num,state,user from ".$request_amnt." where confirm!='Yes' and user='$tsname' order by id desc";
-											}
+											// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri')){
+											    	$y="select distinct quet_num,state,user from request_amnt where confirm!='Yes' order by id desc";
+											// }else{
+											//     	$y="select distinct quet_num,state,user from request_amnt where confirm!='Yes' and user='$tsname' order by id desc";
+											// }
 												
 											 
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -488,7 +443,7 @@ $state=$_GET['state'];
 														</td>-->
 														<?php
 														 $qotnum=$rs1['quet_num'];
-												            $tyy="select sum(req_amnt+gstamt) as samt from ".$request_amnt." where quet_num='$qotnum' and confirm='Pending'";
+												            $tyy="select sum(req_amnt+gstamt) as samt from request_amnt where quet_num='$qotnum' and confirm='Pending'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
                                                 $ty1=mysqli_fetch_array($ty);
                                                             
@@ -502,8 +457,8 @@ $state=$_GET['state'];
                                                           <td class="hidden-480"><?php echo $qot=$rs1['quet_num']; ?></td>
 														  <?php 
 										$state=$rs1['state'];
-										if($state=='AP' or $state=='TG' or $state=='KL' or $state=='TN' or $state=='KN' or $state=='OD'){
-										 $a="select * from ".$qottable." where quet_num='$qot'";
+										if($state=='AP'){
+										 $a="select * from add_qot where quet_num='$qot'";
 										} 
 										$ssq=mysqli_query($link,$a);
 										$r1=mysqli_fetch_array($ssq);
@@ -547,7 +502,7 @@ $state=$_GET['state'];
 												   <td class="hidden-480">
 												   
 												   <?php
-												             $ty5="select sum(approve_amnt) as samt from ".$request_amnt." where quet_num='$qot'";
+												             $ty5="select sum(approve_amnt) as samt from request_amnt where quet_num='$qot'";
                                                             $ty55=mysqli_query($link,$ty5) or die(mysqli_error($link));
                                                 $ty15=mysqli_fetch_array($ty55);
                                                             
@@ -557,7 +512,7 @@ $state=$_GET['state'];
 										   </td>
 												    <td class="hidden-480">
 												        <?php
-												             $tyy="select sum(req_amnt+gstamt) as samt from ".$request_amnt." where quet_num='$qot'";
+												             $tyy="select sum(req_amnt+gstamt) as samt from request_amnt where quet_num='$qot'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
                                                 $ty1=mysqli_fetch_array($ty);
                                                             
@@ -570,7 +525,7 @@ $state=$_GET['state'];
 												  <td class="hidden-480"><?php echo $r1['bal']; ?></td>
 												  <td class="hidden-480"><?php 
 												  
-												     $yt5="select * from ".$request_amnt." where quet_num='$qot'";
+												     $yt5="select * from request_amnt where quet_num='$qot'";
                                                             $uy0=mysqli_query($link,$yt5) or die(mysqli_error($link));
                                                         while($uy01=mysqli_fetch_array($uy0)){
                                                             $gstamt=$uy01['gstamt'];
@@ -580,7 +535,7 @@ $state=$_GET['state'];
 																							  ?></td>
 																							  <td class="hidden-480"><?php 
 												  
-												     $yt5="select * from ".$request_amnt." where quet_num='$qot'";
+												     $yt5="select * from request_amnt where quet_num='$qot'";
                                                             $uy0=mysqli_query($link,$yt5) or die(mysqli_error($link));
                                                         while($uy01=mysqli_fetch_array($uy0)){
                                                             $gstamt=$uy01['gstamt'];
@@ -592,7 +547,7 @@ $state=$_GET['state'];
                                                         <td class="hidden-480">
                                                             
                                                             <?php 
-                                                             $yt="select * from ".$request_amnt." where quet_num='$qot'";
+                                                             $yt="select * from request_amnt where quet_num='$qot'";
                                                             $uy=mysqli_query($link,$yt) or die(mysqli_error($link));
                                                         while($uy1=mysqli_fetch_array($uy)){
                                                             $at=$uy1['req_amnt']+$uy1['gstamt'];
@@ -628,16 +583,13 @@ $state=$_GET['state'];
                                                         
                                                         </td>
                                                     <td class="hidden-480">
-                                                        <?php if(($tsname=='admin') or ($tsname=='durgarao')or ($tsname=='sumanthpotluri')){ ?>
+                                                        
                                                         <a href="edit_request.php?id=<?php echo $rs1['quet_num']; ?>&state=<?php echo $state;?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="cancel_request.php?id=<?php echo $rs1['quet_num']; ?>&state=<?php echo $state;?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                         <?php }else{ ?>
-                                                        <img src="images/edit.gif"> <img src="images/Icon_Delete.png">
-                                                        
-                                                        <?php }?> 
+                                                         
                                                         </td>
 														 
 														 

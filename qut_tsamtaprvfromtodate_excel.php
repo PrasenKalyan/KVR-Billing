@@ -15,7 +15,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:AC1');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'JYOTHI FACILITY MANAGEMENT PVT.LTD');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $objPHPExcel->getActiveSheet()->mergeCells('A4:AC4');
 $objPHPExcel->getActiveSheet()->getStyle("A4:AC4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
@@ -76,7 +76,7 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:AC6")->getFill()->setFillType(PHPEx
         $objPHPExcel->getActiveSheet()->getColumnDimension('Q')->setWidth(19);
         $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(22);
 $objPHPExcel->getActiveSheet()->getStyle("A6:AC6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $cnt=$result->num_rows;
 $i=1;
 $rowCount	=	7;
@@ -85,12 +85,12 @@ while($row	=	$result->fetch_assoc()){
     $krid=$row['id'];
     $ac=$row['ac_det'];
     $a="select store_code,ro_no,ro_date,falt_desc,tot_base,tot_ser,tot_gst,adv_amnt,adv_amnt1,adv_amnt2,gst_type,net,bal,invoice_date,invoice_no from add_tgqot where quet_num='$qot'";
-    $result1=$db->query($a) or die(mysql_error());
+    $result1=$db->query($a) or die(mysqli_close($link));
     $row2=$result1->fetch_assoc();
     $str_code=$row2['store_code'];
     $tot_base=$row2['tot_base'];
     $ds="select * from dpr where store_code='$str_code'";
-	$result2=$db->query($ds) or die(mysql_error());
+	$result2=$db->query($ds) or die(mysqli_close($link));
 	$row1=$result2->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, mb_strtoupper($i,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, mb_strtoupper($qot,'UTF-8'));
@@ -113,13 +113,13 @@ while($row	=	$result->fetch_assoc()){
 	$objPHPExcel->getActiveSheet()->SetCellValue('R'.$rowCount, mb_strtoupper($row['gstamt'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('S'.$rowCount, mb_strtoupper($row['remarks'],'UTF-8'));
 	$adamt="select sum(approve_amnt) as req_amnt from tgrequest_amnt where quet_num='$qot'and  status='Amount Transferred' and   confirm='Yes' and date between '$fromdate' and '$todate' " ;
-												      $ads=$db->query($adamt) or die(mysql_error());
+												      $ads=$db->query($adamt) or die(mysqli_close($link));
 												      $ads1=$ads->fetch_assoc();
 												       $adsd=$ads1['req_amnt'];
 	$objPHPExcel->getActiveSheet()->SetCellValue('T'.$rowCount, mb_strtoupper($adsd,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('U'.$rowCount, mb_strtoupper($ac,'UTF-8'));
 	$tyy="select sum(approve_amnt) as req_amnt from tgrequest_amnt where quet_num='$qot'   and status='' and  confirm='Yes' and ac_det='$ac' and date between '$fromdate' and '$todate' ";
-    $result3=$db->query($tyy) or die(mysql_error());
+    $result3=$db->query($tyy) or die(mysqli_close($link));
     $row4=$result3->fetch_assoc(); 
   	$objPHPExcel->getActiveSheet()->SetCellValue('V'.$rowCount, mb_strtoupper($row4['req_amnt'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('W'.$rowCount, mb_strtoupper($row['date'],'UTF-8'));
@@ -151,17 +151,17 @@ $objPHPExcel->getActiveSheet()->SetCellValue('F'.$tc, 'Amount');
     	$y2="select distinct ac_det from tgrequest_amnt where  user='$tsname' and  confirm='Yes' and status='' and date between '$fromdate' and '$todate' ";
 	}
 										
-$result10=$db->query($y2) or die(mysql_error());
+$result10=$db->query($y2) or die(mysqli_close($link));
 $cnt2=1;
 $j=1;
 $rowCount1	=	$tc+$cnt2;
 while($row10	=	$result10->fetch_assoc()){
     $acd=$row10['ac_det'];
      $yu="select * from ac_det where name='$acd'";
-     $result11=$db->query($yu) or die(mysql_error());
+     $result11=$db->query($yu) or die(mysqli_close($link));
      $row11	=	$result11->fetch_assoc();
 	 $r12="select sum(approve_amnt) as amt from tgrequest_amnt where ac_det='$acd' and confirm='Yes' and status='' and date between '$fromdate' and '$todate' ";
-	 $result12=$db->query($r12) or die(mysql_error());
+	 $result12=$db->query($r12) or die(mysqli_close($link));
 	 $row12	=	$result12->fetch_assoc();
 	$dds=$row12['amt'];
 	

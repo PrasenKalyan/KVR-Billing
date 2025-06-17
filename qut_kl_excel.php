@@ -14,7 +14,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:O1');
  $objPHPExcel->getActiveSheet()->getStyle("A1:O1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
  $objPHPExcel->getActiveSheet()->getStyle("A1:O1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JYOTHI FACILITY MANAGEMENT PVT.LTD');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:O1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->getActiveSheet()->mergeCells('A4:O4');
  $objPHPExcel->getActiveSheet()->getStyle("A4:O4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
@@ -58,7 +58,7 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:O6")->getFill()->setFillType(PHPExc
         $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(22);
 
 $objPHPExcel->getActiveSheet()->getStyle("A6:O6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $i=1;
 $rowCount	=	7;
 while($row	=	$result->fetch_assoc()){
@@ -67,7 +67,7 @@ while($row	=	$result->fetch_assoc()){
 	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, mb_strtoupper($scode=$row['store_code'],'UTF-8'));
     $objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, mb_strtoupper($row['falt_desc'],'UTF-8'));
 	$ds="select * from dpr where store_code='$scode'";
-	$result1=$db->query($ds) or die(mysql_error());
+	$result1=$db->query($ds) or die(mysqli_close($link));
 	$row1=$result1->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, mb_strtoupper($row1['store_name'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, mb_strtoupper($row1['coordinator'],'UTF-8'));

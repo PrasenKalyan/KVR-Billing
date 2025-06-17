@@ -22,7 +22,7 @@ $tsname=$_SESSION['user'];
         }
         
         .reload {
-  font-family: Lucida Sans Unicode
+  font-family: Lucida Sans Unicode;
   cursor: pointer;
   float:left;
 }
@@ -256,10 +256,12 @@ xmlhttp.send();
 														   <th>User</th>
                                                      		 <th>Edit</th>
         													  <?php if(($tsname!="admin")  ){}else{ ?>
-        													  <th>RONo Edit</th>
+        													  <!-- <th>RONo Edit</th> -->
         													  <?php }?>
 													         
-														     <th>Print</th> <th>Quotation</th>
+														     <th>Print</th>
+                                                             <th>Quotation</th>
+                                                              
 															 <th>Bill of Supply</th><th>Miscllenious</th>
 														     <th>Pdf Download</th>
                                                         
@@ -501,7 +503,7 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         </td>
                                                         <?php if(($tsname!="admin")){}else{ ?>
-                                                        <td> 
+                                                        <!-- <td> 
                                                         
                                                                 
                                                         <a href="tgeditrono_qot.php?id=<?php echo $rs1['id']; ?>">
@@ -511,7 +513,7 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         
                                                         
-                                                        </td>
+                                                        </td> -->
                                                         <?php }?>
 														
 														

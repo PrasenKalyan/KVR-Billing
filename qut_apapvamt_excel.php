@@ -62,14 +62,14 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:X1');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'JTECHNO ASSOCIATES');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $objPHPExcel->getActiveSheet()->mergeCells('A4:X4');
 $objPHPExcel->getActiveSheet()->getStyle("A4:X4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
 $objPHPExcel->getActiveSheet()->getStyle("A4:X4")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
 
- $objPHPExcel->getActiveSheet()->setCellValue('A4', $state.' PROVED AMOUNT LIST');
+ $objPHPExcel->getActiveSheet()->setCellValue('A4', $state.'AP APPROVED AMOUNT LIST');
  $objPHPExcel->getActiveSheet()->getStyle("A4:X4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->setActiveSheetIndex(0);
 $objPHPExcel->getActiveSheet()->SetCellValue('A6', 'SNo');
@@ -118,7 +118,7 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:X6")->getFill()->setFillType(PHPExc
         $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(22);
         
 $objPHPExcel->getActiveSheet()->getStyle("A6:X6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_error());
 $cnt=$result->num_rows;
 $i=1;
 $rowCount	=	7;

@@ -292,18 +292,23 @@ xmlhttp.send();
 										} 
 										$ssq=mysqli_query($link,$a);
 										$r1=mysqli_fetch_array($ssq);?>
+
+
+
+
 										
 										<?php $ssq2=mysqli_query($link,"select * from ac_det where name='$ac'");
 										$r3=mysqli_fetch_array($ssq2);?>
-										  <tr><td align="right">Ac Num</td><td align="left">
-										<input type="text" name="adv_amnt" 
-										id="adv_amnt" readonly  class="form-control" value="<?php echo $r3['ac_no'];?>"></td>	
-                                        <td align="right">Account Holder Name</td><td><input type="text" readonly name="adv_date" 
-										id="sub_type"  class="form-control" value="<?php echo $r3['name'];?>"></td>
+										  <tr><td align="right">Account Number</td><td align="left">
+										<input type="text" name="ac_no" 
+										id="ac_no"   readonly class="form-control" value="<?php echo $r3['ac_no'];?>"></td>	
+                                        <td align="right">Account Holder Name</td><td><input type="text"  name="name" 
+										id="name" readonly  class="form-control" value="<?php echo $r3['name'];?>"></td>
                                         </tr>
 										  <tr><td align="right">IFSC Code</td><td align="left">
 										<input type="text" name="ifsc" 
-										id="ifsc"  class="form-control" value="<?php echo $r3['ifsc'];?>" readonly></td>	
+										id="ifsc" readonly  class="form-control" value="<?php echo $r3['ifsc'];?>"></td>	
+										<tr>	
                                         <td align="right">Request Date</td><td><input type="date" name="adv_date" 
 										id="sub_type"  class="form-control" value="<?php echo $r['req_date'];?>"></td>
                                         </tr>
@@ -359,7 +364,7 @@ xmlhttp.send();
 										<?php }											?></td>
 										
 											
-                                       <td align="right">Image 1</td><td><img src="upload/<?php echo $r1['img1'];?>" onclick="window.open('knqut_image.php?id=<?php echo $r1['img1'];?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" style="width:50px; height:50px;"></td>
+                                       <td align="right">Image 1</td><td><img src="upload/<?php echo $rs1['img1'];?>" onclick="window.open('knqut_image.php?id=<?php echo $r1['img1'];?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" style="width:50px; height:50px;"></td>
                                       </td>  </tr>
 										
 										

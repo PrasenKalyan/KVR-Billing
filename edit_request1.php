@@ -1,61 +1,11 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
  $name=$_SESSION['user'];
 //include('org1.php');
-
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$request_amnt ='request_amnt';
-        $stn='ap';
-	 
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qottable1 ='add_tgqot1';
-		$request_amnt ='tgrequest_amnt';
-        $stn='tg';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qottable1 ='add_tnqot1';
-	  $request_amnt ='tnrequest_amnt';
-      $stn='tn';
-
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qottable1 ='add_klqot1';
-		$request_amnt ='klrequest_amnt';
-        $stn='kl';
-
-	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qottable1 ='add_knqot1';
-	  $request_amnt ='knrequest_amnt';
-      $stn='kn';
-
-	
-	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qottable1 ='add_odqot1';
-	  $request_amnt ='odrequest_amnt';	
-      $stn='od';
-
-	}
 include'dbfiles/org.php';
 //include'dbfiles/iqry_acyear.php';
 ?>
@@ -274,13 +224,13 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state; ?> Request Amount </a>
+                                <a href="#"><?php echo $stn; ?> AP Amount Approved </a>
                             </li>
                             <li>
-                                <a href="req_list.php?state=<?php echo $state; ?>"><?php echo $state; ?> Request Amount List</a>
+                                <a href="req_list.php?state=<?php echo $stn; ?>"><?php echo $stn; ?> AP Amount Approved List</a>
                             </li>
                             <li>
-                                <a href="">Edit Request Amount</a>
+                                <a href="">Edit Amount Approvedt</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -292,7 +242,7 @@ xmlhttp.send();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                Edit Request Amount
+                                Edit Amount Approved
 
                             </h1>
                         </div>
@@ -316,7 +266,7 @@ foreach($array as $value)
 
 				
 				 if($id!=''){
-						$sq=mysqli_query($link,"select * from ".$request_amnt." where id='$id'");
+						$sq=mysqli_query($link,"select * from request_amnt where id='$id'");
 						$r=mysqli_fetch_array($sq);
 						 $ac=$r['ac_det'];
 						
@@ -341,12 +291,12 @@ foreach($array as $value)
 										
 										 <?php 
 										   
-										    $a="select sum(approve_amnt) as amt from ".$request_amnt." where quet_num='$qot'";
+										    $a="select sum(approve_amnt) as amt from request_amnt where quet_num='$qot'";
 										   $qwe=mysqli_query($link,$a);
 										   $re=mysqli_fetch_array($qwe);
 										    $amt=$re['amt'];
 											
-											 $a="select sum(transfer) as amt1 from ".$request_amnt." where quet_num='$qot'";
+											 $a="select sum(transfer) as amt1 from request_amnt where quet_num='$qot'";
 										   $qwe=mysqli_query($link,$a);
 										   $re1=mysqli_fetch_array($qwe);
 										     $amt1=$re1['amt1'];
@@ -355,7 +305,7 @@ foreach($array as $value)
 										<?php 
 										$state=$r['state'];
 										if($state=='AP' or $state=='TG' or $state=='KL' or $state=='TN' or $state=='KN' or $state=='OD'){
-										 $a="select * from ".$qottable." where quet_num='$qot'";
+										 $a="select * from add_qot where quet_num='$qot'";
 										} else {
 												$a="select * from add_qot2 where quet_num='$qot'";
 										}
@@ -455,12 +405,12 @@ foreach($array as $value)
 											$amnt=$req_amnt_settled+$transfer;
 												$remarks1=$_POST['remarks1'];
 										//	if($qot_type=='AP'  or $state=='TG' or $state=='KL' or $state=='TN' or $state=='KN' or $state=='OD'){
-											$sq=mysqli_query($link,"update ".$qottable." set req_amnt_settled='$amnt',status='Document Required' where quet_num='$qt_no'");
+											$sq=mysqli_query($link,"update add_qot set req_amnt_settled='$amnt',status='Document Required' where quet_num='$qt_no'");
 											
 										//	} else {
 										//		$sq=mysqli_query($link,"update add_qot2 set req_amnt_settled='$amnt',status='Document Required' where quet_num='$qt_no'");
 										//	}
-											$ssq=mysqli_query($link,"update ".$request_amnt." set transfer='$transfer',transfer_date='$transfer_date',status='Amount Transferred',remarks1='$remarks1' where id='$id'");
+											$ssq=mysqli_query($link,"update request_amnt set transfer='$transfer',transfer_date='$transfer_date',status='Amount Transferred',remarks1='$remarks1' where id='$id'");
 											
 											print "<script>";
 			print "alert('Amount Transferred Successfully');";

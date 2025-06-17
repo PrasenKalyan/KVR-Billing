@@ -198,6 +198,7 @@ $tyamt=$t1['amount'];
 														  <th>Serv Amt</th>
 														  <th>Gst Amt</th>
 														  <th>Tot Amt</th>
+                                                          
 														  <th>Ro No</th>
 														  <th>Ro Date</th>
 														 
@@ -205,6 +206,7 @@ $tyamt=$t1['amount'];
                                                     <th>User</th>
                                                         
 													 <th>Edit</th>
+                                                     <th>Work Status</th>
 												
 														     <th>Print</th>
 														     <!--<th>Quotation</th>
@@ -345,13 +347,14 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
 												$superwisor=$_POST['superwisor'];
 												$city=$_POST['city'];	
 												$status=$_POST['status'];
+                                                $stat = $_POST['stat'];
 												/*echo $y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from add_qot a,dpr b where a.quet_num='$qot_nun'
 												 or b.store_code='$store_code' or b.store_name='$store_name' or b.coordinator='$coordinator'
 												 or b.superwisor='$superwisor' or b.city='$city' or a.status='$status'
 
 												 order by id desc";*/
 												
-											$y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from add_knqot a,dpr b where
+											$y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id, a.stat from add_knqot a,dpr b where
 											(('$store_code' <> ' ' and locate('$store_code', a.store_code) <> 0) or ('$store_code' = ' '  and 1 = 1) ) and
 											(('$store_name' <> ' ' and locate('$store_name', b.store_name) <> 0) or ('$store_name' = ' '  and 1 = 1) ) and
 											(('$coordinator' <> ' ' and locate('$coordinator', b.coordinator) <> 0) or ('$coordinator' = ' '  and 1 = 1) ) and
@@ -362,27 +365,27 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
 												
 												else {
 													
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling') or ($tsname=='naiduys') ){
+													// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling') or ($tsname=='naiduys') ){
 													 $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page; 
 												//	 $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
-													}else{
-													    $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+													// }else{
+													//     $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
 												      //  $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
 												
-													}
+													// }
 													
 													 
 												}
 										        
 										        
-										        if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='apbilling')){
+										        // if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='apbilling')){
 													// $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page; 
 													 $y10="SELECT  sum(approve_amnt) as amnt FROM `knrequest_amnt` where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
-													}else{
-													 //   $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												        $y10="SELECT  sum(approve_amnt) as amnt FROM `knrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
+													// }else{
+													//  //   $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+												    //     $y10="SELECT  sum(approve_amnt) as amnt FROM `knrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
 												
-													}
+													// }
                                                       $y11=mysqli_query($link,$y10) or die(mysqli_error($link));
                                                       $y12=mysqli_fetch_array($y11);
                                                       $yamt=$y12['amnt'];
@@ -452,6 +455,8 @@ $r1=mysqli_fetch_array($ssq1);
                                                         <td class="hidden-480"><?php echo $n1=$rs1['net'];
                                                          $n=$n+$n1;
                                                         ?></td>
+                                                        
+                                                        
                                                         <td class="hidden-480"><?php echo $rs1['ro_no']; ?></td>
                                                         <td class="hidden-480"><?php echo $rs1['ro_date']; ?></td>
                                                         <td class="hidden-480"><?php echo $rs1['status']; ?></td>
@@ -464,34 +469,24 @@ $r1=mysqli_fetch_array($ssq1);
                                                          	echo $cempname;
                                                          	else
                                                             echo $rss1['emp_name']; ?></td>
-                                                      
-                                                    
-                                                      
+
+
+                                                                                                             
                                                       
                                                     <td class="hidden-480">
-                                                        <?php 	if(($tsname=='admin') or ($tsname=='durgarao')or ($tsname=='JFMTS22230493') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
-                                                        <a href="knwtsedit_qot.php?id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                                    <?php    }else{
-                                                    if($tsname==$ses){
-                                                        
-                                                        if($yamt > $tdamt){ ?>
-                                                        <img src="images/edit.gif"> 
-                                                        <?php  }else{ ?>
                                                         
                                                         <a href="knwtsedit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                                        
-                                                        <?php }
-                                                        
-                                                    }
+                                                        <a href="workstatus.php?id=<?php echo $rs1['quet_num']; ?>" onclick="return confirm('Are you sure you want to cancel this Quotation?')"> 
+                                                        <span class="glyphicon glyphicon-remove btn-lg"></span></a>
                                                     
-                                                    
-                                                     }?>
+                                                        
+                                                        
                                                         
                                                         
                                                         
                                                         </td>
+                                                        <td class="hidden-480"><?php echo $rs1['wd']; ?></td>
 													
 														 <td class="hidden-480">
 														 
@@ -530,7 +525,7 @@ $r1=mysqli_fetch_array($ssq1);
 											<div align="center">		
 <?php 
 $sql = "SELECT COUNT(id) AS total FROM ".$datatable;
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($link,$sql);
 $row = mysqli_fetch_assoc($result);
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
   

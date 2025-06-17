@@ -1,6 +1,6 @@
 <?php //include('config.php');
 session_start();
-//include('dbconnection/connection.php');
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -412,11 +412,11 @@ $tsname=$_SESSION['user'];
 												<?php 
 											include('dbconnection/connection.php');
 												//	$y="select distinct quet_num,state from odrequest_amnt where confirm!='Yes' order by id desc";
-											if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri') or ($tsname=='JFMOD22232823')){
+											
 											    	$y="select distinct quet_num,state,user from odrequest_amnt where confirm!='Yes' order by id desc";
-											}else{
-											    	$y="select distinct quet_num,state,user from odrequest_amnt where confirm!='Yes' and user='$tsname' order by id desc";
-											}
+											// }else{
+											//     	$y="select distinct quet_num,state,user from odrequest_amnt where confirm!='Yes' and user='$tsname' order by id desc";
+											// }
 												
 											 
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -585,16 +585,13 @@ $tsname=$_SESSION['user'];
                                                         
                                                         </td>
                                                     <td class="hidden-480">
-                                                        <?php if(($tsname=='admin') or ($tsname=='durgarao')or ($tsname=='sumanthpotluri')){ ?>
+                                                        
                                                         <a href="odedit_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="odcancel_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                         <?php }else{ ?>
-                                                        <img src="images/edit.gif"> <img src="images/Icon_Delete.png">
-                                                        
-                                                        <?php }?> 
+                                                          
                                                         </td>
 														 
 														 

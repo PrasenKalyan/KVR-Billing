@@ -1,50 +1,12 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
  $name=$_SESSION['user'];
 //include('org1.php');
 include'dbfiles/org.php';
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$qotbill ='qot_bill';
-		$request_amnt ='request_amnt';
-       
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qotbill ='tgqot_bill';
-		$request_amnt ='tgrequest_amnt';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qotbill ='tnqot_bill';
-	  $request_amnt ='tnrequest_amnt';
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qotbill ='klqot_bill';
-		$request_amnt ='klrequest_amnt';	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qotbill ='knqot_bill';
-	  $request_amnt ='knrequest_amnt';
-      	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qotbill ='odqot_bill';
-	  $request_amnt ='odrequest_amnt';	
-	}
 //include'dbfiles/iqry_acyear.php';
 ?>
 <!DOCTYPE html>
@@ -417,7 +379,7 @@ error:function (){}
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                          Edit To be raised Invoice
+                         AP Edit To be raised Invoice
 
                             </h1>
                         </div>
@@ -427,7 +389,7 @@ error:function (){}
                  <?php  $id=$_GET['id'];
                         $id1=$_GET['id1'];
 
-						$sq=mysqli_query($link,"select * from ".$request_amnt." where quet_num='$id'");
+						$sq=mysqli_query($link,"select * from request_amnt where quet_num='$id'");
 						$r=mysqli_fetch_array($sq);
 						
 						?>             <!-- PAGE CONTENT BEGINS -->
@@ -436,11 +398,11 @@ error:function (){}
                                 <!-- PAGE CONTENT BEGINS -->
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <?php $ssq=mysqli_query($link,"select * from ".$qotbill." where quet_num='$id'");
+                                        <?php $ssq=mysqli_query($link,"select * from qot_bill where quet_num='$id'");
 													   $r1=mysqli_fetch_array($ssq);?>
- <form name="frm" method="post" action="" enctype="multipart/form-data">
- <input type="hidden" name="ids" value="<?php echo $id?>">
-  <input type="hidden" name="state" value="<?php echo $r['state'];?>">
+											<form name="frm" method="post" action="" enctype="multipart/form-data">
+											<input type="hidden" name="ids" value="<?php echo $id?>">
+											<input type="hidden" name="state" value="<?php echo $r['state'];?>">
                                             <table class="table table-striped table-bordered table-hover">
 											
 											  <tr><td align="right">QuoteNumber</td><td align="left">
@@ -469,11 +431,30 @@ error:function (){}
 											<tr><td align="right">Service Period</td><td align="left">
 										<input type="text" required name="speriod" id="speriod" class="form-control" /></td>	
                                         <td align="right">Format Type</td><td>
-										<input id="ftype1" required type="text" class="form-control" name="ftype" onkeyup='s3(1)' >
+										<input id="ftype1" required type="text" class="form-control" readonly name="ftype" onkeyup='s3(1)' >
 										<div id='suggesstion-box1'>
 
 										</td>
                                         </tr>
+<tr><td align="right">Company Name</td><td align="left">
+										<input type="text" name="com_name" id="com_name" required class="form-control" value="<?php echo $rs1['com_name'];?>" /></td>
+                                        </tr>
+
+										<?php
+
+$id = $_REQUEST['id'];
+$query = mysqli_query($link, "SELECT tot_base FROM add_qot WHERE quet_num = '$id'");
+$r1 = mysqli_fetch_assoc($query);
+$tot_base = $r1['tot_base'];
+?>
+										<tr>
+  <td align="right">Total Base Amount</td>
+  <td align="left">
+    <input type="text" name="tot_base" id="tot_base" class="form-control" readonly 
+           value="<?php echo $tot_base; ?>">
+  </td>
+  
+</tr>
 										<tr><td align="right">Total Base Amount</td><td align="left">
 										<input type="text" required name="tbase" id="tbase" class="form-control" readonly /></td>	
 											<td align="right">File Upload</td>
@@ -532,6 +513,7 @@ error:function (){}
                                                 <i class="ace-icon fa fa-save bigger-110"></i>
                                                 Update
                                             </button>
+											
 										
 										<?php 
 										if(isset($_POST['update'])){
@@ -541,10 +523,10 @@ error:function (){}
 											$bill_date=$_POST['bill_date'];
 											$inv_no=$_POST['inv_no'];
 											$inv_date=$_POST['inv_date'];
-											$id1=$_POST['id1'];
+											// $id1=$_POST['id1'];
 											$state=$_POST['state'];
 											$note=$_POST['note'];
-																						$speriod=$_POST['speriod'];
+											$speriod=$_POST['speriod'];
 											$ftype=$_POST['ftype'];
 											$tbase=$_POST['tbase'];
 											$gst28=$_POST['gst28'];
@@ -552,6 +534,7 @@ error:function (){}
 											$gst12=$_POST['gst12'];
 											$gst5=$_POST['gst5'];
 											$gst0=$_POST['gst0'];
+											$com_name=$_POST['com_name'];
 
 											
 											
@@ -561,31 +544,33 @@ error:function (){}
 											$st="Un Paid";
 										}
 											
-												$iname4 = $_FILES['img3']['name'];
-			 if($iname4!= ""){
-	$code2 = md5(rand());
-	 $iname4 =$code2. $_FILES['img3']['name'];
-	$tmp = $_FILES['img3']['tmp_name'];
-	 $dir2 = "iupload";
-		       $destination =  $dir2 . '/' . $iname4;
-		         move_uploaded_file($tmp, $destination);
-	 $iname5 =$code2. $_FILES['img3']['name'];
-	$iname5 = ($iname5);
-	}else{
-	 $iname5 = ($img3);
-	}	
-										 $yt=	"update  ".$qotbill." set quet_num='$qt_no',bill_date='$bill_date',
+											$iname4 = $_FILES['img3']['name'];
+											if($iname4!= ""){
+											$code2 = md5(rand());
+											$iname4 =$code2. $_FILES['img3']['name'];
+											$tmp = $_FILES['img3']['tmp_name'];
+											$dir2 = "iupload";
+											$destination =  $dir2 . '/' . $iname4;
+											move_uploaded_file($tmp, $destination);
+											$iname5 =$code2. $_FILES['img3']['name'];
+											$iname5 = ($iname5);
+											}else{
+											$iname5 = ($img3);
+											}	
+
+
+											
+										 $yt=	mysqli_query($link,"update  qot_bill set quet_num='$qt_no',bill_date='$bill_date',
 												inv_num='$inv_no',inv_date='$inv_date',note1='$note',inv_sub_date='$inv_sub_date',status='RUn Paid',
 												speriod='$speriod',ftype='$ftype',tbase='$tbase',gst28='$gst28',gst18='$gst18',gst12='$gst12',gst5='$gst5',
-												gst0='$gst0',total='$total',file='$iname5'   where id='$id1' and quet_num='$id'";
-											//exit;
-												$sq=mysqli_query($link,$yt) or die(mysqli_error($link));
+												gst0='$gst0', com_name='$com_name',total='$total',file='$iname5'   where id='$id1' and quet_num='$id'");
+											
 												
 											
-										//	if($state=='AP'){
-												$s=mysqli_query($link,"update ".$qottable." set
+										
+												$s=mysqli_query($link,"update add_qot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='Raised Invoice List' where quet_num='$qt_no'");
-										//	} 
+										
 											
 											print "<script>";
 			print "alert('Invoice Sucessfully Updated');";

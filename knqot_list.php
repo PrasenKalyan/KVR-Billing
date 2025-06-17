@@ -256,11 +256,11 @@ xmlhttp.send();
 														   <th>User</th>
                                                      		 <th>Edit</th>
         													  <?php if(($tsname!="admin")  ){}else{ ?>
-        													  <th>RONo Edit</th>
+        													  <!-- <th>RONo Edit</th> -->
         													  <?php }?>
 													         
 														     <th>Print</th> 
-                                                             <!-- <th>Quotation</th> -->
+                                                             <th>Quotation</th>
 															 <th>Bill of Supply</th><th>Miscllenious</th>
 														     <th>Pdf Download</th>
                                                         
@@ -502,7 +502,7 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         </td>
                                                         <?php if(($tsname!="admin")){}else{ ?>
-                                                        <td> 
+                                                        <!-- <td> 
                                                         
                                                                 
                                                         <a href="kneditrono_qot.php?id=<?php echo $rs1['id']; ?>">
@@ -512,7 +512,7 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         
                                                         
-                                                        </td>
+                                                        </td> -->
                                                         <?php }?>
 														
 														
@@ -522,8 +522,8 @@ $r1=mysqli_fetch_array($ssq1);
 												   class="btn btn-primary btn-xs"><img src="images/printer.png"></a>
                                                         </td> 
                                                         
-                                                         <!-- <td class="hidden-480"><a href="qut_excel.php?id=<?php echo $rs1['id']; ?>&state=KN">
-                                                        <img src="images/xl.jpg" width="20" height="20"></a></td> -->
+                                                         <td class="hidden-480"><a href="qut_excel.php?id=<?php echo $rs1['id']; ?>&state=KN">
+                                                        <img src="images/xl.jpg" width="20" height="20"></a></td>
                                                         
                                                         <td class="hidden-480"><a href="qut_excel_bill.php?id=<?php echo $rs1['id']; ?>&state=KN">
                                                         <img src="images/xl.jpg" width="20" height="20"></a></td>
@@ -562,7 +562,7 @@ $r1=mysqli_fetch_array($ssq1);
 											<div align="center">		
 <?php 
 $sql = "SELECT COUNT(id) AS total FROM ".$datatable;
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($link,$sql);
 $row = mysqli_fetch_assoc($result);
 $total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
   

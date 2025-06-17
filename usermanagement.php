@@ -5,7 +5,7 @@ if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 //include('org1.php');
-include'dbfiles/org.php';
+include 'dbfiles/org.php';
 //include'dbfiles/iqry_emp.php';
 ?>
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ function ConfirmDialog() {
                 </script>
 
                 <!-- /.sidebar-shortcuts -->
-                <?php include'template/sidemenu.php' ?>
+                <?php include 'template/sidemenu.php' ?>
                 <!-- /.nav-list -->
 
                 <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -116,8 +116,8 @@ function ConfirmDialog() {
 				  <input type="checkbox" name="menu[]" value="2" /><b>Settings</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="21" />Update Organization<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="22" />Add Employee<br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="23" />Add Material<br/>
-				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="91" />Add Supervisor Details<br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="23" />Add Material<br/> -->
+				   <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="91" />Add Supervisor Details<br/> -->
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="92" />Add Company  Details<br/>
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="93" />Add AFM Details<br/>
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="94" />Add Co-Ordinatior Details<br/>
@@ -125,15 +125,17 @@ function ConfirmDialog() {
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="97" />Add Item Details<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="96" />Add Store List<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="99" />Add Upload Store List<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="98" />Add KN Items List<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="98" />Add AP Items List<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="100" />Add TG Items List<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="101" />Add Upload TN Items List<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="102" />Add Change User Names<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="103" />Add Change Status<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="101" />Add KL Items List<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="100" />Add OD Items List<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="101" />Add KN Items List<br/>
+				    <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="102" />Add Change User Names<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="103" />Add Change Status<br/> -->
 				    
 				  </div>
 
-                  <div class="col-sm-3">
+                  <!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="3" /><b>Upload Formats</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="24" />Upload Products Format<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="25" />Upload Add Billing Format <br/>
@@ -141,7 +143,7 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="31" />Employee Activity Report<br/>
 				  
 				  				  
-				  </div>
+				  </div> -->
 				<!--  <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="8" /><b>Employee</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="81" />Add Tools<br/>
@@ -152,7 +154,7 @@ function ConfirmDialog() {
 				  				  
 				  </div>-->
 				  
-				 <!-- <div class="col-sm-3">
+				 <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="4" /><b>AP Track </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="41" />Quotations<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="42" />RO Required <br/>
@@ -170,15 +172,15 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="408" />Request Amount  Excel <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="402" />Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="403" />Quotation Details <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="404" />Supervisor <br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="404" />Supervisor <br/> -->
 				  
 				  
 				  				  
 				  </div>
-											-->
+											
 				  
 				  <div class="col-sm-3">
-				  <input type="checkbox" name="menu[]" value="5" /><b>TS Track </b><br/>
+				  <input type="checkbox" name="menu[]" value="5" /><b>TG Track </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="51" />Quotations<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="52" />RO Required <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="53" />Work To Be Started<br/>
@@ -201,7 +203,7 @@ function ConfirmDialog() {
 				  				  
 				  </div>
 				  
-				  <!--
+				  
 				  <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="6" /><b>KL Track </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="61" />Quotations<br/>
@@ -220,12 +222,12 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="608" />Requested Amount  Excel <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="602" />Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="603" />Quotation Details <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="604" />Supervisor <br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="604" />Supervisor <br/> -->
 				  				  
 				  </div>
 				  
 				  
-				   <div class="col-sm-3">
+				   <!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="7" /><b>TN Track </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="71" />Quotations<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="72" />RO Required <br/>
@@ -245,7 +247,7 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="703" />Quotation Details <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="704" />Supervisor <br/>
 				  				  
-				  </div>-->
+				  </div> -->
 				  
 				  	  <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="10" /><b>KN Track </b><br/>
@@ -265,12 +267,12 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="128" />Amount Approved Excel <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="123" />Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="124" />Quotation Details <br/>
-				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="125" />Supervisor <br/>
+				   <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="125" />Supervisor <br/> -->
 				  
 				  
 				  				  
 				  </div>
-				<!--  <div class="col-sm-3">
+				 <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="240" /><b>OD Track </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="241" />Quotations<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="242" />RO Required <br/>
@@ -288,7 +290,7 @@ function ConfirmDialog() {
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2414" />Requested Amount  Excel <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2415" />Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2416" />Quotation Details <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2417" />Supervisor <br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2417" />Supervisor <br/> -->
 				  				  
 				  </div>
 				   
@@ -297,7 +299,7 @@ function ConfirmDialog() {
 				  
 				  				
 				
-				<div class="col-sm-3">
+				<!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="16" /><b>User Management</b>
 				  
 				  				  
@@ -306,14 +308,14 @@ function ConfirmDialog() {
 				  <input type="checkbox" name="menu[]" value="9" /><b>Reports</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="999" />Working Hours <br/>
 				  				  
-				  </div>
-											--> 				  		  
+				  </div> -->
+											 				  		  
 				  <div class="col-sm-3">
-				  <input type="checkbox" name="menu[]" value="1111" /><b>Reports </b><br/>
+				  <input type="checkbox" name="menu[]" value="1111" /><b>Expenses </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="110" />Add Expenses<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="111" />AP Expenses List <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="112" />TS Expenses List<br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="113" />TN Expenses List<br/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="112" />TG Expenses List<br/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="113" />OD Expenses List<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="114" />KL Expenses List<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="115" />KN Expenses List <br/>
 
@@ -533,14 +535,6 @@ where a.user!='admin'";
 
                         //to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
                        
-
-
-                       
-
-
-
-                      
-
 
                     });
 

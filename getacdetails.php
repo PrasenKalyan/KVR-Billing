@@ -3,7 +3,7 @@ include('dbconnection/connection.php');
 $keyword=$_GET["keyword"];
 $id=$_GET["id"];
 
-    $query =mysqli_query($link,"SELECT distinct name  FROM   ac_det WHERE   name LIKE '%$keyword%'  LIMIT 0,10");
+    $query =mysqli_query($link,"SELECT distinct name  FROM ac_det WHERE name LIKE '%$keyword%'  LIMIT 0,10");
 ?>
 <ul id="country-list">
 <?php

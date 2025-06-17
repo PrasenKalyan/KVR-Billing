@@ -117,6 +117,7 @@ xmlhttp.onreadystatechange=function()
 	document.getElementById("cordinator").value=strar[7];
 	document.getElementById("afm").value=strar[8];
 	document.getElementById("company").value=strar[9];
+    document.getElementById("frm_type").value=strar[5];
     }
   }
 xmlhttp.open("GET","get-apdata3.php?q="+str,true);
@@ -127,8 +128,31 @@ xmlhttp.send();
 <script>
 function showUser(str,id)
 {
+    $.ajax({
+     url: 'get_oditems.php', //This is the current doc
+     type: "POST",
+     dataType:'text', // add json datatype to get json
+     data: ({q: str}),
+     success: function(data){
+         var strar=data.split(":");
+	//document.getElementById("supname").value=strar[2];
+	
+	//document.getElementById("state").value=strar[1];
+	
+	//document.getElementById("city").value=strar[2];	
+	document.getElementById("serv_num"+id).value=strar[1];	
+	document.getElementById("hsn"+id).value=strar[2];
+    document.getElementById("gst"+id).value=strar[3];
+	//document.getElementById("addr").value=strar[4];	
+	document.getElementById("uom"+id).value=strar[4];
+	document.getElementById("price"+id).value=strar[5];
+	document.getElementById("serv_amt"+id).value=strar[6];
+	document.getElementById("product_code"+id).value=strar[7];
+	
+     }
+});
 
-if (str.length==0)
+/*if (str.length==0)
   {
   document.getElementById("txtHint").innerHTML="";
   return;
@@ -160,12 +184,13 @@ xmlhttp.onreadystatechange=function()
 	document.getElementById("uom"+id).value=strar[4];
 	document.getElementById("price"+id).value=strar[5];
 	document.getElementById("serv_amt"+id).value=strar[6];
+	document.getElementById("product_code"+id).value=strar[7];
 	
 	
     }
   }
 xmlhttp.open("GET","get_oditems.php?q="+str,true);
-xmlhttp.send();
+xmlhttp.send();*/
 }
 </script>	  
 	
@@ -320,7 +345,7 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="odqot_list"> Quotations</a>
+                                <a href="qot_list"> Quotations</a>
                             </li>
                             <li>
                                 <a href=""> Add OD Quotations</a>
@@ -347,7 +372,7 @@ xmlhttp.send();
 						 $r=mysqli_fetch_array($ssq);
 						$cnt1=$r['cnt'];
 						
-						 $cnt=  23240000+1+$cnt1;
+						 $cnt=  25260900+1+$cnt1;
 						
 						?>
                         
@@ -365,8 +390,38 @@ xmlhttp.send();
                                             <table class="table table-striped table-bordered table-hover">
                                                 
 											<tr>
-											    <td align="right">Quote No</td>
-											    <td><input  type="text" readonly   class="form-control" value="QJFMOD<?php echo $cnt;?>" required name="qt_no" id="qt_no"></td>
+                                            <tr>
+                                            <td align="right">Service</td>
+<td>
+    <input type="radio" class="form-check-input" name="service" id="house_cleaning" value="House Cleaning" required onclick="toggleQuote()"> House Cleaning
+    <input type="radio" class="form-check-input" name="service" id="other_service" value="Other Service" required onclick="toggleQuote()"> Other Service
+</td>
+
+<tr id="quote_row">
+    <td align="right">Quote No</td>
+    <td>
+        <input type="text" class="form-control" name="qt_no" id="qt_no" value="" readonly required>
+    </td>
+</tr>
+
+<script>
+function toggleQuote() {
+    const houseCleaning = document.getElementById('house_cleaning').checked;
+    const quoteInput = document.getElementById('qt_no');
+    const count = <?php echo json_encode($cnt); ?>; 
+
+    if (houseCleaning) {
+        quoteInput.value = 'QHCOD' + count;
+    } else {
+        quoteInput.value = 'QKVROD' + count;
+    }
+}
+
+// Optional: set default on page load
+// window.onload = toggleQuote;
+</script>
+											    <!-- <td align="right">Quote No</td>
+											    <td><input  type="text" readonly   class="form-control" value="QJTOD<?php echo $cnt;?>" required name="qt_no" id="qt_no"></td> -->
 											    <td align="right">Manual Quote NO</td>
 											     <td><input  type="text"   class="form-control" value=""  name="qt_no1" id="qt_no1"></td>
 											</tr>
@@ -375,9 +430,9 @@ xmlhttp.send();
 											 <input id=\"store_code\" list=\"city1\" class="form-control" name="store_code" onChange="showHint22(this.value)" >
 <datalist id=\"city1\" >
 
-<?php 
+<?php
 include_once('dbconnection/connection1.php');
-$sql="select distinct store_code from dpr where state='OD' ";  // Query to collect records
+$sql="select distinct store_code from dpr where state='Odisha' ";  // Query to collect records
 $r1=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r1)) {
 echo  "<option value=\"$row[store_code]\"/>"; // Format for adding options 
@@ -433,6 +488,12 @@ include_once('dbconnection/connection.php');
                                         <td align="right">FM Fault date</td><td><input type="date" name="falt_date" 
 										id="falt_date" required class="form-control" value="<?php echo date('Y-m-d');?>"></td>
                                         </tr>
+                                         <tr><td align="right">Format Type</td><td align="left">
+										<input type="text" required name="frm_type" id="frm_type" class="form-control"></td>
+                                        <td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text"  name="vendor" id="vendor" class="form-control"></td>
+                                        </tr>
+
                                         <tr><td align="right">Photo1</td><td align="left">
 										<input type="file" required   name="img1" id="img1" class="form-control"/></td>
                                         <td align="right">Photo2</td><td><input type="file" name="img2" 
@@ -503,14 +564,15 @@ include_once('dbconnection/connection.php');
 	</div>
                                             <div class="table-responsive">
                                             <table id="dynamic-table1" class="table table-striped table-bordered table-hover">
- <tr><td colspan="2"><a onclick="window.open('addoduitems.php','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" >Add Items</a></td>
+ <tr><td colspan="2"><a onclick="window.open('adduitems.php','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" >Add Items</a></td>
   <td colspan="9"><b style="color:red;">for getting the values after selecting the description column please click on descripton text box once</b></td></tr>
                                              <tr>
 														<th>C</th>
 														<th>ID</th>
-													
+													 <th>Product Type</th>
 														  <th> Description</th>
                                                        <th> Service Id</th>
+                                                       
                                                  <th> Brand/Make</th>
 														 <th> Model</th>
                                                         <th>HSN<br/> /SAN Code</th>
@@ -524,7 +586,7 @@ include_once('dbconnection/connection.php');
                                                        <th>SERVICE FEE(6%)</th>
 													    <th>GST AMOUNT</th>
                                                       <th>Serv AMOUNT</th>
-                                                      <th>Remarks</th>
+                                                     
                                                      
 														</tr>
 														<tbody>
@@ -597,7 +659,9 @@ $(".addmore").on('click',function(){
 	var data ="<tr>";
     data +="<td><input type='checkbox' class='case'/></td>";
 	data +="<td>"+i+"</td>"; 
-   // data +="<td><input type='hidden' name='id1[]'  id='id1"+i+"' style='width:30px;' data-row='"+i+"' value='<?php echo $id ?>'><input type='hidden' name='id5[]' id='id5"+i+"' style='width:30px;' data-row='"+i+"' value=''><input data-row='"+i+"' type='text' name='sno[]' id='sno"+i+"' style='width:30px;' value=''></td>";          
+   // data +="<td><input type='hidden' name='id1[]'  id='id1"+i+"' style='width:30px;' data-row='"+i+"' value='<?php echo $id ?>'><input type='hidden' name='id5[]' id='id5"+i+"' style='width:30px;' data-row='"+i+"' value=''><input data-row='"+i+"' type='text' name='sno[]' id='sno"+i+"' style='width:30px;' value=''></td>";  
+    data +="<td><select name='productype[]'  id='productype"+i+"' value='' style='width:70px;' data-row='"+i+"'><option value='plumbing'>Plumbing</option><option value='Carpentory'>Carpentory</option><option value='electrical'>Electrical</option><option selected value='service'>Service</option></select></td>";
+    
    	 
 data +="<td><input type='text' name='pname[]'  id='pname"+i+"' data-row='"+i+"' style='width:150px;' class='form-control pname"+i+"' onkeyup='s2("+i+")' onclick='showUser(this.value,"+i+")'> <div id='suggesstion-box"+i+"'></div>";
 data +="</td>";
@@ -619,12 +683,14 @@ data +="<td><input type='text' name='amnt[]' data-row='"+i+"' value='' style='wi
    
    data +="<td><input type='text' name='gst_amnt[]' data-row='"+i+"' value='' style='width:60px;' class='txt4 ' readonly  id='gst_amnt"+i+"' /> </td>";          
    data +="<td><input type='text' name='serv_amt[]' data-row='"+i+"'  style='width:60px;'  class='' id='serv_amt"+i+"' value='6'/> </td>";  
-    //data +="<td><input type='text' name='uom[]'  id='uom"+i+"' value='' style='width:70px;' data-row='"+i+"'></td>";
+   
+   
    	data +="<td><input type='hidden' name='id[]' data-row='"+i+"' value='' style='width:60px;' readonly class='' id='id"+i+"' /> </td>";          
    	data +="<td><input type='hidden' name='cap[]' data-row='"+i+"' value='' style='width:60px;' readonly class='' id='cap"+i+"' /> </td>";          
    	       
-   	data +="<td><input type='hidden' name='serv_code[]' data-row='"+i+"' value='' style='width:60px;' readonly class='' id='serv_code"+i+"' /> </td>";          
-   		data +="<td><input type='text' name='remarks[]'  id='remarks"+i+"' value='' style='width:70px;' data-row='"+i+"'></td>";
+   	data +="<td><input type='hidden' name='serv_code[]' data-row='"+i+"' value='' style='width:60px;' readonly class='' id='serv_code"+i+"' /> </td>";    
+   	data +="<td><input type='hidden' name='product_code[]' data-row='"+i+"' value='' style='width:60px;' readonly class='' id='product_code"+i+"' /> </td>";    
+   	
 	 
 	data +="</tr>";
 	$('#dynamic-table1 ').append(data).find('#dynamic-table1>tbody>tr:nth-child(2)');

@@ -88,8 +88,14 @@ $sqq=mysqli_query($link,"select `count` as ids from qutcount where state='AP' ")
 	$rr=mysqli_fetch_array($sqq);
 	$idd=$rr['ids'];
 	$cc=$idd+1;
-	 $qt_nox=23240000+1+$idd;
-	 $qt_no="QJFMAP$qt_nox";  
+	$service = $_POST['service']; 
+	if ($service == "House Cleaning") {
+		$qt_nox = 25260900 + 1 + $idd;
+		$qt_no = "QHCAP" . $qt_nox;
+	} else {
+	 $qt_nox=25260900+1+$idd;
+	 $qt_no="QKVRAP$qt_nox";  
+	}
 	 if($qt_no1!=''){
 	     $ac=mysqli_query($link,"update add_qot set quet_num='$qt_no1' where id='$sno'");
 	 }else{
@@ -320,9 +326,7 @@ if($ad2!=$adv_amnt2 and $adv_amnt2>=1){
 }
 
 */
-		    $v="update add_qot set
-		 
-		 `store_code`='$store_code' ,`tot_base`='$tot', `tot_ser`='$tot_serv', `tot_gst`='$tot_gst', `net`='$net', 
+		    $v="update add_qot set `store_code`='$store_code' ,`tot_base`='$tot', `tot_ser`='$tot_serv', `tot_gst`='$tot_gst', `net`='$net', 
 		 falt_no='$falt_no',falt_date='$falt_date',falt_desc='$falt_desc',type_of_work='$type_of_work',sub_type='$sub_type',
 		 
 		 img1='$iname1',img2='$iname3',img3='$iname5',img4='$iname20',img5='$iname21',img6='$iname22',   bal='$bal',gst_type='$gst_type'

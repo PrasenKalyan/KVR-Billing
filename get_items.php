@@ -5,7 +5,7 @@ include('dbconnection/connection.php');
 <?php
 $q=urldecode($_GET["q"]);
 
- $sql="SELECT *  FROM ritems WHERE mdescription = '$q'";
+ $sql="SELECT * FROM ritems WHERE mdescription = '$q'";
 echo 'hello';
 $result = mysqli_query($link,$sql);
 
@@ -24,6 +24,7 @@ while($row = mysqli_fetch_array($result))
    echo ":" . $row['umo'];
    echo ":" . $row['urate'];
    echo ":" . $row['service_fee'];
+   
   
     
   //$d1= date("Y-m-d", strtotime($d));

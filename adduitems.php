@@ -162,7 +162,7 @@ function report()
 										
  										 </td>
                                         <td align="right">Service Code</td><td align="left">
-										<input type="text"  class="form-control" name="s_code"> </td>
+										<input type="text"  class="form-control" name="s_code" id="s_code"> </td>
                                         </tr>
                              
                                         

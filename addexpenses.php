@@ -392,10 +392,7 @@ xmlhttp.send();
                                        </tr>
                                         
                                         <tr>
-                                                 <td align="right">Exp Description</td>
-                                                 <td>
-                                              <textarea  name="expdesc" id="expdesc" rows="4"  required class="form-control"></textarea>
-										 </td>
+                                                 
 										 </tr>
                                          
 
@@ -406,10 +403,10 @@ xmlhttp.send();
     </td>
 </tr>
 
-<tr><td align="right">Balance Amount</td>
+<tr><td align="right">Requested Amount</td>
 											
 <td>
-        <input type="text" class="form-control" name="bal" id="bal" readonly>
+        <input type="text" class="form-control" name="adv_amnt" id="adv_amnt" readonly>
     
     
 <script>
@@ -436,7 +433,7 @@ xmlhttp.onreadystatechange=function()
 	
 	var show=xmlhttp.responseText;
 	var strar=show.split(":");
-    document.getElementById("bal").value=strar[1];
+    document.getElementById("adv_amnt").value=strar[1];
 	
     }
   }
@@ -475,6 +472,10 @@ xmlhttp.send();
                                     
                                        </td>
                                         </tr>
+                                        <td align="right">Exp Description</td>
+                                                 <td>
+                                              <textarea  name="expdesc" id="expdesc" rows="4"  required class="form-control"></textarea>
+										 </td>
 									
                                         </table>
                                         

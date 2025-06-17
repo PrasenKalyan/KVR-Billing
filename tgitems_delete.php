@@ -6,7 +6,7 @@ $id=$_GET['id'];
 
 
 
-$sql=mysqli_query($link,"delete from titems where id='$id'") or die(mysqli_error($link));
+$sql=mysqli_query($link,"delete from ritems where id='$id'") or die(mysqli_error($link));
 if($sql){
 	print "<script>";
 	print "alert('Sucessfully Deleted');";

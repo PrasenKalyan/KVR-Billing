@@ -116,6 +116,7 @@ xmlhttp.onreadystatechange=function()
 	document.getElementById("cordinator").value=strar[7];
 	document.getElementById("afm").value=strar[8];
 	document.getElementById("company").value=strar[9];
+    document.getElementById("frm_type").value=strar[5];
     }
   }
 xmlhttp.open("GET","get-apdata3.php?q="+str,true);
@@ -346,7 +347,7 @@ xmlhttp.send();
 						 $r=mysqli_fetch_array($ssq);
 						$cnt1=$r['cnt'];
 						
-						 $cnt=  23240000+1+$cnt1;
+						 $cnt=  25260900+1+$cnt1;
 						
 						?>
                 
@@ -364,9 +365,36 @@ xmlhttp.send();
   <input type="hidden" name="ses" value="<?php echo $name;?>">
                                             <table class="table table-striped table-bordered table-hover">
 											
-											<tr>
-											    <td align="right">Quote No</td>
-											    <td> <input  type="text" readonly  class="form-control" value="QJFMKL<?php echo $cnt;?>" required name="qt_no" id="qt_no"></td>
+                                            <tr>
+                                            <td align="right">Service</td>
+<td>
+    <input type="radio" class="form-check-input" name="service" id="house_cleaning" value="House Cleaning" required onclick="toggleQuote()"> House Cleaning
+    <input type="radio" class="form-check-input" name="service" id="other_service" value="Other Service" required onclick="toggleQuote()"> Other Service
+</td>
+
+<tr id="quote_row">
+    <td align="right">Quote No</td>
+    <td>
+        <input type="text" class="form-control" name="qt_no" id="qt_no" value="" readonly required>
+    </td>
+</tr>
+
+<script>
+function toggleQuote() {
+    const houseCleaning = document.getElementById('house_cleaning').checked;
+    const quoteInput = document.getElementById('qt_no');
+    const count = <?php echo json_encode($cnt); ?>; 
+
+    if (houseCleaning) {
+        quoteInput.value = 'QHCKL' + count;
+    } else {
+        quoteInput.value = 'QKVRKL' + count;
+    }
+}
+
+// Optional: set default on page load
+// window.onload = toggleQuote;
+</script>
 											    <td align="right">Manual Quote NO</td>
 											     <td><input  type="text"   class="form-control" value=""  name="qt_no1" id="qt_no1"></td>
 											</tr>
@@ -382,8 +410,8 @@ xmlhttp.send();
 
 <?php 
 include_once('dbconnection/connection1.php');
-$sql="select distinct store_code from dpr where state='KL' or state='Kerala' ";  // Query to collect records
-$r1=mysqli_query($link,$sql) or die(mysql_error());
+$sql="select distinct store_code from dpr where state='Kerala' ";  // Query to collect records
+$r1=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r1)) {
 echo  "<option value=\"$row[store_code]\"/>"; // Format for adding options 
 }
@@ -436,6 +464,12 @@ include_once('dbconnection/connection.php');
 										<textarea  required name="falt_desc" id="falt_no" class="form-control"></textarea></td>
                                         <td align="right">FM Fault date</td><td><input type="date" name="falt_date" 
 										id="falt_date" required  class="form-control" value="<?php echo date('Y-m-d');?>"></td>
+                                        </tr>
+                                        <tr><td align="right">Format Type</td><td align="left">
+										<input type="text" required name="frm_type" id="frm_type" class="form-control"></td>
+                                        <td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text"  name="vendor" id="vendor" class="form-control"></td>
+                                        
                                         </tr>
                                         <tr><td align="right">Photo1</td><td align="left">
 										<input type="file"   required  name="img1" id="img1" class="form-control"/></td>

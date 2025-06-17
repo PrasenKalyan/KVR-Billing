@@ -5,7 +5,7 @@ if(isset($_REQUEST['submit'])){
 $uname = $_REQUEST['user'];
 
 $menu=$_REQUEST['menu'];
-$result = mysqli_query($link,"select * from admin_login where empname='$empname'") or die(mysqli_error($link));
+$result = mysqli_query($link,"select * from admin_login where empname='$empname'") or die(mysqli_close($link));
  $rows = mysqli_num_rows($result);
 
  

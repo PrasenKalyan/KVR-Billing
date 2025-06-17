@@ -13,7 +13,7 @@ include'dbfiles/org.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include'template/headerfile.php'; ?>
+    <?php include 'template/headerfile.php'; ?>
 	 <script src="js/jquery.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
     <style>
@@ -226,13 +226,13 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"> KL Request Amount </a>
+                                <a href="#"> KL Amount Approved </a>
                             </li>
                             <li>
-                                <a href="qot_list.php">KL Request Amount List</a>
+                                <a href="qot_list.php">KL Amount Approved List</a>
                             </li>
                             <li>
-                                <a href="">Edit Request Amount</a>
+                                <a href="">Edit Amount Approved</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -244,7 +244,7 @@ xmlhttp.send();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                Edit Request Amount
+                                Edit Amount Approved
 
                             </h1>
                         </div>
@@ -352,7 +352,7 @@ foreach($array as $value)
 										</td>	
                                         <td align="right">Remarks</td><td align="left">
 										<input type="text" name="remarks1" 
-										id="remarks1" readonly class="form-control"  value="<?php echo $r['remarks'];?>">
+										id="remarks1" class="form-control"  value="<?php echo $r['remarks'];?>">
 										
 										</td>	
                                         </tr>

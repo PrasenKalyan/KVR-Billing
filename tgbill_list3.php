@@ -109,6 +109,10 @@ include'dbfiles/org.php';
                   
                 <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search By Quotation Name No  " onkeyup="myFunction()">
                   </div>
+                  <button class="btn btn-info pull-left" type="submit" name="bsearch" id="bsearch">
+                                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                                Search
+                                            </button>
                   <div class="col-sm-2"><b><a href="qut_tgpp_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
 			<!--	   <div class="col-sm-3">
                   
@@ -133,24 +137,24 @@ include'dbfiles/org.php';
 														</th>-->
                                                     <th>S No</th>
 													<th>Inv Number</th>
-													<th>Qut Num</th>
+													<th>Quet Num</th>
 													<th>Inv Date</th>
 													<th>Inv Sub Date</th>
 													<th>Serv Period</th>
 													<th>Inv Sub Mon</th>
 													<th>State</th>
 													<th>Fomate</th>
-													<th>Gst 28%</th>
+													<!-- <th>Gst 28%</th> -->
 													<th>Gst 18%</th>
-													<th>Gst 12%</th>
+													<!-- <th>Gst 12%</th>
 													<th>Gst 5%</th>
-													<th>Gst 0%</th>
+													<th>Gst 0%</th> -->
 													<th>Total Base</th>
-													<th>Gst(28%) Amt</th>
+													<!-- <th>Gst(28%) Amt</th> -->
 													<th>Gst(18%) Amt</th>
-													<th>Gst(12%) Amt</th>
+													<!-- <th>Gst(12%) Amt</th>
 													<th>Gst(5%) Amt</th>
-													<th>Gst(0%) Amt</th>
+													<th>Gst(0%) Amt</th> -->
 													<th>Total Gst</th>
                                                     <th>Total Amount </th>
                                                     <th>Ageing</th>
@@ -176,11 +180,11 @@ include'dbfiles/org.php';
 												$bsearch=$_POST['search'];
 											$ssq1="select * from tgqot_bill where status='Un Paid' ";
 													  } else {
-													       if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='rasheed') or ($tsname=='accounts') or ($tsname=='tgbilling')or ($tsname=='sumanthpotluri')){
+													    //    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='rasheed') or ($tsname=='accounts') or ($tsname=='tgbilling')or ($tsname=='sumanthpotluri')){
 													           $ssq1="select * from tgqot_bill where status='Un Paid' ";
-													      }else{
-													           $ssq1="select * from tgqot_bill where status='Un Paid' and user='$tsname' ";
-													      }
+													    //   }else{
+													    //        $ssq1="select * from tgqot_bill where status='Un Paid' and user='$tsname' ";
+													    //   }
 														
 													  }
 											$t=mysqli_query($link,$ssq1) or die(mysqli_error($link));
@@ -219,13 +223,13 @@ include'dbfiles/org.php';
 														<td><?php echo $rs1['inv_sub_date']; ?></td>
 														<td>TG</td>
 														<td><?php echo $rs1['ftype']; ?></td>
-													    <td><?php echo $gst28=$rs1['gst28'];
+													    <!-- <td><?php echo $gst28=$rs1['gst28'];
 													    $g128=$gst28+$g128;
-													    ?></td>
+													    ?></td> -->
 														<td><?php echo $gst18=$rs1['gst18']; 
 															$g118=$gst18+$g118;
 														?></td>
-														<td><?php echo $gst12=$rs1['gst12'];
+														<!-- <td><?php echo $gst12=$rs1['gst12'];
 															$g112=$gst12+$g112;
 														?></td>
 														<td><?php echo $gst5=$rs1['gst5'];
@@ -233,17 +237,17 @@ include'dbfiles/org.php';
 														?></td>
 														<td><?php echo $gst0=$rs1['gst0']; 
 														$g10=$gst0+$g10;
-														?></td>
+														?></td> -->
 														<td><?php echo $tbase=$rs1['tbase']; 
 															$tbs=$tbase+$tbs;
 														?></td>	
-														<td><?php echo $g28=($gst28*28)/100;
+														<!-- <td><?php echo $g28=($gst28*28)/100;
 														$gt28=$gt28+$g28;
-														?></td>
+														?></td> -->
 														<td><?php echo $g18=($gst18*18)/100;
 															$gt18=$gt18+$g18;
 														?></td>
-														<td><?php echo $g12=($gst12*12)/100;
+														<!-- <td><?php echo $g12=($gst12*12)/100;
 														$gt12=$gt12+$g12;
 														?></td>
 														<td><?php echo $g5=($gst5*5)/100; 
@@ -251,7 +255,7 @@ include'dbfiles/org.php';
 														?></td>
 														<td><?php echo $g0=($gst0*0)/100; 
 														$gt0=$gt0+$g0;
-														?></td>
+														?></td> -->
                                                        <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0;
                                                        $tg=$tg+$gtot;
                                                        ?></td>
@@ -270,14 +274,11 @@ include'dbfiles/org.php';
                                                    </td>
 														  <td><?php echo $rs1['user']; ?></td>
                                                         <td class="hidden-480">
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') ){ ?>
+                                                             
                                                             
-                                                            <a href="tgedit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $net;?>&q=<?php echo $q?>">
+                                                            <a href="tgedit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $tbase;?>&q=<?php echo $q?>">
                                                         <img src="images/edit.gif"></a>
-                                                        <?php }else{ ?>
-                                                        <img src="images/edit.gif">
                                                         
-                                                        <?php }?>
                                                         </td>
 														
                                                        
@@ -317,17 +318,17 @@ include'dbfiles/org.php';
 											<?php $i++; } ?>
 											<tr>
 											    <td colspan="9">Total</td>
-											    <td><?php echo $g128; ?></td>
+											    <!-- <td><?php echo $g128; ?></td> -->
 											    <td><?php echo $g118; ?></td>
-											    <td><?php echo $g112; ?></td>
+											    <!-- <td><?php echo $g112; ?></td>
 											    <td><?php echo $g15; ?></td>
-											    <td><?php echo $g10; ?></td>
+											    <td><?php echo $g10; ?></td> -->
 											    <td><?php echo $tbs; ?></td>
-											     <td><?php echo $gt28; ?></td>
+											     <!-- <td><?php echo $gt28; ?></td> -->
 											    <td><?php echo $gt18; ?></td>
-											    <td><?php echo $gt12; ?></td>
+											    <!-- <td><?php echo $gt12; ?></td>
 											    <td><?php echo $gt5; ?></td>
-											    <td><?php echo $gt0; ?></td>
+											    <td><?php echo $gt0; ?></td> -->
 											    <td><?php echo $tg; ?></td>
 											    <td><?php echo $tamt; ?></td>
 											  <td></td>

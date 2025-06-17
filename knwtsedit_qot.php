@@ -474,6 +474,7 @@ calculateTotal22();
 						$wd=$r['wd'];
 						$qtno=$r['quet_num'];
 						
+						
 						$y=mysqli_query($link,"select * from knrequest_amnt where quet_num='$qtno' order by id desc limit 1");
 						$y1=mysqli_fetch_array($y);
 						$ystatus=$y1['confirm'];
@@ -523,6 +524,8 @@ calculateTotal22();
 										<td><input  name="adv_date" 
 										id="sub_type"  class="form-control" <?php if($r['adv_amnt']!='0.00'){  echo 'type="text"'.'readonly';}else{ echo 'type="date"'; } ?>       value="<?php if($r['adv_amnt']!='0.00'){ echo  $r['adv_date'];}else{ echo date('Y-m-d');}?>"></td>
 										
+
+
 									   <th><input id="ac_det1"  <?php if($r['adv_amnt']!='0.00'){ echo 'readonly';}else{ echo ''; } ?> class="form-control" name="ac_det1" value="<?php echo $str=$r['ac_det1'];?>"  onkeyup='s2(1)'><div id='suggesstion-box1'></div>
 </th>
 
@@ -601,15 +604,25 @@ calculateTotal22();
 									   
 									   </td>
 									   </tr>
+									   <!-- <tr>
+										<td align="left">Status</td>
+										<td><select name="status" id="status" class="form-control">
+											<option value="">Select the work status</option>
+											<option value ="approve">Approve</option>
+											<option value = "cancel">Cancel</option>
+										</select></td>
+									   </tr> -->
 
 										 <tr><td >Balance Amount</td><td align="left">
 										<input type="text" name="bal" 
 										id="bal"  class="form-control" value="<?php echo $r['bal'];?>"></td>	
-                                     <td >Work Description</td><td align="right">
-										<input type="text" name="wd" 
-										id="wd"  class="form-control" value="<?php echo $r['wd'];?>"></td>
-										<td></td>
-                                        </tr>
+										<!-- <td align="left"> Work Status</td>
+										<td><select name="wd" id="wd" class="form-control">
+											<option value="">Select the work status</option>
+											<option value ="approve">Approve</option>
+											<option value = "cancel">Cancel</option>
+										</select></td> -->
+									   </tr>
 										<tr><td>Mark Not Required</td>
 										<td><select name="mark" id="mark" >
 										    <option value="">Select</option>

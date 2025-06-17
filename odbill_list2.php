@@ -158,6 +158,7 @@ include'dbfiles/org.php';
                                                        <th>Total Amount</th>
                                                       <th>User</th>
                                                           <th>Edit</th>
+                                                          <th>Document Download</th>
                                                            <th>Invoice PDF</th>
                                                            <th>Tax Invoice</th>
 													
@@ -176,11 +177,11 @@ include'dbfiles/org.php';
 												$bsearch=$_POST['search'];
 											 $y="SELECT * FROM odqot_bill where status='payment pending'  and quet_num like  '%$bsearch%'  ";
 											} else {
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
+													// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
 											         $y="SELECT * FROM odqot_bill where status='payment pending'  order by id asc  LIMIT $start_from,$results_per_page  ";
-											    }else{
-											         $y="SELECT * FROM odqot_bill where status='payment pending' and user='$tsadmin' order by id asc  LIMIT $start_from,$results_per_page ";
-											    }
+											    // }else{
+											    //      $y="SELECT * FROM odqot_bill where status='payment pending' and user='$tsadmin' order by id asc  LIMIT $start_from,$results_per_page ";
+											    // }
 												
 											}
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -279,33 +280,35 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){ ?>
+                                                             
                                                             <a href="odedit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>">
-                                                        <img src="images/edit.png"></a>
-														<a href="odraise_delete.php?id=<?php echo $rs1['id'];?>">
+                                                        <img src="images/edit.GIF"></a>
+														<a href="odraise_delete.php?id=<?php echo $rs1['id'];?>" onclick="return confirm('Are you sure you want to Delete this Quotation?')">
                                                         <img src="images/Icon_Delete.png"></a>
                                                         
-                                                       <?php }else{?>
-                                                       <img src="images/edit.gif">
-                                                       <img src="images/Icon_Delete.png">
-                                                       <?php }?>
-                                                        
-                                                        
-                                                        
+                                    
                                                         </td>
                                                         <td class="hidden-480">
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){ ?>
+                                                            
+                                                            <a href="od_doc.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                             <a href="od_doc1.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file1']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="od_doc2.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file2']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+                                                       
+                                                         </td>
+                                                        <td class="hidden-480">
+                                                             
                                                             <a href="odgenerateinvoice.php?id=<?php echo $rs1['quet_num']; ?>">
                                                          <img src="images/pdf_icon.gif" width="30" height="30"></a>
-                                                          <?php }else{?>
-                                                       <img src="images/pdf_icon.gif">
-                                                       <?php }?>
+                                                          
                                                          </td>
                                                          <td class="hidden-480">
-                                                              <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){ ?><a href="odgenerateexcel.php?id=<?php echo $rs1['quet_num']; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
-                                                                  <?php }else{?>
-                                                       <img src="images/xl.jpg">
-                                                       <?php }?>
+                                                              <a href="odgenerateexcel.php?id=<?php echo $rs1['quet_num']; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
+                                                                  
                                                           </td>
 													<!--	
                                                       <td class="hidden-480"><a href="qotti_excel.php?id=<?php echo $rs1['quet_num']; ?>">
@@ -346,11 +349,11 @@ if($bsearch!=''){
 											
 											 $sql="SELECT count(1) as total FROM odqot_bill where status='payment pending'  and quet_num like  '%$bsearch%'  ";
 											} else {
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
+													// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
 											         $sql="SELECT count(1) as total FROM odqot_bill where status='payment pending'    ";
-											    }else{
-											         $sql="SELECT count(1) as total FROM odqot_bill where status='payment pending' and user='$tsadmin'  ";
-											    }
+											    // }else{
+											    //      $sql="SELECT count(1) as total FROM odqot_bill where status='payment pending' and user='$tsadmin'  ";
+											    // }
 												
 											}
 $result = mysqli_query($link,$sql);

@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 	$id=$_GET['id'];
 	
 	$sql = "select * from ac_det where id='$id'";
-    $res = mysqli_query($link, $sql) or die("could not connected" . mysqli_error());
+    $res = mysqli_query($link, $sql) or die("could not connected" . mysqli_close($link));
 $t=mysqli_fetch_array($res);
 	$acyear=$t['name'];
 	$id1=$t['id'];

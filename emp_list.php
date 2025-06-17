@@ -1,6 +1,6 @@
 <?php //include('config.php');
 session_start();
-//include('dbconnection/connection.php');
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -96,7 +96,7 @@ function ConfirmDialog() {
 
                                         <!-- div.table-responsive -->
 <div style="height:15px; margin-bottom:20px;">
-<button class="btn btn-info" type="submit" name="bsearch" onclick="javascript:location.href='emp_list.php'" id="bsearch">
+<button class="btn btn-info" type="submit" name="bsearch" onclick="javascript:location.href='addemployee.php'" id="bsearch">
                                                
                                                 Add New
         <br />                                    </button>

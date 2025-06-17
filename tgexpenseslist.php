@@ -111,6 +111,10 @@ include'dbfiles/org.php';
                   
               <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search   " onkeyup="myFunction()">
              </div>
+             <button class="btn btn-info pull-left" type="submit" name="bsearch" id="bsearch">
+                                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                                Search
+                                            </button>
              <div class="col-sm-2"><b><a href="tsexp_excel.php?user=<?php echo $tsname; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
             	</div>
 										
@@ -123,6 +127,7 @@ include'dbfiles/org.php';
                                                     <th>S No</th>
 													<th>Date</th>
 													 <th>State</th>
+                                                     <th>Quotation Number</th>
 													<th>Description</th>
 													<th>Amount</th>
 													
@@ -152,7 +157,8 @@ include'dbfiles/org.php';
 											    <td><?php echo $i; ?></td>
 											     <td><?php echo date('d-m-Y',strtotime($k1['edate'])); ?></td>
 											     <td><?php echo $k1['state']; ?></td>
-											     <td><?php echo $k1['expdesc']; ?></td>
+                                                 <td><?php echo $k1['quet_no'];?></td>
+                                                 <td><?php echo $k1['expdesc']; ?></td>
 											     <td><?php echo $k1['amount']; ?></td>
 											     <td><a href="expenses/<?php echo $k1['file']; ?>" target="_blank"> View</a></td>
 											     <td><?php echo $k1['user']; ?></td>

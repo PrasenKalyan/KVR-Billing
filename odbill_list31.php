@@ -1,5 +1,6 @@
 <?php //include('config.php');
 session_start();
+$stn="OD";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
@@ -9,19 +10,20 @@ $tsname=$_SESSION['user'];
 $y=mysqli_query($link,"select * from employee where emp_name='$name'");
 $y1=mysqli_fetch_array($y);
 $email=$y1['emp_email'];
-include 'dbfiles/org.php';
+include'dbfiles/org.php';
 //include'dbfiles/iqry_acyear.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include'template/headerfile.php'; ?>
+    <?php include 'template/headerfile.php'; ?>
     <style>
         strong{
             color:red;
         }
     </style>
 	<script>
-function ConfirmDialog() {
+   
+        function ConfirmDialog() {
   var x=confirm("Are you sure to delete record?")
   if (x) {
     return true;
@@ -68,10 +70,10 @@ function ConfirmDialog() {
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#">  Raised Invoice List</a>
+                                <a href="#"> Raised Invoice List</a>
                             </li>
                             <li>
-                                <a href="#"> Raised Invoice List</a>
+                                <a href="#">Raised Invoice List</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -91,7 +93,7 @@ function ConfirmDialog() {
 
                                         
                                         <div class="table-header">
-                                       Raised Invoice List
+                                        Raised Invoice List
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -107,13 +109,14 @@ function ConfirmDialog() {
 						<div class="col-sm-1"></div>
                      <div class="col-sm-8">
                   
-                <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search By Quotation Name No or Invoice No " onkeyup="myFunction()">
+                <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search By Quotation No or Invoice No  " onkeyup="myFunction()">
                   </div>
                   <button class="btn btn-info pull-left" type="submit" name="bsearch" id="bsearch">
                                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                                 Search
                                             </button>
                   <div class="col-sm-2"><b><a href="qut_odrsi_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
+                  
 			<!--	   <div class="col-sm-3">
                   
                <button class="btn btn-info" type="submit" name="bsearch" id="bsearch">
@@ -141,57 +144,60 @@ function ConfirmDialog() {
 													<th>Inv Date</th>
 													<th>Inv Sub Date</th>
 													<th>Serv Period</th>
+                                                    <th>Company Name</th>
 													<th>Inv Sub Mon</th>
 													<th>State</th>
 													<th>Fomate</th>
-													<th>Gst 28%</th>
+													<!-- <th>Gst 28%</th> -->
 													<th>Gst 18%</th>
-													<th>Gst 12%</th>
+													<!-- <th>Gst 12%</th>
 													<th>Gst 5%</th>
-													<th>Gst 0%</th>
+													<th>Gst 0%</th> -->
 													<th>Total Base</th>
-													<th>Gst(28%) Amt</th>
+													<!-- <th>Gst(28%) Amt</th> -->
 													<th>Gst(18%) Amt</th>
-													<th>Gst(12%) Amt</th>
+													<!-- <th>Gst(12%) Amt</th>
 													<th>Gst(5%) Amt</th>
-													<th>Gst(0%) Amt</th>
+													<th>Gst(0%) Amt</th> -->
 													<th>Total Gst</th>
                                                     <th>Total Amount </th>
                                                     <th>Ageing</th>
                                                     <th>User</th>
-                                                   <!-- <th>Tds</th>
-                                                    <th>Doc No</th>
+                                                    <!--<th>Doc No</th>
                                                     <th>Rec Date</th>
                                                     <th>Rec Mon</th>
                                                      <th>Total Amt Rec</th>
                                                       <th>Outstanding</th>
-                                                     -->
+                                                      -->
                                                     <th>Update</th>
-													  
-													  <th>Tax Invoice</th>
+                                                     <th>Tax Invoice</th>
                                                          <th>PDF Tax Invoice</th> 
                                                         <th>Breakage</th>
-                                                        <!-- <th>PDF Breakage</th>-->
+                                                         <th>PDF Breakage</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
 												
 												<?php 
-													$results_per_page = 30;
-										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-                                        $start_from = ($page-1) * $results_per_page;
+
+                                                $results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											$ssq1="select * from odqot_bill where status='RUn Paid' and (quet_num like  '%$bsearch%' or inv_num like '%$bsearch%' ) ";
+											$ssq1="select * from odqot_bill where status='RUn Paid' ";
 													  } else {
-													       if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){
-													           $ssq1="select * from odqot_bill where status='RUn Paid' order by id asc  LIMIT $start_from,$results_per_page";
-													      }else{
-													           $ssq1="select * from odqot_bill where status='RUn Paid' and user='$tsname' order by id asc  LIMIT $start_from,$results_per_page ";
-													      }
+													    //  if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or ($tsname=='sumanthpotluri')){
+													           $ssq1="select * from odqot_bill where status='RUn Paid' ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+													    //   }else{
+													    //        $ssq1="select * from odqot_bill where status='RUn Paid' and user='$tsname' ";
+													    //   }
 														
 													  }
+														
+                                             
 											$t=mysqli_query($link,$ssq1) or die(mysqli_error($link));
 											$i=1;
 											$g128=0;
@@ -210,14 +216,12 @@ function ConfirmDialog() {
 											$ot=0;
 											$tg=0;
 											$amt=0;
-											
 											while($rs1=mysqli_fetch_array($t)){
 											
 													$q=$rs1['inv_num'];
 													$st=$rs1['state'];
 													$rid=$rs1['id'];
 													$qtno=$rs1['quet_num'];
-												
                                                     ?>
                                                     <tr>
                                                         
@@ -228,33 +232,36 @@ function ConfirmDialog() {
 														<td><?php echo $invdate=$rs1['inv_date']; ?></td>
 														<td><?php echo $rs1['inv_sub_date']; ?></td>
 														<td><?php echo $rs1['speriod']; ?></td>
+                                                        
+                                                        <td><?php echo $rs1['com_name']; ?></td>
 														<td><?php echo $rs1['inv_sub_date']; ?></td>
 														<td>OD</td>
 														<td><?php echo $rs1['ftype']; ?></td>
-													    <td><?php echo $gst28=$rs1['gst28'];
-													    $g128=$gst28+$g128;?></td>
-														<td><?php echo $gst18=$rs1['gst18']; 
+													    <!-- <td><?php echo $gst28=$rs1['gst28'];
+													    $g128=$gst28+$g128;
+													    ?></td> -->
+														<td><?php echo $gst18=$rs1['gst18'];
 															$g118=$gst18+$g118;
 														?></td>
-														<td><?php echo $gst12=$rs1['gst12'];
+														<!-- <td><?php echo $gst12=$rs1['gst12']; 
 															$g112=$gst12+$g112;
 														?></td>
 														<td><?php echo $gst5=$rs1['gst5'];
 															$g15=$gst5+$g15;
 														?></td>
-														<td><?php echo $gst0=$rs1['gst0'];
+														<td><?php echo $gst0=$rs1['gst0']; 
 														$g10=$gst0+$g10;
-														?></td>
-														<td><?php echo $tbase=$rs1['tbase'];
+														?></td> -->
+														<td><?php echo $tbase=$rs1['tbase']; 
 															$tbs=$tbase+$tbs;
 														?></td>	
-														<td><?php echo $g28=($gst28*28)/100; 
+														<!-- <td><?php echo $g28=($gst28*28)/100;
 														$gt28=$gt28+$g28;
-														?></td>
+														?></td> -->
 														<td><?php echo $g18=($gst18*18)/100;
 															$gt18=$gt18+$g18;
 														?></td>
-														<td><?php echo $g12=($gst12*12)/100;
+														<!-- <td><?php echo $g12=($gst12*12)/100;
 														$gt12=$gt12+$g12;
 														?></td>
 														<td><?php echo $g5=($gst5*5)/100;
@@ -262,14 +269,14 @@ function ConfirmDialog() {
 														?></td>
 														<td><?php echo $g0=($gst0*0)/100;
 														$gt0=$gt0+$g0;
-														?></td>
-                                                       <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0;
+														?></td> -->
+                                                       <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0 ;
                                                        $tg=$tg+$gtot;
                                                        ?></td>
-                                                      <td><?php echo  $net=$tbase+$gtot; 
+                                                      <td><?php echo  $net=$tbase+$gtot;
                                                       $tamt=$tamt+$net;
                                                       ?></td>
-                                                   <td>
+                                                      <td>
                                                        <?php 
                                                        $rdate=date('Y-m-d');
                                                        $amtdate=strtotime($rdate);
@@ -279,105 +286,67 @@ function ConfirmDialog() {
                                                        ?>
                                                        
                                                    </td>
-												   		  <!--<td><?php echo $rs1['user']; ?></td>-->
-												   		  
-												   		  <td class="hidden-480"><?php 
-                                                         $cempname=$rs1['user'];
-                                                         $sq=mysqli_query($link,"select emp_name from emp where employeeid='$cempname' limit 1");
-                                                         	$rss1=mysqli_fetch_array($sq);
-                                                         	if($rss1['emp_name']=="")
-                                                         	echo $cempname;
-                                                         	else
-                                                            echo $rss1['emp_name']; ?></td>
-												   		  
-                                                        <td class="hidden-480">
-                                                            
-                                                            <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri') ){ ?>
-                                                            <a href="odedit_req_ubill3.php?id=<?php echo $q; ?>&id1=<?php echo $rid;?>&q=<?php echo $qtno?>">
-                                                        <img src="images/edit.gif"></a>	
-                                                        <?php }else{ ?>
-														<img src="images/edit.gif">
-														<?php }?>
+                                                   <th><?php echo $rs1['user']; ?></th>
+                                                     <td class="hidden-480">
+                                                         
+                                                         
+                                                         
+                                                         <a href="odedit_req_ubill3.php?id=<?php echo $q; ?>&id1=<?php echo $rid;?>&q=<?php echo $qtno?>">
+                                                        <img src="images/edit.gif"></a>
+                                                        
+                                                        
                                                         </td>
-                                                          <td class="hidden-480"><a href="odqotti_excel.php?id=<?php echo $rs1['quet_num']; ?>">
+                                                         <td class="hidden-480"><a href="odqotti_excel.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/xl.jpg" width="20" height="20"></a></td>
 													<td class="hidden-480"><a href="odqotti_pdf.php?id=<?php echo $rs1['quet_num']; ?>">
                                                          <img src="images/pdf_icon.gif" width="30" height="30"></a></td>
 													<td class="hidden-480"><a href="odqotbrk_excel.php?id=<?php echo $rs1['quet_num']; ?>">
                                                           <img src="images/xl.jpg" width="20" height="20"></a></td>
-													   <!--  <td class="hidden-480">
-													     <a href="qotbrk_pdf.php?id=<?php echo $rs1['quet_num']; ?>">
-                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a></td>-->
+													   <td class="hidden-480"><a href="odqotbrk_pdf.php?id=<?php echo $rs1['quet_num']; ?>">
+                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a></td>
 														
-                                                        
-                                                        
-														
-                                                       
-													
-														
+                                                        	
                                                     </tr>
 												
-												
-												
-												
-												
-												
-												
 											<?php $i++; } ?>
+											
 											<tr>
 											    <td colspan="9">Total</td>
-											    <td><?php echo $g128; ?></td>
+											    <!-- <td><?php echo $g128; ?></td> -->
 											    <td><?php echo $g118; ?></td>
-											    <td><?php echo $g112; ?></td>
+											    <!-- <td><?php echo $g112; ?></td>
 											    <td><?php echo $g15; ?></td>
-											    <td><?php echo $g10; ?></td>
+											    <td><?php echo $g10; ?></td> -->
 											    <td><?php echo $tbs; ?></td>
-											     <td><?php echo $gt28; ?></td>
+											     <!-- <td><?php echo $gt28; ?></td> -->
 											    <td><?php echo $gt18; ?></td>
-											    <td><?php echo $gt12; ?></td>
+											    <!-- <td><?php echo $gt12; ?></td>
 											    <td><?php echo $gt5; ?></td>
-											    <td><?php echo $gt0; ?></td>
+											    <td><?php echo $gt0; ?></td> -->
 											    <td><?php echo $tg; ?></td>
 											    <td><?php echo $tamt; ?></td>
 											  <td></td>
 											  </tr>
-                                                    
-                                                </tbody>
+											    </tbody>
                                             </table>
 											</div>
 											<div align="center">		
 <?php 
-if($bsearch!=''){
-											
-											$sql="select count(1) as total from odqot_bill where status='RUn Paid' and quet_num like  '%$bsearch%' ";
-													  } else {
-													       if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){
-													           $sql="select count(1) as total from odqot_bill where status='RUn Paid' ";
-													      }else{
-													           $sql="select count(1) as total from odqot_bill where status='RUn Paid' and user='$tsname'    ";
-													      }
-														
-													  }
+$sql = "SELECT COUNT(id) AS total FROM odqot_bill";
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_assoc($result);
-$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+$total_pages = ceil($row["total"] / $results_per_page);
   
 
 
 
-echo "<ul class='pagination'>";
-echo "<li><a href='odbill_list31.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+// echo "<ul class='pagination'>";
+// echo "<li><a href='odbill_list31.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
 
-for($i=0;$i<$total_pages;$i++)
-{
-if(($i+1)==$page) 
-echo "<li><a href='odbill_list31.php?page=".($i+1)."' class='button' style='color:red'>".($i+1)."</a></li>";
-else
-echo "<li><a href='odbill_list31.php?page=".($i+1)."' class='button'>".($i+1)."</a></li>";
-}
+// echo "<li><a>".$page."</></li>";
 
-echo "<li><a href='odbill_list31.php?page=".($page+1)."' class='button'>NEXT</a></li>";
-echo "</ul>";
+// echo "<li><a href='odbill_list31.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+// echo "</ul>";
 ?>
 												
 </div>

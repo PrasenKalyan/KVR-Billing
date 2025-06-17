@@ -54,6 +54,7 @@ elseif($state=='OD'){
   $qottable1 ='add_odqot1';
 
 }
+
 $bid=$_GET['id'];
 $loc=$_GET['loc'];
 $q=mysqli_query($link,"select * from add_bill1 where id='$bid'") or die(mysqli_error($link));
@@ -107,7 +108,12 @@ $dt=date('m-d-Y');
 							$sq=mysqli_query($link,"select * from ".$qottable." where id='$id'");
 							$r=mysqli_fetch_array($sq);
 							$store_code=$r['store_code'];
-
+$img1 = $r['img1'];
+$img2 = $r['img2'];
+$img3 = $r['img3'];
+$img1 = str_replace ('http://localhost/kvrbilling/','',$img1);
+$img2 = str_replace ('http://localhost/kvrbilling/','',$img2);
+$img3 = str_replace ('http://localhost/kvrbilling/','',$img3);
 							$ssq1=mysqli_query($link,"select * from dpr where store_code='$store_code'");
 							$r1=mysqli_fetch_array($ssq1);
 							$state_code=$r1['state_code'];
@@ -231,7 +237,7 @@ $org_name=$r2y['org_name'];
 			<b>
 		<?php echo $r1['company_name'];?><br/>
 		<?php echo $r1['address'];?><br/>
-				<?php   $st=$r1['state']; if($st=='AP'){ echo "ANDHRA PRADESH "; } else if($st=='TG'){ echo "TELANGANA STATE"; }else if($st=='KN'){ echo "Karnataka"; }?><br/>
+				<?php   $st=$r1['state']; if($st=='ANDHRA PRADESH'){ echo "ANDHRA PRADESH "; } else if($st=='TELANGANA'){ echo "TELANGANA STATE"; }else if($st=='KARNATAKA'){ echo "KARNATAKA"; } else if($st=='KERALA'){ echo "KERALA"; }else if($st=='ODISHA'){ echo "ODISHA"; }?><br/>
 			<?php echo $r1['gst_in'];?>
 			</b>			
 			</td>
@@ -323,15 +329,13 @@ Fee -6% (In Rs)</th>
 
 </tr>
 
-
-
 <?php
 include_once('dbconnection/connection.php');
 $bid=$r['id'];
 
-	 $aa="select * from ".$qottable1." where  id1='$bid' ";
+	 $aa="select * from ".$qottable1." where id1='$bid'";
  
-$t=mysqli_query($link,$aa) or die(mysqli_error($link));
+$t=mysqli_query($link,$aa) or die(mysqli_close($link));
 $i=1;
 $gst_amnt1=0;
 $tx=0;
@@ -502,8 +506,12 @@ $i++; }
    <input type="submit" name="submit" value="Submit" />
 
 </form>-->
+<pagebreak></pagebreak>
+                                  
+<img src="<?php echo htmlspecialchars($img1); ?>" height= "30%" width="30%" />
+<img src="<?php echo htmlspecialchars($img2); ?>" height= "30%" width="30%" />
+<img src="<?php echo htmlspecialchars($img3); ?>" height= "30%" width="30%" />
 
-    
 <?php
    $qtno=$qt.".pdf";  
    $body=ob_get_clean();
@@ -519,8 +527,8 @@ $mpdf->Output($qtno,'F');
 echo  "<script type=\"text/javascript\"> 
  
 
-   location.href = 'download.php?qt=$qtno';
-   setTimeout(\"DoTheRedirect('knqot_list.php?state=$state')\",parseInt(2*1000));
+   location.href = 'download.php?qt={$qtno}';
+   setTimeout(\"DoTheRedirect('qot_list.php?state={$state}')\",parseInt(2*1000));
 function DoTheRedirect(url) { window.location=url; }
 
 </script>";

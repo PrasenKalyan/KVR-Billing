@@ -92,12 +92,19 @@ if(isset($_POST['submit'])){
 	 $sno=mysqli_insert_id($link);
 	 
 
-   $sqq=mysqli_query($link,"select `count` as ids from qutcount where state='KL' ");
-	$rr=mysqli_fetch_array($sqq);
-	$idd=$rr['ids'];
-	$cc=$idd+1;
-	 $qt_nox=23240000+1+$idd;
-	$qt_no="QJFMKL$qt_nox";  
+	 $sqq=mysqli_query($link,"select `count` as ids from qutcount where state='KL' ");
+	 $rr=mysqli_fetch_array($sqq);
+	 $idd=$rr['ids'];
+	 $cc=$idd+1;
+	 $service = $_POST['service']; 
+	 if ($service == "House Cleaning") {
+		 $qt_nox = 20250000 + 1 + $idd;
+		 $qt_no = "QHCKL" . $qt_nox;
+	 } else {
+		 
+		 $qt_nox = 20250000 + 1 + $idd;
+		 $qt_no = "QKVRKL" . $qt_nox;
+	 }  
 	
 	if($qt_no1!=''){
 	     $ac=mysqli_query($link,"update add_klqot set quet_num='$qt_no1' where id='$sno'");

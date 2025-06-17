@@ -145,17 +145,17 @@ function ConfirmDialog() {
 													<th>Inv Sub Mon</th>
 													<th>State</th>
 													<th>Fomate</th>
-													<th>Gst 28%</th>
+													<!-- <th>Gst 28%</th> -->
 													<th>Gst 18%</th>
-													<th>Gst 12%</th>
+													<!-- <th>Gst 12%</th>
 													<th>Gst 5%</th>
-													<th>Gst 0%</th>
+													<th>Gst 0%</th> -->
 													<th>Total Base</th>
-													<th>Gst(28%) Amt</th>
+													<!-- <th>Gst(28%) Amt</th> -->
 													<th>Gst(18%) Amt</th>
-													<th>Gst(12%) Amt</th>
+													<!-- <th>Gst(12%) Amt</th>
 													<th>Gst(5%) Amt</th>
-													<th>Gst(0%) Amt</th>
+													<th>Gst(0%) Amt</th> -->
 													<th>Total Gst</th>
                                                     <th>Total Amount </th>
                                                     <th>Ageing</th>
@@ -169,9 +169,9 @@ function ConfirmDialog() {
                                                      -->
                                                     <th>Edit</th>
 													   <th>View</th>
-													   <?php if(($tsname=='admin')){ ?>
+													   
                                                        <th>upload</th>
-													  <?php }?>
+													  
                                                     </tr>
                                                 </thead>
 
@@ -185,11 +185,11 @@ function ConfirmDialog() {
 												$bsearch=$_POST['search'];
 											$ssq1="select * from odqot_bill where status='Un Paid' and (quet_num like  '%$bsearch%' or inv_num like '%$bsearch%') ";
 													  } else {
-													       if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){
+													    //    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri')){
 													           $ssq1="select * from odqot_bill where status='Un Paid' order by id desc  LIMIT $start_from,$results_per_page ";
-													      }else{
-													           $ssq1="select * from odqot_bill where status='Un Paid' and user='$tsname' order by id desc  LIMIT $start_from,$results_per_page ";
-													      }
+													    //   }else{
+													    //        $ssq1="select * from odqot_bill where status='Un Paid' and user='$tsname' order by id desc  LIMIT $start_from,$results_per_page ";
+													    //   }
 														
 													  }
 											$t=mysqli_query($link,$ssq1) or die(mysqli_error($link));
@@ -229,12 +229,12 @@ function ConfirmDialog() {
 														<td><?php echo $rs1['inv_sub_date']; ?></td>
 														<td>OD</td>
 														<td><?php echo $rs1['ftype']; ?></td>
-													    <td><?php echo $gst28=$rs1['gst28'];
-													    $g128=$gst28+$g128;?></td>
+													    <!-- <td><?php echo $gst28=$rs1['gst28'];
+													    $g128=$gst28+$g128;?></td> -->
 														<td><?php echo $gst18=$rs1['gst18']; 
 															$g118=$gst18+$g118;
 														?></td>
-														<td><?php echo $gst12=$rs1['gst12'];
+														<!-- <td><?php echo $gst12=$rs1['gst12'];
 															$g112=$gst12+$g112;
 														?></td>
 														<td><?php echo $gst5=$rs1['gst5'];
@@ -242,17 +242,17 @@ function ConfirmDialog() {
 														?></td>
 														<td><?php echo $gst0=$rs1['gst0'];
 														$g10=$gst0+$g10;
-														?></td>
+														?></td> -->
 														<td><?php echo $tbase=$rs1['tbase'];
 															$tbs=$tbase+$tbs;
 														?></td>	
-														<td><?php echo $g28=($gst28*28)/100; 
+														<!-- <td><?php echo $g28=($gst28*28)/100; 
 														$gt28=$gt28+$g28;
-														?></td>
+														?></td> -->
 														<td><?php echo $g18=($gst18*18)/100;
 															$gt18=$gt18+$g18;
 														?></td>
-														<td><?php echo $g12=($gst12*12)/100;
+														<!-- <td><?php echo $g12=($gst12*12)/100;
 														$gt12=$gt12+$g12;
 														?></td>
 														<td><?php echo $g5=($gst5*5)/100;
@@ -260,7 +260,7 @@ function ConfirmDialog() {
 														?></td>
 														<td><?php echo $g0=($gst0*0)/100;
 														$gt0=$gt0+$g0;
-														?></td>
+														?></td> -->
                                                        <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0;
                                                        $tg=$tg+$gtot;
                                                        ?></td>
@@ -288,11 +288,9 @@ function ConfirmDialog() {
                                                             echo $rss1['emp_name']; ?></td>
                                                         <td class="hidden-480">
                                                             
-                                                            <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri') ){ ?>
-                                                            <a href="odedit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $net;?>&q=<?php echo $q?>">
-                                                        <img src="images/edit.gif"></a>														<?php }else{ ?>
-														<img src="images/edit.gif">
-														<?php }?>
+                                                            
+                                                            <a href="odedit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $tbase;?>&q=<?php echo $q?>">
+                                                        <img src="images/edit.gif"></a>														
                                                         
                                                         
                                                         
@@ -315,13 +313,13 @@ function ConfirmDialog() {
 														    
 														    </td>
 														
-														<?php if(($tsname=='admin')){ ?>
+														
 														    <td>
 														         <a href="odupload_req_bill.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
 														        
 														    </td>
-														<?php }?>
+														
 													
 														
                                                     </tr>
@@ -335,17 +333,17 @@ function ConfirmDialog() {
 											<?php $i++; } ?>
 											<tr>
 											    <td colspan="9">Total</td>
-											    <td><?php echo $g128; ?></td>
+											    <!-- <td><?php echo $g128; ?></td> -->
 											    <td><?php echo $g118; ?></td>
-											    <td><?php echo $g112; ?></td>
+											    <!-- <td><?php echo $g112; ?></td>
 											    <td><?php echo $g15; ?></td>
-											    <td><?php echo $g10; ?></td>
+											    <td><?php echo $g10; ?></td> -->
 											    <td><?php echo $tbs; ?></td>
-											     <td><?php echo $gt28; ?></td>
+											     <!-- <td><?php echo $gt28; ?></td> -->
 											    <td><?php echo $gt18; ?></td>
-											    <td><?php echo $gt12; ?></td>
+											    <!-- <td><?php echo $gt12; ?></td>
 											    <td><?php echo $gt5; ?></td>
-											    <td><?php echo $gt0; ?></td>
+											    <td><?php echo $gt0; ?></td> -->
 											    <td><?php echo $tg; ?></td>
 											    <td><?php echo $tamt; ?></td>
 											  <td></td>

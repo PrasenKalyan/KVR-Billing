@@ -20,7 +20,7 @@ $sheet->mergeCells('A1:W1');
 $sheet->getStyle("A1:W1")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
     ->getStartColor()->setRGB('0000FF');
 $sheet->getStyle("A1:W1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$sheet->setCellValue('A1', 'JTECHNO ASSOCIATES FACILITY MANAGEMENT PVT.LTD');
+$sheet->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
 $sheet->getStyle("A1:W1")->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
 $sheet->mergeCells('A4:W4');

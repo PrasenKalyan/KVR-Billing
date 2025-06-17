@@ -153,7 +153,7 @@ include'dbfiles/org.php';
 												<?php 
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="select * from titems where hsncode like  '%$bsearch%' or mdescription like  '%$bsearch%' ";
+											 $y="select * from ritems where hsncode like  '%$bsearch%' or mdescription like  '%$bsearch%' ";
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
 											$i=1;
 											while($rs1=mysqli_fetch_array($t)){
@@ -186,14 +186,14 @@ include'dbfiles/org.php';
 													
 													<?php $i++; }
 											}else{
-												$datatable="titems";
+												$datatable="ritems";
 										$results_per_page = 30;
 										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
 										$start_from = ($page-1) * $results_per_page;
                                                     //$q="select * from mproducts order by id desc limit 1000";
 													$q = "SELECT * FROM ".$datatable."   ORDER BY id desc LIMIT $start_from, ".$results_per_page;
                                                     //$q="select * from refferences order by id desc";
-                                                    $rs= mysqli_query($link, $q) or die(mysqli_error());
+                                                    $rs= mysqli_query($link, $q) or die(mysqli_close($link));
                                                     $i=$start_from;
 													$start=1;
                                                     while($rs1= mysqli_fetch_array($rs)){

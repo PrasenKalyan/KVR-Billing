@@ -150,10 +150,10 @@ include'dbfiles/org.php';
                                                         <th>Tot Gst</th>
                                                         <th>Total</th>
 														<th>Whom To be Invest</th>
-														 <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') or ($tsname=='JFMOD22232823') ){?>
+														 
 
 													    <th>Transfer Amount</th>
-													    <?php } ?>
+													    
                                                         <th>Amount Transferred Date</th>
                                                         <th>Ageing</th>
                                                         <th>User</th>
@@ -181,11 +181,11 @@ include'dbfiles/org.php';
 													  //$y="SELECT distinct quet_num,state,transfer_date FROM `odrequest_amnt` where  status='Amount Transferred' and bill_status=''     ";
 										
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')  or ($tsname=='JFMOD22232823')){
+										
 											         $y="SELECT  distinct quet_num,user FROM `odrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
-											    }else{
-											         $y="SELECT distinct quet_num,user FROM `odrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'   or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
-											    }
+											    // }else{
+											    //      $y="SELECT distinct quet_num,user FROM `odrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'   or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
+											    // }
 										
 										
 										
@@ -356,33 +356,29 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='odbilling')or ($tsname=='sumanthpotluri') ){ ?>
+                                                             
                                                             
                                                             <a href="odedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+                                                        
+                                                         
                                                         <a href="odwtsedit1_qot.php?id=<?php echo $qtno; ?>">
                                                         <span class="glyphicon glyphicon-plus-sign btn-lg"></span></a>
-                                                       <?php }else{ ?>
+                                                       
                                                          <!--<span class="glyphicon glyphicon-plus-sign btn-lg"></span>-->
-                                                    <?php    } ?>
+                                                    
                                                         </td>
                                                         
                                                         <!--status starts-->
                                                         <td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+														    
                                                             
                                                             <a href="odedit_status.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/cancel.png"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/cancel.png">
-                                                        <?php }?>
+                                                        
 
 														    
 														</td> 
@@ -390,14 +386,12 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														<!--status ends-->
                                                 <td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+														    
                                                             
                                                             <a href="odedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
+                                                        
 
 														    
 														</td>       
@@ -441,11 +435,11 @@ if($bsearch!=''){
 													  //$y="SELECT distinct quet_num,state,transfer_date FROM `odrequest_amnt` where  status='Amount Transferred' and bill_status=''     ";
 										
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') or ($tsname=='JFMOD22232823')){
+										// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') or ($tsname=='JFMOD22232823')){
 											         $sql="SELECT  count(distinct quet_num) as total FROM `odrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel' ";
-											    }else{
-											         $sql="SELECT count(distinct quet_num) as total FROM `odrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname' ";
-											    }
+											    // }else{
+											    //      $sql="SELECT count(distinct quet_num) as total FROM `odrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname' ";
+											    // }
 											}
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_assoc($result);

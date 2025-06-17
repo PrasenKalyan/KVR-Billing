@@ -274,7 +274,7 @@ xmlhttp.send();
                                         </tr>
 											
                                            
-										<?php $net=$_GET['id1'];
+										<?php $tbase=$_GET['id1'];
 										$q=$_GET['q'];
 										?>
 										
@@ -291,10 +291,10 @@ xmlhttp.send();
 										
 										 <tr><td align="right">Outstanding</td><td align="left">
 										<input type="text" name="outstanding" 
-										id="outstanding" readonly class="form-control" value=""></td>	
+										id="outstanding" readonly class="form-control" value=""></td>
 							
 										<input type="text" name="net" 
-										id="net" readonly class="form-control" value="<?php echo $net;?>">
+										id="net" readonly class="form-control" value="<?php echo $tbase;?>">
 										
                                         <td align="right">Invoice No</td><td>
 										<input type="text" name="inv_no" 
@@ -419,19 +419,19 @@ function select_all() {
 
 function val(str)
 {
-cal=0;
-cal1=0;
-cal12=0;
-var price=document.getElementById("recevid_amnt").value;
+// cal=0;
+// cal1=0;
+// cal12=0;
+    var received = parseFloat(document.getElementById("recevid_amnt").value) || 0;
+    var net = parseFloat(document.getElementById("net").value) || 0;
+    var tds = (net * 2) / 100;
 
-var qty=document.getElementById("tds").value;
-var gst=document.getElementById("net").value;
+    document.getElementById("tds").value = tds.toFixed(2);var gst=document.getElementById("net").value;
 //alert(gst);
-cal=eval(price)+eval(qty);
+var paidTotal = received + tds;
+var outstanding = net - paidTotal;
 //alert(cal);
-cal1=gst-cal;
-//alert(cal);
-document.getElementById("outstanding").value=Math.abs(cal1);	
+    document.getElementById("outstanding").value = outstanding.toFixed(2);
 
 
 

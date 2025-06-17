@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>JTECHNO BILLING</title>
+<title>KVR BEST</title>
  <script type="text/javascript">
             function printt()
             {
@@ -136,7 +136,7 @@ $invdate = date('d-M-y', strtotime( $invdate1 ));
     </header>
     <table border='1'  cellpadding="0" cellspacing='0'>
         <thead>
-            <tr class="noBorder" ><th   colspan="9" style="padding-top:20px;border-right:none !important;font-size:18px;">JTECHNO ASSOCIATES FACILITY MANAGEMENT PVT.LTD</th></tr>
+            <tr class="noBorder" ><th   colspan="9" style="padding-top:20px;border-right:none !important;font-size:18px;">KVR BEST PROPERTY MANAGEMENT PVT.LTD</th></tr>
  <tr><td colspan="9">      
 <hr></td></tr>
 	   </thead>

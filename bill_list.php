@@ -1,48 +1,12 @@
 <?php //include('config.php');
 session_start();
-
+$stn="AP";
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$request_amnt ='request_amnt';
-       
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qottable1 ='add_tgqot1';
-		$request_amnt ='tgrequest_amnt';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qottable1 ='add_tnqot1';
-	  $request_amnt ='tnrequest_amnt';
 	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qottable1 ='add_klqot1';
-		$request_amnt ='klrequest_amnt';	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qottable1 ='add_knqot1';
-	  $request_amnt ='knrequest_amnt';
-      	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qottable1 ='add_odqot1';
-	  $request_amnt ='odrequest_amnt';	
-	}
 //include('org1.php');
 $y=mysqli_query($link,"select * from employee where username='$name'");
 $y1=mysqli_fetch_array($y);
@@ -107,7 +71,7 @@ include'dbfiles/org.php';
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state;?> Document Required List</a>
+                                <a href="#"><?php echo $stn;?> Document Required List</a>
                             </li>
                             <li>
                                 <a href="#">Document Required List</a>
@@ -130,7 +94,7 @@ include'dbfiles/org.php';
 
                                         
                                         <div class="table-header">
-                                        <?php echo $state; ?> Document Required List
+                                        <?php echo $stn; ?> Document Required List
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -152,7 +116,7 @@ include'dbfiles/org.php';
                                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                                 Search
                                             </button>
-                  <div class="col-sm-2"><b><a href="qut_apdoc_excel.php?user=<?php echo $tsname ?>&state=<?php echo $state; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
+                  <div class="col-sm-2"><b><a href="qut_apdoc_excel.php?user=<?php echo $tsname ?>&state=<?php echo $stn; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
 				   <div class="col-sm-3">
                   
                
@@ -188,10 +152,10 @@ include'dbfiles/org.php';
                                                         <th>Tot Gst</th>
                                                         <th>Total</th>
 														<th>Whom To be Invest</th>
-														 <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+														 
 
 													    <th>Transfer Amount</th>
-													    <?php } ?>
+													    
                                                         <th>Amount Transferred Date</th>
                                                         <th>Ageing</th>
                                                         <th>User</th>
@@ -211,7 +175,7 @@ include'dbfiles/org.php';
                                         $start_from = ($page-1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="SELECT distinct quet_num,state,transfer_date FROM ".$request_amnt."  where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
+											 $y="SELECT distinct quet_num,state,transfer_date FROM request_amnt  where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
 											} else {
 											    
 											    
@@ -219,11 +183,11 @@ include'dbfiles/org.php';
 													  //$y="SELECT distinct quet_num,state,transfer_date FROM ".$request_amnt." where  status='Amount Transferred' and bill_status=''     ";
 										
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')){
-											         $y="SELECT  distinct quet_num,user FROM ".$request_amnt." where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
-											    }else{
-											         $y="SELECT distinct quet_num,user FROM ".$request_amnt." where  status='Amount Transferred'  and bill_status=''   and user='$tsname'   or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
-											    }
+										// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')){
+											         $y="SELECT  distinct quet_num,user FROM request_amnt where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
+											    // }else{
+											    //      $y="SELECT distinct quet_num,user FROM request_amnt where  status='Amount Transferred'  and bill_status=''   and user='$tsname'   or docr_status='Cancel'  ORDER BY id asc LIMIT $start_from,$results_per_page";
+											    // }
 										
 										
 										
@@ -239,7 +203,7 @@ include'dbfiles/org.php';
 							 			while($rs1=mysqli_fetch_array($t)){
 											    $ses=$rs1['user'];
 											    $qtno=$rs1['quet_num'];
-											    $yt=mysqli_query($link,"select transfer_date from ".$request_amnt." where quet_num='$qtno'");
+											    $yt=mysqli_query($link,"select transfer_date from request_amnt where quet_num='$qtno'");
 											    $yt1=mysqli_fetch_assoc($yt);
 											$tdate=$yt1['transfer_date'];
 											$trdate=date_create($yt1['transfer_date']);
@@ -255,7 +219,7 @@ include'dbfiles/org.php';
                                                 }
                                                 
 													
-						$a="select store_code,ro_no,ro_date,falt_desc,id,tot_base,tot_ser,tot_gst,net from ".$qottable." where quet_num='$qtno'";
+						$a="select store_code,ro_no,ro_date,falt_desc,id,tot_base,tot_ser,tot_gst,net from add_qot where quet_num='$qtno'";
 							$ssq=mysqli_query($link,$a);
 							$r1=mysqli_fetch_array($ssq);
 							$str_code=$r1['store_code'];
@@ -273,7 +237,7 @@ include'dbfiles/org.php';
 							$k13=mysqli_query($link,$k12);
 							$r33=mysqli_fetch_array($k13);
                             ?>
-                            <?php if(($supervisor==$ename) or($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname==$ses) or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') ){?>
+                            
                                                     <tr style="background-color:<?php echo $color; ?>;color:<?php echo $c1; ?>;">
                                                         
 <!--<td class="center">
@@ -315,7 +279,7 @@ include'dbfiles/org.php';
 														    ?></td>
                                       <td class="hidden-480"><?php 
 									 $ac=$rs1['ac_det'];
-									 $a="select ac_det,approve_amnt,transfer_date from ".$request_amnt." where quet_num='$qtno' and  confirm='Yes' ";
+									 $a="select ac_det,approve_amnt,transfer_date from request_amnt where quet_num='$qtno' and  confirm='Yes' ";
 														  $sr1=mysqli_query($link,$a);
 										 while( $r2=mysqli_fetch_array($sr1)){
 										      $transfer_date=$r2['transfer_date'];
@@ -327,10 +291,10 @@ include'dbfiles/org.php';
 														   ?>
 														  
 														  </td>
-													 <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+													 
 <td class="hidden-480"><?php 
                                                         
-                                                        $a="select sum(approve_amnt) as req_amnt from ".$request_amnt." where quet_num='$qtno' and  confirm='Yes' ";
+                                                        $a="select sum(approve_amnt) as req_amnt from request_amnt where quet_num='$qtno' and  confirm='Yes' ";
 														  $sr1=mysqli_query($link,$a);
 										  $r2=mysqli_fetch_array($sr1);
 														    //$r2['quet_num'];
@@ -349,7 +313,7 @@ include'dbfiles/org.php';
                                                         
                                                         echo $req_amnt; ?></td>
 													    
-													    <?php } ?>
+													    
                                	  
                                                         
                                            
@@ -359,7 +323,7 @@ include'dbfiles/org.php';
 											
 <?php
 														
-														$a1="select transfer_date  from ".$request_amnt." where quet_num='$qtno' and  confirm='Yes' order by id desc limit 1 ";
+														$a1="select transfer_date  from request_amnt where quet_num='$qtno' and  confirm='Yes' order by id desc limit 1 ";
 														  $sr11=mysqli_query($link,$a1);
 										  $r21=mysqli_fetch_array($sr11);
 														
@@ -394,20 +358,18 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri') ){ ?>
+                                                             
                                                             
                                                             <a href="edit_req_bill.php?id=<?php echo $rs1['quet_num'];?>&id1=<?php echo $r1['id'];?>&state=<?php echo $state;?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+                                                        
+                                                         
                                                         <a href="wtsedit1_qot.php?id=<?php echo $qtno; ?>&state=<?php echo $state;?>">
                                                         <span class="glyphicon glyphicon-plus-sign btn-lg"></span></a>
-                                                       <?php }else{ ?>
+                                                       
                                                          <!--<span class="glyphicon glyphicon-plus-sign btn-lg"></span>-->
-                                                    <?php    } ?>
+                                                    
                                                         </td>
                                                         
                                                         <!--status starts-->
@@ -428,14 +390,12 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														<!--status ends-->
                                                 <td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+														    
                                                             
                                                             <a href="edit_req_bill.php?id=<?php echo $rs1['quet_num'];?>&id1=<?php echo $r1['id'];?>&state=<?php echo $state;?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
+                                                        
 
 														    
 														</td>       
@@ -443,7 +403,7 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														
                                                     </tr>
 												
-												<?php }?>
+												
 												
 												
 												
@@ -473,7 +433,7 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 
 if($bsearch!=''){
 
-	$sql="SELECT count(distinct quet_num) as total FROM ".$request_amnt."  where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
+	$sql="SELECT count(distinct quet_num) as total FROM request_amnt  where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
 											} else {
 											    
 											    
@@ -482,9 +442,9 @@ if($bsearch!=''){
 										
 										
 										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname=='8919765662') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')){
-											         $sql="SELECT  count(distinct quet_num) as total FROM ".$request_amnt." where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel' ";
+											         $sql="SELECT  count(distinct quet_num) as total FROM request_amnt where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel' ";
 											    }else{
-											         $sql="SELECT count(distinct quet_num) as total FROM ".$request_amnt." where  status='Amount Transferred'  and bill_status=''   and user='$tsname' ";
+											         $sql="SELECT count(distinct quet_num) as total FROM request_amnt where  status='Amount Transferred'  and bill_status=''   and user='$tsname' ";
 											    }
 											}
 $result = mysqli_query($link,$sql);

@@ -21,7 +21,7 @@ $sheet->mergeCells('A1:S1');
 $sheet->getStyle('A1:S1')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
     ->getStartColor()->setRGB('0000FF');
 $sheet->getStyle('A1:S1')->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$sheet->setCellValue('A1', 'JTECHNO ASSOCIATES FACILITY MANAGEMENT PVT.LTD');
+$sheet->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
 $sheet->getStyle('A1:S1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 $spreadsheet->getActiveSheet()->mergeCells('A4:S4');
 $spreadsheet->getActiveSheet()->getStyle("A4:S4")->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)

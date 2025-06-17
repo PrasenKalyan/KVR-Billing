@@ -406,14 +406,18 @@ $tsname=$_SESSION['user'];
 												
 												<?php 
 											include('dbconnection/connection.php');
+                                            $results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
 												//	$y="select distinct quet_num,state from klrequest_amnt where confirm!='Yes' order by id desc";
 												
 												
-											if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='JFMTS22230493') or ($tsname=='sumanthpotluri')){
+											// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='JFMTS22230493') or ($tsname=='sumanthpotluri')){
 											    	$y="select distinct quet_num,state,user from knrequest_amnt where confirm!='Yes' order by id desc";
-											}else{
-											    	$y="select distinct quet_num,state,user from knrequest_amnt where confirm!='Yes' and user='$tsname' order by id desc";
-											}
+											// }else{
+											//     	$y="SELECT * FROM knrequest_amnt ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+											// }
 											
 											 
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -440,6 +444,8 @@ $tsname=$_SESSION['user'];
 															</label>
 														</td>-->
 																		 <?php
+
+
 														 $qotnum=$rs1['quet_num'];
 												            $tyy="select sum(req_amnt+gstamt) as samt from knrequest_amnt where quet_num='$qotnum' and confirm='Pending'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
@@ -568,26 +574,20 @@ $tsname=$_SESSION['user'];
                                                             echo $rss1['emp_name']; ?></td>
                                                        
                                                        <td class="hidden-480">
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='JFMTS22230493') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
+                                                         
                                                            <a href="knreq_amnt_list.php?id=<?php echo $qot; ?>&amt=<?php echo $amt;?>&st=<?php echo $state;?>" onclick="return confirm('are you sure?')">
                                                         <img src="update.png" width="16" height="16"></a>
-                                                        <?php }else{ ?>
-                                                        <img src="update.png" width="16" height="16">
-                                                        <?php }?>
+                                                        
                                                         </td>
                                                     <td class="hidden-480">
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='vinoth') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
+                                                         
                                                         
                                                         <a href="knedit_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="kncancel_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                        <?php }else{ ?>
                                                         
-                                                        <img src="images/edit.gif"> <img src="images/Icon_Delete.png">
-                                                        
-                                                        <?php }?>
                                                         </td>
 														 
 														 
@@ -615,6 +615,26 @@ $tsname=$_SESSION['user'];
                                             
 												<?php }?>
                                         </div>
+                                        <div align="center">		
+<?php 
+$sql = "SELECT COUNT(id) AS total FROM knrequest_amnt";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_assoc($result);
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+
+
+
+echo "<ul class='pagination'>";
+echo "<li><a href='knreq_list.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+
+echo "<li><a>".$page."</></li>";
+
+echo "<li><a href='knreq_list.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+echo "</ul>";
+?>
+												
+</div>
                                     </div>
                                 </div>
                                 <!-- PAGE CONTENT ENDS -->

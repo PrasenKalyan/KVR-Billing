@@ -226,13 +226,13 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"> KN Request Amount </a>
+                                <a href="#"> KN Amount Approved </a>
                             </li>
                             <li>
-                                <a href="knqot_list.php">KN Request Amount List</a>
+                                <a href="knqot_list.php">KN Amount Approved List</a>
                             </li>
                             <li>
-                                <a href="">Edit Request Amount</a>
+                                <a href="">Edit Amount Approved</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -244,7 +244,7 @@ xmlhttp.send();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                Edit Request Amount
+                                Edit Amount Approved
 
                             </h1>
                         </div>
@@ -314,11 +314,11 @@ foreach($array as $value)
 										
 										<?php $ssq2=mysqli_query($link,"select * from ac_det where name='$ac'");
 										$r3=mysqli_fetch_array($ssq2);?>
-										  <tr><td align="right">Ac Num</td><td align="left">
-										<input type="text" name="adv_amnt" 
-										id="adv_amnt" readonly  class="form-control" value="<?php echo $r3['ac_no'];?>"></td>	
-                                        <td align="right">Account Holder Name</td><td><input type="text" name="adv_date" 
-										id="sub_type"  readonly class="form-control" value="<?php echo $r3['name'];?>"></td>
+										  <tr><td align="right">Account Number</td><td align="left">
+										<input type="text" name="ac_no" 
+										id="ac_no" readonly  class="form-control" value="<?php echo $r3['ac_no'];?>"></td>	
+                                        <td align="right">Account Holder Name</td><td><input type="text" name="name" 
+										id="name"  readonly class="form-control" value="<?php echo $r3['name'];?>"></td>
                                         </tr>
 										  <tr><td align="right">IFSC Code</td><td align="left">
 										<input type="text" readonly name="ifsc" 
@@ -352,7 +352,7 @@ foreach($array as $value)
 										</td>	
                                         <td align="right">Remarks</td><td align="left">
 										<input type="text" name="remarks1" 
-										id="remarks1" readonly  class="form-control"  value="<?php echo $r['remarks'];?>">
+										id="remarks1"   class="form-control"  value="<?php echo $r['remarks'];?>">
 										
 										</td>	
                                         </tr>

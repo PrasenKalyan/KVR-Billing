@@ -197,6 +197,15 @@ $tsname=$_SESSION['user'];
                                                 <tbody>
 												
 												<?php 
+
+$results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
+
+
+
+
 											include('dbconnection/connection.php');
 									if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
@@ -206,11 +215,12 @@ $tsname=$_SESSION['user'];
 													
 													//$y="select * from klrequest_amnt where  confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												
-												    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){
+												    // if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){
 													$y="select * from knrequest_amnt where  confirm='Yes' and status=''  order by id desc";    
-													}else{
-													    $y="select * from knrequest_amnt where  confirm='Yes' and status=''  and user='$tsname'  order by id desc";
-													}
+													// }else{
+													//     $y="select * from knrequest_amnt where  confirm='Yes' and status=''  and user='$tsname'  order by id desc LIMIT $start_from, ".$results_per_page;
+                                                        
+													// }
 													
 												    
 												    
@@ -325,25 +335,20 @@ $tsname=$_SESSION['user'];
                                                          	else
                                                             echo $rss1['emp_name']; ?></td>
                                                           <td class="hidden-480">
-                                                          <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='sumanthpotluri')){ ?> 
+                                                          
                                                           <a href="knreq_amnt_list1.php?id=<?php  echo $rs1['id']; ?>" onclick="return confirm('are you sure?')">
                                                         <img src="update.png" width="16" height="16"></a>
                                                         
-                                                        <?php }else{ ?>
-                                                        <img src="update.png" width="16" height="16">
-                                                        <?php }?>
+                                                        
                                                         </td>
                                                        
                                                       
                                                     <td class="hidden-480">
-                                                    <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='sumanthpotluri')){ ?>  
+                                                     
                                                     <a href="knedit_request1.php?id=<?php echo $rs1['id'] ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{ ?>
-                                                        <img src="images/edit.gif">
                                                         
-                                                        <?php }?>
                                                         
                                                         
                                                         </td>
@@ -412,7 +417,29 @@ $tsname=$_SESSION['user'];
 											
 											
                                         </div>
+                                        <div align="center">		
+<?php 
+$sql = "SELECT COUNT(id) AS total FROM knrequest_amnt";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_assoc($result);
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+
+
+
+echo "<ul class='pagination'>";
+echo "<li><a href='knreq_list1.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+
+echo "<li><a>".$page."</></li>";
+
+echo "<li><a href='knreq_list1.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+echo "</ul>";
+?>
+												
+</div>
                                     </div>
+
+
                                 </div>
                                 <!-- PAGE CONTENT ENDS -->
                             </div><!-- /.col -->

@@ -1,49 +1,7 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
-$state=$_GET['state'];
-
-if($state=='AP'){
-  $qottable ='add_qot';
-  $qotbill ='qot_bill';
-  $request_amnt ='request_amnt';
-     
-}
-elseif($state=='TG'){
-  $qottable ='add_tgqot';
-      $qottable1 ='add_tgqot1';
-  $qotbill ='tgqot_bill';
-  $request_amnt ='tgrequest_amnt';
-
- 
-}
- elseif($state=='TN'){
-  $qottable ='add_tnqot';
-    $qottable1 ='add_tnqot1';
-  $qotbill ='tnqot_bill';
-  $request_amnt ='tnrequest_amnt';
-
-}
-elseif($state=='KL'){
-  $qottable ='add_klqot';
-      $qottable1 ='add_klqot1';
-  $qotbill ='klqot_bill';
-  $request_amnt ='klrequest_amnt';	
-  
-}
-else if($state=='KN'){
-  $qottable ='add_knqot';
-    $qottable1 ='add_knqot1';
-  $qotbill ='knqot_bill';
-  $request_amnt ='knrequest_amnt';
-      
-}
-elseif($state=='OD'){
-  $qottable ='add_odqot';
-    $qottable1 ='add_odqot1';
-  $qotbill ='odqot_bill';
-  $request_amnt ='odrequest_amnt';	
-}
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -134,7 +92,7 @@ function ConfirmDialog() {
 
                                         
                                         <div class="table-header">
-                                       <?php echo $state; ?> Payment Pending List
+                                       <?php echo $stn; ?> Payment Pending List
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -156,7 +114,7 @@ function ConfirmDialog() {
                                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                                 Search
                                             </button>
-                  <div class="col-sm-2"><b><a href="qut_appp_excel.php?user=<?php echo $tsname ?>&state=<?php echo $state; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
+                  <div class="col-sm-2"><b><a href="qut_appp_excel.php?user=<?php echo $tsname ?>&state=<?php echo $stn; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
                   
 			<!--	   <div class="col-sm-3">
                   
@@ -188,33 +146,27 @@ function ConfirmDialog() {
 													<th>Inv Sub Mon</th>
 													<th>State</th>
 													<th>Fomate</th>
-													<th>Gst 28%</th>
+													<!-- <th>Gst 28%</th> -->
 													<th>Gst 18%</th>
-													<th>Gst 12%</th>
+													<!-- <th>Gst 12%</th>
 													<th>Gst 5%</th>
-													<th>Gst 0%</th>
+													<th>Gst 0%</th> -->
 													<th>Total Base</th>
-													<th>Gst(28%) Amt</th>
+													<!-- <th>Gst(28%) Amt</th> -->
 													<th>Gst(18%) Amt</th>
-													<th>Gst(12%) Amt</th>
+													<!-- <th>Gst(12%) Amt</th>
 													<th>Gst(5%) Amt</th>
-													<th>Gst(0%) Amt</th>
+													<th>Gst(0%) Amt</th> -->
 													<th>Total Gst</th>
                                                     <th>Total Amount </th>
                                                     <th>Ageing</th>
                                                     <th>User</th>
-                                                   <!-- <th>Tds</th>
-                                                    <th>Doc No</th>
-                                                    <th>Rec Date</th>
-                                                    <th>Rec Mon</th>
-                                                     <th>Total Amt Rec</th>
-                                                      <th>Outstanding</th>
-                                                     -->
+                                                   
                                                     <th>Edit</th>
 													   <th>View</th>
-													   <?php if(($tsname=='admin')){ ?>
+													   
                                                        <th>upload</th>
-													  <?php }?>
+													  
                                                     </tr>
                                                 </thead>
 
@@ -226,13 +178,13 @@ function ConfirmDialog() {
                                         $start_from = ($page-1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											$ssq1="select * from ".$qotbill." where status='Un Paid' and (quet_num like  '%$bsearch%' or inv_num like '%$bsearch%') ";
+											$ssq1="select * from qot_bill where status='Un Paid' and (quet_num like  '%$bsearch%' or inv_num like '%$bsearch%') ";
 													  } else {
-													       if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri')){
-													           $ssq1="select * from ".$qotbill." where status='Un Paid' order by id desc  LIMIT $start_from,$results_per_page ";
-													      }else{
-													           $ssq1="select * from ".$qotbill." where status='Un Paid' and user='$tsname' order by id desc  LIMIT $start_from,$results_per_page ";
-													      }
+													    //    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri')){
+													           $ssq1="select * from qot_bill where status='Un Paid' order by id desc  LIMIT $start_from,$results_per_page ";
+													    //   }else{
+													    //        $ssq1="select * from qot_bill where status='Un Paid' and user='$tsname' order by id desc  LIMIT $start_from,$results_per_page ";
+													    //   }
 														
 													  }
 											$t=mysqli_query($link,$ssq1) or die(mysqli_error($link));
@@ -272,12 +224,12 @@ function ConfirmDialog() {
 														<td><?php echo $rs1['inv_sub_date']; ?></td>
 														<td><?php echo $state; ?></td>
 														<td><?php echo $rs1['ftype']; ?></td>
-													    <td><?php echo $gst28=$rs1['gst28'];
-													    $g128=$gst28+$g128;?></td>
+													    <!-- <td><?php echo $gst28=$rs1['gst28'];
+													    $g128=$gst28+$g128;?></td> -->
 														<td><?php echo $gst18=$rs1['gst18']; 
 															$g118=$gst18+$g118;
 														?></td>
-														<td><?php echo $gst12=$rs1['gst12'];
+														<!-- <td><?php echo $gst12=$rs1['gst12'];
 															$g112=$gst12+$g112;
 														?></td>
 														<td><?php echo $gst5=$rs1['gst5'];
@@ -285,17 +237,17 @@ function ConfirmDialog() {
 														?></td>
 														<td><?php echo $gst0=$rs1['gst0'];
 														$g10=$gst0+$g10;
-														?></td>
+														?></td> -->
 														<td><?php echo $tbase=$rs1['tbase'];
 															$tbs=$tbase+$tbs;
 														?></td>	
-														<td><?php echo $g28=($gst28*28)/100; 
+														<!-- <td><?php echo $g28=($gst28*28)/100; 
 														$gt28=$gt28+$g28;
-														?></td>
+														?></td> -->
 														<td><?php echo $g18=($gst18*18)/100;
 															$gt18=$gt18+$g18;
 														?></td>
-														<td><?php echo $g12=($gst12*12)/100;
+														<!-- <td><?php echo $g12=($gst12*12)/100;
 														$gt12=$gt12+$g12;
 														?></td>
 														<td><?php echo $g5=($gst5*5)/100;
@@ -303,7 +255,7 @@ function ConfirmDialog() {
 														?></td>
 														<td><?php echo $g0=($gst0*0)/100;
 														$gt0=$gt0+$g0;
-														?></td>
+														?></td> -->
                                                        <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0;
                                                        $tg=$tg+$gtot;
                                                        ?></td>
@@ -331,13 +283,9 @@ function ConfirmDialog() {
                                                             echo $rss1['emp_name']; ?></td>
                                                         <td class="hidden-480">
                                                             
-                                                            <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri') ){ ?>
-                                                            <a href="edit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $net;?>&q=<?php echo $q?>&state=<?php echo $state; ?>">
-                                                        <img src="images/edit.gif"></a>														<?php }else{ ?>
-														<img src="images/edit.gif">
-														<?php }?>
-                                                        
-                                                        
+                                                            
+                                                            <a href="edit_req_bill3.php?id=<?php echo $q; ?>&id1=<?php echo $tbase;?>&q=<?php echo $q?>&state=<?php echo $state; ?>">
+                                                        <img src="images/edit.gif"></a>														
                                                         
                                                         </td>
 														
@@ -345,7 +293,7 @@ function ConfirmDialog() {
 														    <?php
 														    $tgid=$rs1['id'];
 														    
-														    $tp=mysqli_query($link,"select file from ".$qotbill." where id='$tgid'") or die(mysqli_error($link));
+														    $tp=mysqli_query($link,"select file from qot_bill where id='$tgid'") or die(mysqli_error($link));
 														    $tp1=mysqli_fetch_array($tp);
 														    $tpfile=$tp1['file'];
 														    if($tpfile!=''){
@@ -378,17 +326,17 @@ function ConfirmDialog() {
 											<?php $i++; } ?>
 											<tr>
 											    <td colspan="9">Total</td>
-											    <td><?php echo $g128; ?></td>
+											    <!-- <td><?php echo $g128; ?></td> -->
 											    <td><?php echo $g118; ?></td>
-											    <td><?php echo $g112; ?></td>
+											    <!-- <td><?php echo $g112; ?></td>
 											    <td><?php echo $g15; ?></td>
-											    <td><?php echo $g10; ?></td>
+											    <td><?php echo $g10; ?></td> -->
 											    <td><?php echo $tbs; ?></td>
-											     <td><?php echo $gt28; ?></td>
+											     <!-- <td><?php echo $gt28; ?></td> -->
 											    <td><?php echo $gt18; ?></td>
-											    <td><?php echo $gt12; ?></td>
+											    <!-- <td><?php echo $gt12; ?></td>
 											    <td><?php echo $gt5; ?></td>
-											    <td><?php echo $gt0; ?></td>
+											    <td><?php echo $gt0; ?></td> -->
 											    <td><?php echo $tg; ?></td>
 											    <td><?php echo $tamt; ?></td>
 											  <td></td>

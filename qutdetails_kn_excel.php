@@ -26,7 +26,7 @@ $objPHPExcel
     ->getFont()->setBold(true)->getColor()
     ->setARGB('ffffff');
 
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JTECHNO ASSOCIATES FACILITY MANAGEMENT PVT.LTD');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY  MANAGEMENT PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:AF1")->getAlignment()->setHorizontal('center');
  
  $objPHPExcel->getActiveSheet()->mergeCells('A4:AF4');

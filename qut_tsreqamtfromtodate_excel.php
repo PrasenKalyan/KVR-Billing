@@ -24,14 +24,14 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:U1');
  $objPHPExcel->getActiveSheet()->getStyle("A1:U1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
  $objPHPExcel->getActiveSheet()->getStyle("A1:U1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
- $objPHPExcel->getActiveSheet()->setCellValue('A1', 'JYOTHI FACILITY MANAGEMENT PVT.LTD');
+ $objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
  $objPHPExcel->getActiveSheet()->getStyle("A1:U1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->getActiveSheet()->mergeCells('A4:U4');
  $objPHPExcel->getActiveSheet()->getStyle("A4:U4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
         $objPHPExcel->getActiveSheet()->getStyle("A4:U4")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
 
- $objPHPExcel->getActiveSheet()->setCellValue('A4', 'TS REQUEST AMOUNT LIST');
+ $objPHPExcel->getActiveSheet()->setCellValue('A4', 'TG REQUEST AMOUNT LIST');
  $objPHPExcel->getActiveSheet()->getStyle("A4:U4")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  $objPHPExcel->setActiveSheetIndex(0);
 $objPHPExcel->getActiveSheet()->SetCellValue('A6', 'SNo');
@@ -81,17 +81,17 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:U6")->getFill()->setFillType(PHPExc
              $objPHPExcel->getActiveSheet()->getColumnDimension('U')->setWidth(18);
  
 $objPHPExcel->getActiveSheet()->getStyle("A6:U6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $i=1;
 $rowCount	=	7;
 while($row	=	$result->fetch_assoc()){
     $qot=$row['quet_num'];
     $a="select * from add_tgqot where quet_num='$qot'";
-    $result1=$db->query($a) or die(mysql_error());
+    $result1=$db->query($a) or die(mysqli_close($link));
     $row2=$result1->fetch_assoc();
     $str_code=$row2['store_code'];
     $ds="select * from dpr where store_code='$str_code'";
-	$result2=$db->query($ds) or die(mysql_error());
+	$result2=$db->query($ds) or die(mysqli_close($link));
 	$row1=$result2->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, mb_strtoupper($i,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, mb_strtoupper($qot,'UTF-8'));
@@ -108,11 +108,11 @@ while($row	=	$result->fetch_assoc()){
 	$objPHPExcel->getActiveSheet()->SetCellValue('M'.$rowCount, mb_strtoupper($row2['tot_gst'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('N'.$rowCount, mb_strtoupper($row2['net'],'UTF-8'));
 	$ty5="select sum(approve_amnt) as samt from tgrequest_amnt where quet_num='$qot'";
-    $result3=$db->query($ty5) or die(mysql_error());
+    $result3=$db->query($ty5) or die(mysqli_close($link));
     $row3=$result3->fetch_assoc();      
 	$objPHPExcel->getActiveSheet()->SetCellValue('O'.$rowCount, mb_strtoupper($row3['samt'],'UTF-8'));
 	$tyy="select sum(req_amnt+gstamt) as rsamt from tgrequest_amnt where quet_num='$qot' and confirm='Yes'";
-    $result3=$db->query($tyy) or die(mysql_error());
+    $result3=$db->query($tyy) or die(mysqli_close($link));
     $row4=$result3->fetch_assoc(); 
   	$objPHPExcel->getActiveSheet()->SetCellValue('P'.$rowCount, mb_strtoupper($row4['rsamt'],'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('Q'.$rowCount, mb_strtoupper($row2['bal'],'UTF-8'));
@@ -120,7 +120,7 @@ while($row	=	$result->fetch_assoc()){
 			
 	
 	$yt1="select gsttype,gstamt from tgrequest_amnt where quet_num='$qot'";
-    $result5=$db->query($yt1) or die(mysql_error());
+    $result5=$db->query($yt1) or die(mysqli_close($link));
    $array1=array();
     $array2=array();
     
@@ -144,7 +144,7 @@ $objPHPExcel->getActiveSheet()->SetCellValue('R'.$rowCount, $row['gsttype']);
 //$objPHPExcel->getActiveSheet()->SetCellValue('S'.$rowCount, (implode(",",array_unique($array2))));
 $objPHPExcel->getActiveSheet()->SetCellValue('S'.$rowCount, $row['gstamt']);
 	$yt="select req_amnt,gstamt,ac_det,req_date from tgrequest_amnt where quet_num='$qot'";
-    $result4=$db->query($yt) or die(mysql_error());
+    $result4=$db->query($yt) or die(mysqli_close($link));
     $array='';
                                         while($row4=$result4->fetch_assoc()){
                                             $at=$row4['req_amnt']+$row4['gstamt'];

@@ -22,7 +22,7 @@ $tsname=$_SESSION['user'];
             color:red;
         }
      .reload {
-  font-family: Lucida Sans Unicode
+  font-family: Lucida Sans Unicode;
   cursor: pointer;
   float:left;
 }
@@ -257,10 +257,11 @@ xmlhttp.send();
                                                         
 													 <th>Edit</th>
 													  <?php if(($tsname!="admin")  ){}else{ ?>
-													  <th>RONo Edit</th>
+													  <!-- <th>RONo Edit</th> -->
 													  <?php }?>
-													 <th>Email</th>
-														     <th>Print</th> <th>Quotation</th>
+													 <!-- <th>Email</th> -->
+														     <th>Print</th>
+                                                             <th>Quotation</th>
 															 <th>Bill of Supply</th><th>Miscllenious</th>
 														 <th>Pdf Download</th>
                                                         
@@ -479,48 +480,40 @@ $start_from = ($page-1) * $results_per_page;
                                                        
                                                         
                                                         
-                                                        <?php 
+                                                        
                                                 
-                                                if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='Sulfeekkar') or ($tsname=='sumanthpotluri')){ ?>
+                                                
                                                          <a href="edit_klqot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                           <?php     }else{
+                                           
                                                
-                                               if($user==$tsname){?>
-                                                    <a href="edit_klqot.php?id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                              <?php  }else{ ?>
-                                               
-                                                        <img src="images/edit.gif">
-                                          <?php }
-                                           }
-                                                ?>        
+                                                     
                                                         </td>
                                                          <?php 
                                                 
                                                 if($tsname=='admin'){ ?>
-                                                         <td> 
+                                                         <!-- <td> 
                                                                 
                                                         <a href="kleditrono_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
                                                      
-                                                        </td>
+                                                        </td> -->
 													<?php }      ?> 
-														 <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="klemail.php?id=<?php echo $rs1['id'];?>&name1=<?php echo $r1['coordinator'];?>&name2=<?php echo $r1['superwisor'];?>"
+														 <!-- <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="klemail.php?id=<?php echo $rs1['id'];?>&name1=<?php echo $r1['coordinator'];?>&name2=<?php echo $r1['superwisor'];?>"
 												   class="">
-                                                        <img src="images/email.png" width="20" height="20"></a></td>
+                                                        <img src="images/email.png" width="20" height="20"></a></td> -->
 														
 														 <td class="hidden-480">
 														 
                                                    <a onclick="window.open('qut_print.php?id=<?php echo $rs1['id'];?>&state=KL','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')"
 												   class="btn btn-primary btn-xs"><img src="images/printer.png"></a>
                                                         </td> 
+                                                        <td class="hidden-480"><a href="qut_excel.php?id=<?php echo $rs1['id']; ?>&state=KL">
+                                                        <img src="images/xl.jpg" width="20" height="20"></a></td>
                                                         
-                                                         <td class="hidden-480"><a href="klqut_excel.php?id=<?php echo $rs1['id']; ?>&state=KL">
+                                                        <td class="hidden-480"><a href="qut_excel_bill.php?id=<?php echo $rs1['id']; ?>&state=KL">
                                                         <img src="images/xl.jpg" width="20" height="20"></a></td>
-                                                        <td class="hidden-480"><a href="klqut_excel_bill.php?id=<?php echo $rs1['id']; ?>&state=KL">
-                                                        <img src="images/xl.jpg" width="20" height="20"></a></td>
-                                                     <td class="hidden-480"><a href="klqut_excel_mis.php?id=<?php echo $rs1['id']; ?>&state=KL">
+                                                     <td class="hidden-480"><a href="qut_excel_mis.php?id=<?php echo $rs1['id']; ?>&state=KL">
                                                         <img src="images/xl.jpg" width="20" height="20"></a></td>
                                                         <td class="hidden-480">
                                                        <a href="qot_pdf.php?id=<?php echo $rs1['id'];?>&state=KL"

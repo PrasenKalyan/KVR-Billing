@@ -1,7 +1,7 @@
 <?php //include('config.php');
 session_start();
 $stn="KL";
-//include('dbconnection/connection.php');
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -122,8 +122,9 @@ $tsname=$_SESSION['user'];
                                                 Search
                                             </button>
                   </div>
-                  <div class="col-sm-2"><b><a href="qut_klrreqamt_excel.php?user=<?php echo $tsname; ?>" class="btn btn-primary btn-xs">XL Download</a></b>
-                 <!-- <b><button class="btn btn-primary btn-xs" id="aprvall" name ="aptvall">Approve All</button></b>--></div>
+                  <div class="col-sm-2"><b><a href="qut_kLrreqamt_excel.php?user=<?php echo $tsname; ?>" class="btn btn-primary btn-xs">XL Download</a></b>
+                  <!--<b><button class="btn btn-primary btn-xs" id="aprvall" name ="aptvall">Approve All</button></b>-->
+                  </div>
 				</div>
 										
 										</form>	
@@ -187,12 +188,12 @@ $tsname=$_SESSION['user'];
                                                          <th>Service Fee</th>
                                                          <th>GST</th>
                                                          <th>Total Amount</th>
-                                                          <th>Advance</th>
+                                                         <th>Advance</th>
                                                          <th>Requested Amount</th>
 														 
 														   <th>Balance Amount</th>
-											<th>GST Type</th>	
-											<th>GST Amount</th>
+											<th>GST Type</th>
+												<th>GST Amount</th>
 														   <th>Whoom</th>
                                                         <th>User</th>
 														
@@ -225,7 +226,6 @@ $tsname=$_SESSION['user'];
 											$reqamt=0;
 											$bamt=0;
 											$tgst=0;
-											
 											while($rs1=mysqli_fetch_array($t)){
 											
 													$qot=$rs1['quet_num'];									
@@ -266,11 +266,10 @@ $tsname=$_SESSION['user'];
 										$adv=$adv+$r1['adv_amnt']+$r1['adv_amnt1']+$r1['adv_amnt2']-$rs1['req_amnt'];
 										$reqamt=$reqamt+$rs1['req_amnt'];
 										$bamt=$bamt+$r1['bal'];
-										$tgst=$tgst+$r1['gst_amount']+$r1['gst_amount1']+$r1['gst_amount2']-$rs1['gst_amount3'];
-										
+											$tgst=$tgst+$r1['gst_amount']+$r1['gst_amount1']+$r1['gst_amount2']-$rs1['gst_amount3'];
 										
 										?>
-										 <?php
+														 <?php
 														 $qotnum=$rs1['quet_num'];
 												            $tyy="select sum(req_amnt+gstamt) as samt from klrequest_amnt where quet_num='$qotnum' and confirm='Pending'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
@@ -317,9 +316,8 @@ $tsname=$_SESSION['user'];
 												  
                                                         <td class="hidden-480"><?php echo $rs1['ac_det']; ?></td>
 												  
-                                                       <!-- <td><?php echo $rs1['user']; ?></td>-->
-                                                       
-                                                        <td class="hidden-480"><?php 
+                                                        <!--<td><?php echo $rs1['user']; ?></td>-->
+                                                       <td class="hidden-480"><?php 
                                                          $cempname=$rs1['user'];
                                                          $sq=mysqli_query($link,"select emp_name from emp where employeeid='$cempname' limit 1");
                                                          	$rss1=mysqli_fetch_array($sq);
@@ -327,6 +325,7 @@ $tsname=$_SESSION['user'];
                                                          	echo $cempname;
                                                          	else
                                                             echo $rss1['emp_name']; ?></td>
+                                                        
                                                        
                                                        <td class="hidden-480"><a href="klreq_amnt_list.php?id=<?php echo $rs1['id']; ?>&amt=<?php echo $amt;?>&st=<?php echo $state;?>" onclick="return confirm('are you sure?')">
                                                         <img src="update.png" width="16" height="16"></a></td>
@@ -354,7 +353,7 @@ $tsname=$_SESSION['user'];
 													<td><?php echo $reqamt ?></td>
 													<td><?php echo $bamt ?></td>
 													<td></td>
-												<td><?php echo $tgst ?></td>
+													<td><?php echo $tgst ?></td>
 													<td colspan="4"></td>
 													</tr>
                                                     
@@ -372,6 +371,7 @@ $tsname=$_SESSION['user'];
 															</label>
 														</th>-->
 														<th></th>
+														
                                                         <th>S No</th>
                                                         <th>Quotation No</th>
                                                         <th>Supervisor</th>
@@ -409,11 +409,11 @@ $tsname=$_SESSION['user'];
 												//	$y="select distinct quet_num,state from klrequest_amnt where confirm!='Yes' order by id desc";
 												
 												
-											if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='sumanthpotluri')){
+											
 											    	$y="select distinct quet_num,state,user from klrequest_amnt where confirm!='Yes' order by id desc";
-											}else{
-											    	$y="select distinct quet_num,state,user from klrequest_amnt where confirm!='Yes' and user='$tsname' order by id desc";
-											}
+											
+											    	// $y="select distinct quet_num,state,user from klrequest_amnt where confirm!='Yes' and user='$tsname' order by id desc";
+											
 											
 											 
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -439,7 +439,7 @@ $tsname=$_SESSION['user'];
 																<span class="lbl"></span>
 															</label>
 														</td>-->
-														 <?php
+																		 <?php
 														 $qotnum=$rs1['quet_num'];
 												            $tyy="select sum(req_amnt+gstamt) as samt from klrequest_amnt where quet_num='$qotnum' and confirm='Pending'";
                                                             $ty=mysqli_query($link,$tyy) or die(mysqli_error($link));
@@ -530,7 +530,7 @@ $tsname=$_SESSION['user'];
                                         echo $uy01['gsttype']."<br/>";
                                                         }
 																							  ?></td>
-																							  	  <td class="hidden-480"><?php 
+																							  <td class="hidden-480"><?php 
 												  
 												     $yt5="select * from klrequest_amnt where quet_num='$qot'";
                                                             $uy0=mysqli_query($link,$yt5) or die(mysqli_error($link));
@@ -557,8 +557,8 @@ $tsname=$_SESSION['user'];
 												  
                                                         
                                                        
-                                                   <!--     <td><?php echo $rs1['user']; ?></td>-->
-                                                   <td class="hidden-480"><?php 
+                                                       <!-- <td><?php echo $rs1['user']; ?></td>-->
+                                                       <td class="hidden-480"><?php 
                                                          $cempname=$rs1['user'];
                                                          $sq=mysqli_query($link,"select emp_name from emp where employeeid='$cempname' limit 1");
                                                          	$rss1=mysqli_fetch_array($sq);
@@ -568,7 +568,7 @@ $tsname=$_SESSION['user'];
                                                             echo $rss1['emp_name']; ?></td>
                                                        
                                                        <td class="hidden-480">
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='sumanthpotluri')){ ?>
+                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='JFMTS22230493') or ($tsname=='sumanthpotluri')or ($tsname=='klbilling')){ ?>
                                                            <a href="klreq_amnt_list.php?id=<?php echo $qot; ?>&amt=<?php echo $amt;?>&st=<?php echo $state;?>" onclick="return confirm('are you sure?')">
                                                         <img src="update.png" width="16" height="16"></a>
                                                         <?php }else{ ?>
@@ -576,18 +576,14 @@ $tsname=$_SESSION['user'];
                                                         <?php }?>
                                                         </td>
                                                     <td class="hidden-480">
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='sumanthpotluri')){ ?>
+                                                         
                                                         
                                                         <a href="kledit_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="klcancel_request.php?id=<?php echo $rs1['quet_num']; ?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                        <?php }else{ ?>
                                                         
-                                                        <img src="images/edit.gif"> <img src="images/Icon_Delete.png">
-                                                        
-                                                        <?php }?>
                                                         </td>
 														 
 														 
@@ -606,7 +602,7 @@ $tsname=$_SESSION['user'];
 													<td><?php echo $reqamt ?></td>
 													<td><?php echo $bamt ?></td>
 													<td></td>
-													<td><?php echo $tgst ?></td>
+														<td><?php echo $tgst ?></td>
 													<td colspan="4"></td>
 													</tr>
                                                     
@@ -855,7 +851,7 @@ $tsname=$_SESSION['user'];
 
 
                                             })
-        </script>
+        </script><!-- inline scripts related to this page -->
         <script>
 document.getElementById('aprvall').onclick = function() {
   var markedCheckbox = document.getElementsByName('checkboxrow');
@@ -880,7 +876,6 @@ document.getElementById('aprvall').onclick = function() {
 	});
 }
 </script>
-        <!-- inline scripts related to this page -->
 </body>
 </html>
 <?php 

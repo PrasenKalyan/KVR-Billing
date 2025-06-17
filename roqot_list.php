@@ -267,7 +267,6 @@ xmlhttp.send();
                                                         <th>Quotation No</th>
                                                          <th>Store Code</th>
                                                         <th>Store Name</th>
-														
 														<th>Coordinator Name</th>
                                                         <th>Super Wisor</th>
                                                          <th>City</th>
@@ -406,15 +405,10 @@ $start_from = ($page-1) * $results_per_page;
 												
 												else {
 													
-											if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='Dwarka')){
+											
 												     $y="SELECT * FROM ".$datatable."  where status='Ro Required'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;    
-												    }else{
-												         $y="SELECT * FROM ".$datatable."  where status='Ro Required' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												    }
-													
-													 
-												}
-											 
+												    
+                                                }
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
 									    	$i=$start_from;
 													$start=1;
@@ -448,8 +442,6 @@ $r1=mysqli_fetch_array($ssq1);
 														?></td>
                                                        
                                                         <td class="hidden-480"><?php echo $r1['store_name']; ?></td>
-                                                        
-														
 														<td class="hidden-480"><?php echo $r1['coordinator']; ?></td>
                                                         <td class="hidden-480"><?php echo $r1['superwisor']; ?></td>
                                                         <td class="hidden-480"><?php echo $r1['city']; ?></td>

@@ -229,6 +229,11 @@ if($menu == "2"){$menu2="2";}
 	if($menu == "96"){$menu96="96";}
 	if($menu == "97"){$menu97="97";}
 	if($menu == "98"){$menu98="98";}
+	if($menu == "98"){$menu99="99";}
+	if($menu == "98"){$menu1000="1000";}
+	if($menu == "98"){$menu1001="1001";}
+	if($menu == "98"){$menu1002="1002";}
+	if($menu == "98"){$menu1003="1003";}
 	if($menu == "16"){$menu16="16";}
 	
 	
@@ -296,8 +301,8 @@ if($menu == "2"){$menu2="2";}
 				  <input type="checkbox" name="menu[]" value="2"  <?php if($menu2=='2'){echo "checked='checked'";} ?>/><b>Settings</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="21" <?php if($menu21=='21'){echo "checked='checked'";} ?> />Update Organization<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="22" <?php if($menu22=='22'){echo "checked='checked'";} ?> />Add Employee<br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="23" <?php if($menu23=='23'){echo "checked='checked'";} ?> />Add Material<br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="91" <?php if($menu91=='91'){echo "checked='checked'";} ?>/>Add Supervisor Details<br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="23" <?php if($menu23=='23'){echo "checked='checked'";} ?> />Add Material<br/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="91" <?php if($menu91=='91'){echo "checked='checked'";} ?>/>Add Supervisor Details<br/> -->
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="92" <?php if($menu92=='92'){echo "checked='checked'";} ?>/>Add Company  Details<br/>
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="93" <?php if($menu93=='93'){echo "checked='checked'";} ?>/>Add AFM Details<br/>
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="94" <?php if($menu94=='94'){echo "checked='checked'";} ?><?php if($menu23=='23'){echo "checked='checked'";} ?>/>Add Co-Ordinatior Details<br/>
@@ -305,22 +310,26 @@ if($menu == "2"){$menu2="2";}
 				   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="97" <?php if($menu97=='97'){echo "checked='checked'";} ?>/>Add Item Details<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="96" <?php if($menu96=='96'){echo "checked='checked'";} ?>/>Add Store List<br/>
 				     &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="99" <?php if($menu99=='99'){echo "checked='checked'";} ?>/>Add Upload Store List<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="98" <?php if($menu98=='98'){echo "checked='checked'";} ?>/>Add KL Items List<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="100" <?php if($menu100=='100'){echo "checked='checked'";} ?>/>Add TN Items List<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="98" <?php if($menu98=='98'){echo "checked='checked'";} ?>/>Add AP Items List<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="1000" <?php if($menu1000=='1000'){echo "checked='checked'";} ?>/>Add KN Items List<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="1001" <?php if($menu1001=='1001'){echo "checked='checked'";} ?>/>Add OD Items List<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="1002" <?php if($menu1002=='1002'){echo "checked='checked'";} ?>/>Add TG Items List<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="1003" <?php if($menu1003=='1003'){echo "checked='checked'";} ?>/>Add KL Items List<br/>
+				    <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="100" <?php if($menu100=='100'){echo "checked='checked'";} ?>/>Add TN Items List<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="101" <?php if($menu101=='101'){echo "checked='checked'";} ?>/>Add Upload TN Items List<br/>
 				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="102" <?php if($menu102=='102'){echo "checked='checked'";} ?>/>Add Change User Names<br/>
-				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="103" <?php if($menu9103=='103'){echo "checked='checked'";} ?>/>Add Change Status<br/>
+				    &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="103" <?php if($menu9103=='103'){echo "checked='checked'";} ?>/>Add Change Status<br/> -->
 				  </div>
-	<div class="col-sm-3">
+	<!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="3" <?php if($menu3=='3'){echo "checked='checked'";} ?>/><b>Upload Formats</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="24" <?php if($menu24=='24'){echo "checked='checked'";} ?>/>Upload Products Format<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="25" <?php if($menu25=='25'){echo "checked='checked'";} ?> />Upload Add Billing Format <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="26" <?php if($menu26=='26'){echo "checked='checked'";} ?> />Upload Employee Salary Format<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="31" <?php if($menu31=='31'){echo "checked='checked'";} ?> />Upload Employee Salary<br/>
 				 			
-				 </div>
+				 </div> -->
 				 
-			<!--	 <div class="col-sm-3">
+				 <!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="8" <?php if($menu8=='8'){echo "checked='checked'";} ?>/><b>Employee</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="81" <?php if($menu81=='81'){echo "checked='checked'";} ?>/>Add Tools<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="82" <?php if($menu82=='82'){echo "checked='checked'";} ?> />Add Tool Purchase <br/>
@@ -328,7 +337,7 @@ if($menu == "2"){$menu2="2";}
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="84" <?php if($menu84=='84'){echo "checked='checked'";} ?> />Add Employee<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="85" <?php if($menu85=='85'){echo "checked='checked'";} ?> />Assign users<br/>
 				 			
-				 </div>
+				 </div> -->
 			
                   <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="4" <?php if($menu4=='4'){echo "checked='checked'";} ?> /><b>Ap Tracker</b><br/>
@@ -348,7 +357,7 @@ if($menu == "2"){$menu2="2";}
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="408" <?php if($menu408=='408'){echo "checked='checked'";} ?>/> Requested Amount  Excel <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="402" <?php if($menu402=='402'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="403" <?php if($menu403=='403'){echo "checked='checked'";} ?>/>Quotation Details <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="404" <?php if($menu404=='404'){echo "checked='checked'";} ?>/>Supervisor <br/>
+				  <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="404" <?php if($menu404=='404'){echo "checked='checked'";} ?>/>Supervisor <br/> -->
 				  </div>
 				  
 				  
@@ -370,7 +379,7 @@ if($menu == "2"){$menu2="2";}
 				   	&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="508" <?php if($menu508=='508'){echo "checked='checked'";} ?>/>Requested Amount  Excel <br/>
 				 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="502" <?php if($menu502=='502'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="503" <?php if($menu503=='503'){echo "checked='checked'";} ?>/>Quotation Details <br/>
-				 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="504" <?php if($menu504=='504'){echo "checked='checked'";} ?>/>Supervisor <br/>
+				 <!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="504" <?php if($menu504=='504'){echo "checked='checked'";} ?>/>Supervisor <br/> -->
 				 </div>
 				 
 				  <div class="col-sm-3">
@@ -391,7 +400,7 @@ if($menu == "2"){$menu2="2";}
 				 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="608" <?php if($menu608=='608'){echo "checked='checked'";} ?>/>Requested Amount  Excel <br/>
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="602" <?php if($menu602=='602'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="603" <?php if($menu603=='603'){echo "checked='checked'";} ?>/>Quotation Details <br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="604" <?php if($menu604=='604'){echo "checked='checked'";} ?>/>Supervisor <br/>
+				<!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="604" <?php if($menu604=='604'){echo "checked='checked'";} ?>/>Supervisor <br/> -->
 				 </div>
 				 
 				 <div class="col-sm-3">
@@ -412,11 +421,11 @@ if($menu == "2"){$menu2="2";}
 				 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2414" <?php if($menu2414=='2414'){echo "checked='checked'";} ?>/>Requested Amount  Excel <br/>
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2415" <?php if($menu2415=='2415'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2416" <?php if($menu2416=='2416'){echo "checked='checked'";} ?>/>Quotation Details <br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2417" <?php if($menu2417=='2417'){echo "checked='checked'";} ?>/>Supervisor <br/>
+				<!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="2417" <?php if($menu2417=='2417'){echo "checked='checked'";} ?>/>Supervisor <br/> -->
 				 </div>
 				 
 				 
-				  <div class="col-sm-3">
+				  <!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="7" <?php if($menu7=='7'){echo "checked='checked'";} ?>/><b>TN Tracker</b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="71" <?php if($menu71=='71'){echo "checked='checked'";} ?>/>Quotations<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="72" <?php if($menu72=='72'){echo "checked='checked'";} ?>/>RO Required <br/>
@@ -435,7 +444,7 @@ if($menu == "2"){$menu2="2";}
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="702" <?php if($menu702=='702'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="703" <?php if($menu703=='703'){echo "checked='checked'";} ?>/>Quotation Details <br/>
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="704" <?php if($menu704=='704'){echo "checked='checked'";} ?>/>Supervisor <br/>
-				 </div>-->
+				 </div> -->
 				 
 				 	  <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="10" <?php if($menu10=='10'){echo "checked='checked'";} ?>/><b>KN Tracker</b><br/>
@@ -455,29 +464,29 @@ if($menu == "2"){$menu2="2";}
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="128" <?php if($menu128=='128'){echo "checked='checked'";} ?>/>Requested Amount  Excel <br/>
 				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="123" <?php if($menu123=='123'){echo "checked='checked'";} ?>/>Tracker <br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="124" <?php if($menu124=='124'){echo "checked='checked'";} ?>/>Quotation Details <br/>
-				&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="125" <?php if($menu125=='125'){echo "checked='checked'";} ?>/>Supervisor <br/>
+				<!-- &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="125" <?php if($menu125=='125'){echo "checked='checked'";} ?>/>Supervisor <br/> -->
 				 </div>
 			
-			<!--	<div class="col-sm-3">
+				<!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="16" <?php if($menu16=='16'){echo "checked='checked'";} ?>/><b>User Management</b>
 				  
 				  				  
-				  </div>
-			<div class="col-sm-3">
+				  </div> -->
+			<!-- <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="9" <?php if($menu9=='9'){echo "checked='checked'";} ?>/><b>Reports</b><br/>
 				  
 				  	&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="999" <?php if($menu999=='999'){echo "checked='checked'";} ?>/>Working Hours<br/>			  
-				  </div>
+				  </div> -->
 				  <div class="col-sm-3">
 				  <input type="checkbox" name="menu[]" value="1111" <?php if($menu1111=='1111'){echo "checked='checked'";} ?> /><b>Expenses </b><br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="110" <?php if($menu110=='110'){echo "checked='checked'";} ?>/>Add Expenses<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="111" <?php if($menu111=='111'){echo "checked='checked'";} ?>/>AP Expenses List <br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="112" <?php if($menu112=='112'){echo "checked='checked'";} ?>/>TS Expenses List<br/>
-				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="113" <?php if($menu113=='113'){echo "checked='checked'";} ?>/>TN Expenses List<br/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="112" <?php if($menu112=='112'){echo "checked='checked'";} ?>/>TG Expenses List<br/>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="113" <?php if($menu113=='113'){echo "checked='checked'";} ?>/>OD Expenses List<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="114" <?php if($menu114=='114'){echo "checked='checked'";} ?>/>KL Expenses List<br/>
 				  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu[]" value="115" <?php if($menu115=='115'){echo "checked='checked'";} ?>/>KN Expenses List <br/>
 				   </div>
-                </div>	-->
+                </div>	
 				  
 				  
 				

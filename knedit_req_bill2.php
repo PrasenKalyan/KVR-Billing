@@ -395,15 +395,13 @@ error:function (){}
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <?php $ssq=mysqli_query($link,"select * from knqot_bill where quet_num='$id'");
-													   $r1=mysqli_fetch_array($ssq);
-													   $ssq1=mysqli_query($link,"select frm_type from add_knqot where quet_num='$id'");
-													   $r2=mysqli_fetch_array($ssq1);?>
+													   $r1=mysqli_fetch_array($ssq);?>
  <form name="frm" method="post" action="" enctype="multipart/form-data">
  <input type="hidden" name="ids" value="<?php echo $id?>">
   <input type="hidden" name="state" value="<?php echo $r['state'];?>">
                                             <table class="table table-striped table-bordered table-hover">
 											
-											  <tr><td align="right">QuoteNumber</td><td align="left">
+											  <tr><td align="right">Quotation Number</td><td align="left">
 											  <input  type="text" readonly  class="form-control" value="<?php echo $id?>" required  name="qt_no" id="qt_no"></td>
                                         <td align="right">Bill Received Date</td><td><input type="date" value="<?php echo $r1['bill_date'];?>" required   name="bill_date" id="inv_date" class="form-control"></td>
                                         </tr>
@@ -411,7 +409,7 @@ error:function (){}
                                            
 										
 										
-										  <tr><td align="right">Invoice Num</td><td align="left">
+										  <tr><td align="right">Invoice Number</td><td align="left">
 										<input type="text" name="inv_no" 
 										id="inv_no"  class="form-control" value="<?php echo $r1['inv_num'];?>" onkeyup="checkAvailability()" required>
 										<div id="uname_response"></div>
@@ -422,7 +420,7 @@ error:function (){}
 										
 										  <tr><td align="right">Note</td><td align="left">
 										<textarea name="note" class="form-control" required><?php echo $r1['note1'];?></textarea></td>	
-                                        <td align="right">Invoice Submited Date</td><td>
+                                        <td align="right">Invoice Submitted Date</td><td>
 										<input type="date" name="inv_sub_date" 
 										id="sub_type"  class="form-control" required value="<?php echo date('Y-m-d');?>">
 										</td>
@@ -430,11 +428,28 @@ error:function (){}
 											<tr><td align="right">Service Period</td><td align="left">
 										<input type="text" name="speriod" id="speriod" required class="form-control" /></td>	
                                         <td align="right">Format Type</td><td>
-										<input id="ftype1" type="text" class="form-control" required name="ftype"  readonly value="<?php echo $r2['frm_type'];?>" >
+										<input id="ftype1" type="text" class="form-control"  name="ftype" value="<?php echo $r2['frm_type'];?>" >
 										<div id='suggesstion-box1'>
-
 										</td>
+										<tr><td align="right">Company Name</td><td align="left">
+										<input type="text" name="com_name" id="com_name" required class="form-control" value="<?php echo $rs1['com_name'];?>" /></td>
                                         </tr>
+										
+										<?php
+
+$id = $_REQUEST['id'];
+$query = mysqli_query($link, "SELECT tot_base FROM add_knqot WHERE quet_num = '$id'");
+$r1 = mysqli_fetch_assoc($query);
+$tot_base = $r1['tot_base'];
+?>
+										<tr>
+  <td align="right">Total Base Amount</td>
+  <td align="left">
+    <input type="text" name="tot_base" id="tot_base" class="form-control" readonly 
+           value="<?php echo $tot_base; ?>">
+  </td>
+  
+</tr>
 										<tr><td align="right">Total Base Amount</td><td align="left">
 										<input type="text" name="tbase" id="tbase" class="form-control" required readonly /></td>
 										<td align="right">File Upload</td>
@@ -481,7 +496,7 @@ error:function (){}
 									
 									
 									<input type="hidden" name="id1" 
-										id="adv_amnt"  class="form-control" value="<?php echo $r1['id'];?>">
+										id="id1"  class="form-control" value="<?php echo $r1['id'];?>">
                                         </table>
                                         
                                         <div class="form-group">
@@ -493,6 +508,18 @@ error:function (){}
                                                 <i class="ace-icon fa fa-save bigger-110"></i>
                                                 Update
                                             </button>
+											<?php
+// if (isset($_POST['update'])) {
+//     $id        = $_POST['id'];
+//     $com_name  = $_POST['com_name'];
+
+//     $id        = mysqli_real_escape_string($link, $id);
+//     $com_name  = mysqli_real_escape_string($link, $com_name);
+
+//     $sql = "INSERT INTO company (com_name) VALUES ('$com_name')";
+//     $result = mysqli_query($link, $sql);
+// }
+	?>
 										
 										<?php 
 										if(isset($_POST['update'])){
@@ -502,7 +529,7 @@ error:function (){}
 											$bill_date=$_POST['bill_date'];
 											$inv_no=$_POST['inv_no'];
 											$inv_date=$_POST['inv_date'];
-											$id1=$_POST['id1'];
+											// $id1=$_POST['id1'];
 											$state=$_POST['state'];
 											$note=$_POST['note'];
 																						$speriod=$_POST['speriod'];
@@ -513,6 +540,9 @@ error:function (){}
 											$gst12=$_POST['gst12'];
 											$gst5=$_POST['gst5'];
 											$gst0=$_POST['gst0'];
+											$comname=$_POST['com_name'];
+											
+											
 
 											
 											
@@ -534,17 +564,21 @@ error:function (){}
 	}else{
 	 $iname5 = ($img3);
 	}		
-											
+											//  $sq = "update  knqot_bill set quet_num='$qt_no',bill_date='$bill_date',
+											// 	inv_num='$inv_no',inv_date='$inv_date',note1='$note',inv_sub_date='$inv_sub_date',status='RUn Paid',
+											// 	speriod='$speriod',ftype='$ftype',tbase='$tbase',gst28='$gst28',gst18='$gst18',gst12='$gst12',gst5='$gst5',
+											// 	gst0='$gst0',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'";
 												$sq=mysqli_query($link,"update  knqot_bill set quet_num='$qt_no',bill_date='$bill_date',
 												inv_num='$inv_no',inv_date='$inv_date',note1='$note',inv_sub_date='$inv_sub_date',status='RUn Paid',
 												speriod='$speriod',ftype='$ftype',tbase='$tbase',gst28='$gst28',gst18='$gst18',gst12='$gst12',gst5='$gst5',
-												gst0='$gst0',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'");
+												gst0='$gst0', com_name='$comname',total='$total',file='$iname5'    where id='$id1' and quet_num='$id'");
 												
+											//  $s =  "update add_knqot set
+											// 	bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='Raised Invoice List' where quet_num='$qt_no'";
 											
-											if($state=='KN'){
 												$s=mysqli_query($link,"update add_knqot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='Raised Invoice List' where quet_num='$qt_no'");
-											} 
+											
 											
 											print "<script>";
 			print "alert('Invoice Sucessfully Updated');";

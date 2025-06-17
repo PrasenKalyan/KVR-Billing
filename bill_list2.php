@@ -1,49 +1,11 @@
 <?php //include('config.php');
 session_start();
+$stn="AP";
 include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$qotbill ='qot_bill';
-		$request_amnt ='request_amnt';
-       
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qotbill ='tgqot_bill';
-		$request_amnt ='tgrequest_amnt';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qotbill ='tnqot_bill';
-	  $request_amnt ='tnrequest_amnt';
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qotbill ='klqot_bill';
-		$request_amnt ='klrequest_amnt';	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qotbill ='knqot_bill';
-	  $request_amnt ='knrequest_amnt';
-      	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qotbill ='odqot_bill';
-	  $request_amnt ='odrequest_amnt';	
-	}
 //include('org1.php');
 $y=mysqli_query($link,"select * from employee where emp_name='$name'");
 $y1=mysqli_fetch_array($y);
@@ -131,13 +93,13 @@ include'dbfiles/org.php';
 
                                         
                                         <div class="table-header">
-                                      <?php echo $state; ?> To be raised Invoice List
+                                      <?php echo $stn; ?> To be raised Invoice List
                                         </div>
 
                                         <!-- div.table-responsive -->
 
                                         <!-- div.dataTables_borderWrap -->
-                                        <!-- <div class="col-sm-12"><a href="addapinvoice.php?state=<?php echo $state; ?>"><button class="btn btn-primary btn-xs">Add New Invoice </button></a></div> -->
+                                        <!-- <div class="col-sm-12"><a href="addapinvoice.php?state=<?php echo $stn; ?>"><button class="btn btn-primary btn-xs">Add New Invoice </button></a></div> -->
                                         <div>
                                             
                                         <div style="height:15px;"></div>
@@ -158,17 +120,11 @@ include'dbfiles/org.php';
                   <div class="col-sm-2"><b><a href="qut_apraise_excel.php?user=<?php echo $tsname ?>&state=<?php echo $state; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
                  <br/> <div class="col-sm-8"></div>
 
-                  <div class="col-sm-2"><b><a href="bulkinvoice_excel.php?user=<?php echo $tsname ?>&state=<?php echo $state; ?>" class="btn btn-primary btn-xs">Bulk Invoice download</a></b></div>
-				  <div class="col-sm-2"><b><a href="update_bulkinvoice.php?state=<?php echo $state; ?>" class="btn btn-primary btn-xs">Update Bulk Invoice</a></b></div>
+                  <!-- <div class="col-sm-2"><b><a href="bulkinvoice_excel.php?user=<?php echo $tsname ?>&state=<?php echo $stn; ?>" class="btn btn-primary btn-xs">Bulk Invoice download</a></b></div>
+				  <div class="col-sm-2"><b><a href="update_bulkinvoice.php?state=<?php echo $stn; ?>" class="btn btn-primary btn-xs">Update Bulk Invoice</a></b></div> -->
 
 				
-			<!--	   <div class="col-sm-3">
-                  
-               <button class="btn btn-info" type="submit" name="bsearch" id="bsearch">
-                                                <i class="ace-icon fa fa-search bigger-110"></i>
-                                                Search
-                                            </button>
-                  </div>-->
+			
 				</div>
 										
 										</form>
@@ -203,8 +159,9 @@ include'dbfiles/org.php';
                                                        <th>Total Amount</th>
                                                       <th>User</th>
                                                           <th>Edit</th>
-                                                           <th>Invoice PDF</th>
-                                                           <th>Tax Invoice</th>
+                                                          <th>Document Download</th>
+                                                           <!-- <th>Invoice PDF</th>
+                                                           <th>Tax Invoice</th> -->
 													
                                                       
                                                       
@@ -214,18 +171,15 @@ include'dbfiles/org.php';
                                                 <tbody>
 												
 												<?php 
-												$results_per_page = 30;
-										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
-                                        $start_from = ($page-1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="SELECT * FROM ".$qotbill." where status='payment pending'  and quet_num like  '%$bsearch%'  ";
+											 $y="SELECT * FROM qot_bill where status='payment pending'  and quet_num like  '%$bsearch%' limit 30 ";
 											} else {
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
-											         $y="SELECT * FROM ".$qotbill." where status='payment pending'  order by id asc  LIMIT $start_from,$results_per_page " ;
-											    }else{
-											         $y="SELECT * FROM ".$qotbill." where status='payment pending' and user='$tsadmin' order by id asc  LIMIT $start_from,".$results_per_page ;
-											    }
+													// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
+											         $y="SELECT * FROM qot_bill where status='payment pending' limit 30 " ;
+											    // }else{
+											    //      $y="SELECT * FROM qot_bill where status='payment pending' and user='$tsadmin' limit 30 " ;
+											    // }
 												
 											}
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -251,7 +205,7 @@ include'dbfiles/org.php';
                                                 }
 													
 													
-													$ssq=mysqli_query($link,"select * from ".$request_amnt." where quet_num='$q'");
+													$ssq=mysqli_query($link,"select * from request_amnt where quet_num='$q'");
 													
 													$rs2=mysqli_fetch_array($ssq);
                                                     ?>
@@ -266,9 +220,9 @@ include'dbfiles/org.php';
                                                         <td><?php echo $i+$start_from;  ?></td>
                                                        
                                                       <td><?php echo $st=$rs2['state']; $q=$rs1['quet_num'];
-													  if($st==$state){
-													  $ssq1=mysqli_query($link,"select * from ".$qottable." where quet_num='$q'");
-													  } 
+													  
+													  $ssq1=mysqli_query($link,"select * from add_qot where quet_num='$q'");
+													  
 													  $r1=mysqli_fetch_array($ssq1);
 													  $store_code=$r1['store_code'];
 													  
@@ -324,55 +278,28 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri')){ ?>
-                                                            <a href="edit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>&state=<?php echo $state; ?>">
-                                                        <img src="images/edit.png"></a>
-														<a href="apraise_delete.php?id=<?php echo $rs1['id'];?>&state=<?php echo $state; ?>">
+                                                             
+                                                            <a href="edit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>">
+                                                        <img src="images/edit.gif"></a>
+														<a href="apraise_delete.php?id=<?php echo $rs1['id'];?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                        
-                                                       <?php }else{?>
-                                                       <img src="images/edit.gif">
-                                                       <img src="images/Icon_Delete.png">
-                                                       <?php }?>
-                                                        
                                                         
                                                         
                                                         </td>
                                                         <td class="hidden-480">
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri')){ ?>
-                                                            <a href="generateinvoice.php?id=<?php echo $rs1['quet_num']; ?>&state=<?php echo $state; ?>">
-                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a>
-                                                          <?php }else{?>
-                                                       <img src="images/pdf_icon.gif">
-                                                       <?php }?>
+                                                            
+                                                            <a href="doc.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                             <a href="doc1.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file1']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="doc2.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file2']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+                                                       
                                                          </td>
-                                                         <td class="hidden-480">
-                                                              <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname==$state.'billing')or ($tsname=='sumanthpotluri')){ ?>
-                                                              <a href="generateexcel.php?id=<?php echo $rs1['quet_num']; ?>&state=<?php echo $state; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
-                                                                  <?php }else{?>
-                                                       <img src="images/xl.jpg">
-                                                       <?php }?>
-                                                          </td>
-													<!--	
-                                                      <td class="hidden-480"><a href="qotti_excel.php?id=<?php echo $rs1['quet_num']; ?>">
-                                                        <img src="images/xl.jpg" width="20" height="20"></a></td>
-													<td class="hidden-480"><a href="qotti_pdf.php?id=<?php echo $rs1['id']; ?>">
-                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a></td>
-													<td class="hidden-480"><a href="qotbrk_excel.php?id=<?php echo $rs1['id']; ?>">
-                                                          <img src="images/xl.jpg" width="20" height="20"></a></td>
-													   <td class="hidden-480"><a href="qotbrk_pdf.php?id=<?php echo $rs1['id']; ?>">
-                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a></td>
-														
-													-->
-														
+                                                        
                                                     </tr>
-												
-												
-												
-												
-												
-												
-												
 											<?php $i++; } ?>
 											 <tr>
                                                         <td colspan="12">Total</td>
@@ -387,34 +314,7 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                             </table>
 											</div>
 											<div align="center">		
-<?php 
-if($bsearch!=''){
-											
-											 $sql="SELECT count(1) as total FROM ".$qotbill." where status='payment pending'  and quet_num like  '%$bsearch%'  ";
-											} else {
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
-											         $sql="SELECT count(1) as total FROM ".$qotbill." where status='payment pending'    ";
-											    }else{
-											         $sql="SELECT count(1) as total FROM ".$qotbill." where status='payment pending' and user='$tsadmin'  ";
-											    }
-												
-											}
-$result = mysqli_query($link,$sql);
-$row = mysqli_fetch_assoc($result);
-$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
-  
 
-
-
-echo "<ul class='pagination'>";
-echo "<li><a href='bill_list2.php?state=$state&page=".($page-1)."' class='button'>Previous</a></li>"; 
-
-echo "<li><a>".$page."</a></li>";
-
-echo "<li><a href='bill_list2.php?state=$state&page=".($page+1)."' class='button'>NEXT</a></li>";
-echo "</ul>";
-
-?>
 												
 </div>
 											

@@ -5,7 +5,7 @@ include('dbconnection/connection.php');
 <?php
 $q=urldecode($_GET["q"]);
 
- $sql="SELECT *  FROM titems WHERE mdescription = '$q'";
+ $sql="SELECT *  FROM ritems WHERE mdescription = '$q'";
 echo 'hello';
 $result = mysqli_query($link,$sql);
 

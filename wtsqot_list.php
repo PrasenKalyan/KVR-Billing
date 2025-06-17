@@ -6,45 +6,7 @@ if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
-include('dbconnection/connection.php');
 $state=$_GET['state'];
-if($state=='AP'){
-	$qottable ='add_qot';
-	$qottable1 ='add_qot1';
-	$request_amnt ='request_amnt';
- 
-}
-elseif($state=='TG'){
-	$qottable ='add_tgqot';
-	$qottable1 ='add_tgqot1';
-	$request_amnt ='tgrequest_amnt';
- 
-}
- elseif($state=='TN'){
-  $qottable ='add_tnqot';
-  $qottable1 ='add_tnqot1';
-  $request_amnt ='tnrequest_amnt';
-
-}
-elseif($state=='KL'){
-	$qottable ='add_klqot';
-	$qottable1 ='add_klqot1';
-	$request_amnt ='klrequest_amnt';
-
-  
-}
-else if($state=='KN'){
-  $qottable ='add_knqot';
-  $qottable1 ='add_knqot1';
-  $request_amnt ='knrequest_amnt';
-
-
-}
-elseif($state=='OD'){
-  $qottable ='add_odqot';
-  $qottable1 ='add_odqot1';
-  $request_amnt ='odrequest_amnt';
-}
 //include('org1.php');
 $t=mysqli_query($link,"select * from usersamount where uname='$name'") or die(mysqli_error($link));
 $tid=mysqli_num_rows($t);
@@ -217,7 +179,7 @@ xmlhttp.send();
                   </div>
 				  <div class="col-sm-2"><b><a href="qut_apwts_excel.php?user=<?php echo $tsname; ?>&state=<?php echo $state; ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
 				    <div class="col-sm-1"><b>
-					 <a onclick="window.open('wtsqot_print.php?state=<?php echo $state; ?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')"
+					 <a onclick="window.open('qut_ap_print.php?state=<?php echo $state; ?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')"
 												   class="btn btn-primary btn-xs">
 					
 					
@@ -302,6 +264,7 @@ xmlhttp.send();
                                                     <th>User</th>
                                                         
 													 <th>Edit</th>
+                                                     <th>Work Status</th>
 													 <!-- <th>Email</th> -->
 														     <th>Print</th>
 														     <!--<th>Quotation</th>
@@ -325,45 +288,122 @@ xmlhttp.send();
                                                         <th></th>
                                                         
                                                         <th>
-                                                            <div  style="width:100%">
-  <span style="width:20%" onclick="populatefilters('store_code26')" class=reload>&#x21bb;</span>
+                                                            <!-- <div  style="width:100%">
+                                                            <span style="width:20%" onclick="populatefilters('store_code26')" class=reload>&#x21bb;</span>
                                                             <input style="width:80%"  id=\"store_code\" list="store_code26" name="store_code" class="form-control" placeholder="Store Code" ></div>
 <datalist id="store_code26" >
 </datalist>
-</th>
- <th >
+</th> -->
+
+                                            <th><input id=\"store_code\" list=\"city23\" name="store_code" class="form-control" placeholder="Store Code" >
+                                            <datalist id=\"store_code26\" >
+
+<?php  
+$sql="SELECT distinct store_code FROM add_qot";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[store_code]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?></datalist></th>
+
+
+
+
+ <!-- <th >
                                                             <div  style="width:100%">
   <span style="width:20%" onclick="populatefilters('store_name26')" class=reload>&#x21bb;</span><input style="width:80%"  id=\"store_name\" list=store_name26 name="store_name" class="form-control" placeholder="Store Name">
-</div>
+</div> -->
+<th><input id=\"store_name\" list=\"city24\" name="store_name" class="form-control" placeholder="Store Name" >
+<datalist id=\"store_name26\" >
                                                             
-<datalist id="store_name26" >
+ 
+<?php  
+$sql="SELECT distinct a.store_name FROM add_qot b,dpr a where b.store_code=a.store_code";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[store_name]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?>
 </datalist>
 </th>
 														
 														
-     <th >
+     <!-- <th >
                                                             <div  style="width:100%">
   <span style="width:20%" onclick="populatefilters('coordinator26')" class=reload>&#x21bb;</span><input style="width:80%"  id=\"coordinator\" list="coordinator26" name="coordinator" class="form-control" placeholder="Coordinator Name" >
-</div>
+</div> -->
+
+<th><input id=\"coordinator\" list=\"city25\" name="coordinator" class="form-control" placeholder="Coordinator Name" >
+<datalist id=\"coordinator26\" >
                                                             
-<datalist id="coordinator26" >
+<?php  
+$sql="SELECT distinct a.coordinator FROM add_qot b,dpr a where b.store_code=a.store_code";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[coordinator]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?>
 </datalist>
 </th>
-           <th>                                                 <div  style="width:100%">
-  <span style="width:20%" onclick="populatefilters('superwisor26')" class=reload>&#x21bb;</span><input style="width:80%" id=\"superwisor\" list="superwisor26" name="superwisor" class="form-control" placeholder="superwisor Name" >
-</div>
+<th><input id=\"superwisor\" list=\"city26\" name="superwisor" class="form-control" placeholder="superwisor Name" >
+<datalist id=\"superwisor26\" >
                                                             
-<datalist id="superwisor26" >
+<?php  
+$sql="SELECT distinct a.superwisor FROM add_qot b,dpr a where b.store_code=a.store_code";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[superwisor]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?>
 </datalist>
 </th>
-                                                        <th >
+                                                        <!-- <th >
                                                             <div  style="width:100%">
   <span style="width:20%" onclick="populatefilters('city27')" class=reload>&#x21bb;</span><input style="width:80%"  id=\"city\" list="city27" name="city" class="form-control" placeholder="City Name" >
-</div>
+</div> -->
+
+<th><input id=\"city\" list=\"city27\" name="city" class="form-control" placeholder="City Name" >
+<datalist id=\"city27\" >
                                                             
-<datalist id="city27" >
+<?php  
+$sql="SELECT distinct a.city FROM add_qot b,dpr a where b.store_code=a.store_code";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[city]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?>
 </datalist>
 </th>
+
+<th></th>
+														<th><input id=\"status\" list=\"city28\" name="status" class="form-control" placeholder="Status" >
+<datalist id=\"city28\" >
+
+<?php  
+$sql="SELECT distinct status FROM add_qot ";
+  // Query to collect records
+$r=mysqli_query($link,$sql) or die(mysqli_error());
+while ($row=mysqli_fetch_array($r)) {
+echo  "<option value=\"$row[status]\"/>"; // Format for adding options 
+}
+////  End of data collection from table /// 
+
+echo "</datalist>";?></datalist></th>
 														  <th></th>
 														
    <th><input  type="submit" value="Submit" name="submitkk" class="btn btn-primary" ></th>
@@ -384,17 +424,16 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
                                                 <tbody>
 												
 												<?php 
-											include('dbconnection/connection.php');
-										$datatable=$qottable;
+											
+										$datatable="add_qot";
 										$results_per_page = 30;
 										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
                                         $start_from = ($page-1) * $results_per_page;
 												if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
 											// $y="select a.store_name,a.city,b.quet_num,b.store_code,b.inv_date,b.id
-											 //from ".$qottable." b,dpr a where a.store_code=b.store_code order by b.id desc ";
-										// $y="select * from ".$qottable." where quet_num like '%$bsearch%' or falt_no like '%$bsearch%'  or status like '%$bsearch%'order by id desc";
-										$y="select * from ".$qottable." where (quet_num like '%$bsearch%' or falt_no like '%$bsearch%')  and  status='work to be started' order by id desc";
+											 //from add_qot b,dpr a where a.store_code=b.store_code order by b.id desc ";
+										 $y="select * from add_qot where quet_num like '%$bsearch%' or falt_no like '%$bsearch%'  or status like '%$bsearch%'order by id desc";
 												} else
 												if(isset($_POST['submitkk'])){
 												//$qot_nun=$_POST['qot_nun'];
@@ -404,13 +443,13 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
 												$superwisor=$_POST['superwisor'];
 												$city=$_POST['city'];	
 												$status=$_POST['status'];
-												/*echo $y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from ".$qottable." a,dpr b where a.quet_num='$qot_nun'
+												/*echo $y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from add_qot a,dpr b where a.quet_num='$qot_nun'
 												 or b.store_code='$store_code' or b.store_name='$store_name' or b.coordinator='$coordinator'
 												 or b.superwisor='$superwisor' or b.city='$city' or a.status='$status'
 
 												 order by id desc";*/
 												
-											$y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from ".$qottable." a,dpr b where
+											$y="select  a.quet_num,a.store_code,a.inv_date,a.status,a.id from add_qot a,dpr b where
 											(('$store_code' <> ' ' and locate('$store_code', a.store_code) <> 0) or ('$store_code' = ' '  and 1 = 1) ) and
 											(('$store_name' <> ' ' and locate('$store_name', b.store_name) <> 0) or ('$store_name' = ' '  and 1 = 1) ) and
 											(('$coordinator' <> ' ' and locate('$coordinator', b.coordinator) <> 0) or ('$coordinator' = ' '  and 1 = 1) ) and
@@ -421,25 +460,25 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
 												
 												else {
 													
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='apbilling') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')){
+													// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='sumanthpotluri')or ($tsname=='billing') or ($tsname=='naiduys') ){
 													 $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page; 
-												//	 $y10="SELECT  sum(approve_amnt) as amnt FROM ".$request_amnt." where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
-													}else{
-													    $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												      //  $y10="SELECT  sum(approve_amnt) as amnt FROM ".$request_amnt." where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
+												//	 $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
+													// }else{
+													//     $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+												      //  $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
 												
-													}
+													// }
 													
 													 
 												}
 										        
 										        
-										        if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='apbilling') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys')){
+										        if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='apbilling')){
 													// $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page; 
-													 $y10="SELECT  sum(approve_amnt) as amnt FROM ".$request_amnt." where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
+													 $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes' and   bill_status='' or docr_status='Cancel'  ";
 													}else{
 													 //   $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												        $y10="SELECT  sum(approve_amnt) as amnt FROM ".$request_amnt." where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
+												        $y10="SELECT  sum(approve_amnt) as amnt FROM `request_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
 												
 													}
                                                       $y11=mysqli_query($link,$y10) or die(mysqli_error($link));
@@ -456,17 +495,17 @@ style="width:16px; font-size:8px; height:16px; background-image:url(images/Filte
 									          
 											while($rs1=mysqli_fetch_array($t)){
 												$ses=$rs1['ses'];
-												$nextmonthdate = date('Y-m-d', strtotime('+1 month', strtotime($rs1['ro_date'])));
+												$rodate=date_create($rs1['ro_date']);
+												$tdate=date_create(date('Y-m-d'));
+												$diff=date_diff($rodate,$tdate);
+                                                $df=$diff->format("%a");
+                                                 $nextmonthdate = date('Y-m-d', strtotime('+1 month', strtotime($rs1['ro_date'])));
 												$nextmonthdate = explode('-', $nextmonthdate);
 $year = $nextmonthdate[0];
 $month   = $nextmonthdate[1];
 $day  = '06';
 $nextmonthdate=$year.'-'.$month.'-'.$day;
 $currentDateTime = date('Y-m-d');
-												$rodate=date_create($rs1['ro_date']);
-												$tdate=date_create(date('Y-m-d'));
-												$diff=date_diff($rodate,$tdate);
-                                                $df=$diff->format("%a");
                                                 if($df > 7 || ($currentDateTime>$nextmonthdate)){
                                                     $color="red";
                                                     $c1="#fff";
@@ -487,9 +526,9 @@ $currentDateTime = date('Y-m-d');
                                                       
                                                           <td class="hidden-480"><?php echo $rs1['quet_num']; ?></td>
                                                         <td class="hidden-480"><?php echo $store_code=$rs1['store_code'];
-														include('dbconnection/connection1.php');
-$ssq1=mysqli_query($link,"select * from dpr where store_code='$store_code'");
-$r1=mysqli_fetch_array($ssq1);
+														// include('dbconnection/connection1.php');
+                                                        $ssq1=mysqli_query($link,"select * from dpr where store_code='$store_code'");
+                                                        $r1=mysqli_fetch_array($ssq1);
 
 														?></td>
                                                        
@@ -528,25 +567,13 @@ $r1=mysqli_fetch_array($ssq1);
                                                       
                                                       
                                                     <td class="hidden-480">
-                                                        <?php 	if(($tsname=='admin') or ($tsname=='durgarao')or ($tsname=='apbilling')or ($tsname=='sumanthpotluri')){ ?>
-                                                        <a href="wtsedit_qot.php?state=<?php echo $state; ?>&id=<?php echo $rs1['id']; ?>">
+                                                        
+                                                        <a href="wtsedit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                                    <?php    }else{
-                                                    if($tsname==$ses){
-                                                        
-                                                        if($yamt > $tdamt){ ?>
-                                                        <img src="images/edit.gif"> 
-                                                        <?php  }else{ ?>
-                                                        
-                                                        <a href="wtsedit_qot.php?state=<?php echo $state; ?>id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                                        
-                                                        <?php }
-                                                        
-                                                    }
+                                                        <a href="workstatus4.php?id=<?php echo $rs1['quet_num']; ?>" onclick="return confirm('Are you sure you want to cancel this Quotation?')"> 
+                                                        <span class="glyphicon glyphicon-remove btn-lg"></span></a>
                                                     
                                                     
-                                                     }?>
                                                         
                                                         
                                                         
@@ -554,6 +581,8 @@ $r1=mysqli_fetch_array($ssq1);
 														<!-- <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="qotpdfcheck.php?id=<?php echo $rs1['id'];?>&name1=<?php echo $r1['coordinator'];?>&name2=<?php echo $r1['superwisor'];?>"
 												   class="">
                                                         <img src="images/email.png" width="20" height="20"></a></td> -->
+
+                                                        <td class="hidden-480"><?php echo $rs1['wd']; ?></td>
 														 <td class="hidden-480">
 														 
                                                    <a onclick="window.open('qut_print.php?state=<?php echo $state; ?>&id=<?php echo $rs1['id'];?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')"

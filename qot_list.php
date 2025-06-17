@@ -5,6 +5,7 @@ if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
+$stn="AP";
 include('dbconnection/connection.php');
 //include('org1.php');
 //$y=mysqli_query($link,"select * from employee where emp_name='$name'");
@@ -146,7 +147,7 @@ xmlhttp.send();
 									<!--<a href="addbill.php"><button type="button" class="btn-success btn-sm ">Add New</button></a>-->
                                        
                                         <div class="table-header">
-                                        <center><b>QUOTATIONS LIST</b></center>
+                                          AP Quotation List 
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -256,10 +257,11 @@ xmlhttp.send();
 														   <th>User</th>
                                                      		 <th>Edit</th>
         													  <?php if(($tsname!="admin")  ){}else{ ?>
-        													  <th>RONo Edit</th>
+        													  <!-- <th>RONo Edit</th> -->
         													  <?php }?>
-													         <th>Email</th>
-														     <th>Print</th> <th>Quotation</th>
+													         <!-- <th>Email</th> -->
+														     <th>Print</th>
+                                                              <th>Quotation</th>
 															 <th>Bill of Supply</th><th>Miscllenious</th>
 														     <th>Pdf Download</th>
                                                         
@@ -480,43 +482,25 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         
                                                         
-                                                        <?php 
-                                                
-                                                if($tsname=='admin'){ ?>
+                                                        
                                                         <a href="edit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                           <?php     }else{
-                                               echo $user;
-                                               echo $tsname;
-                                               if($tsname==$user){ ?>
-                                                   <a href="edit_qot.php?id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                              <?php  }else{ ?>
-                                               
-                                                        <img src="images/edit.gif">
-                                          <?php }
-                                           }
-                                                ?>        
+                                           
+                                                   
+                                                     
                                                 
                                                         
                                                         
                                                         </td>
                                                         <?php if(($tsname!="admin")){}else{ ?>
-                                                        <td> 
-                                                        
-                                                                
+                                                        <!-- <td>        
                                                         <a href="editrono_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                            
-                                               
-                                                        
-                                                        
-                                                        
-                                                        </td>
+                                                        </td> -->
                                                         <?php }?>
-														 <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="apemail.php?id=<?php echo $rs1['id'];?>"
+														 <!-- <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="apemail.php?id=<?php echo $rs1['id'];?>"
 												   class="">
-                                                        <img src="images/email.png" width="20" height="20"></a></td>
+                                                        <img src="images/email.png" width="20" height="20"></a></td> -->
 														
 														 <td class="hidden-480">
 														 

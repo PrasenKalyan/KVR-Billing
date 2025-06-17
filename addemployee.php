@@ -366,8 +366,8 @@ xmlhttp.send();
 											<tr>
 											    <td align="right">Name of Employee </td>
 											    <td><input  type="text"    class="form-control" value="" required name="empname" id="empname"></td>
-											    <td align="right">DOB</td>
-											     <td><input type="date" value="<?php echo date('Y-m-d');?>"  required name="dob" id="dob" class="form-control"></td>
+											    <!-- <td align="right">DOB</td>
+											     <td><input type="date" value="<?php echo date('Y-m-d');?>"  required name="dob" id="dob" class="form-control"></td> -->
 											</tr>
 											  <tr><td align="right">Gender</td><td align="left">
 											
@@ -378,13 +378,13 @@ xmlhttp.send();
 											</td>
 											
 											  
-                                        <td align="right">Marital Status</td>
+                                        <!-- <td align="right">Marital Status</td>
 										<td>
 										<input type="radio" id="married" name="marstatus" value="married">
   <label for="married">Married</label>
   <input type="radio" id="unmarried" name="marstatus" value="unmarried">
   <label for="unmarried">unmarried</label>
-										</td>
+										</td> -->
                                         </tr>
 											
                                         <tr>
@@ -393,44 +393,45 @@ xmlhttp.send();
 											<input  type="number" value="" class="form-control" name="conno" id="conno"></td>
                                       
 											
-											<td align="right">Alternate Contact No. </td><td align="left">
+											<!-- <td align="right">Alternate Contact No. </td><td align="left">
 											<input type="number" class="form-control"  value="" id="aconno" name="aconno">
 											
-											</td>
+											</td> -->
                                         </tr>
                                         
                                         <tr>
-                                            <td align="right">Aadhaar No</td><td align="left">
-										    <input type="number" value=""  class="form-control" name="adhar" id="adhar"></td>
+                                            <!-- <td align="right">Aadhaar No</td><td align="left">
+										    <input type="number" value=""  class="form-control" name="adhar" id="adhar"></td> -->
 										 
-                                            <td align="right">Address</td><td align="left">
-										    <textarea  required name="address" id="address" class="form-control"></textarea></td>
+                                            <!-- <td align="right">Address</td><td align="left">
+										    <textarea  required name="address" id="address" class="form-control"></textarea></td> -->
                                         </tr>
                                         
 										
 										 <tr>
-                                            <td align="right">City</td><td align="left">
-										    <input  type="text" value=""  class="form-control" name="city" id="city"></td>
+                                            
                                             <td align="right">State</td><td>
 										    <input type="text" required name="state" id="state" class="form-control"></td>
+                                            <td align="right">City</td><td align="left">
+										    <input  type="text" value=""  class="form-control" name="city" id="city"></td>
                                         </tr>
 										
 										
-										 <tr>
+										 <!-- <tr>
                                             <td align="right">Qualification</td><td align="left">
 										    <input type="text" required name="qua" id="qua" class="form-control"></td>
                                             <td align="right">Experience</td><td>
 										    <input type="text" required name="exp" id="exp" class="form-control"></td>
-                                        </tr>
+                                        </tr> -->
 										
-                                         <tr>
+                                         <!-- <tr>
                                             <td align="right">DOJ</td><td align="left">
 										    <input type="date" value="<?php echo date('Y-m-d');?>"  required name="doj" id="doj" class="form-control"></td>
                                             <td align="right"> Designation</td><td>
 										    <input type="text" name="des" id="des" required class="form-control"></td>
-                                        </tr>
+                                        </tr> -->
 										
-										<tr>
+										<!-- <tr>
                                             <td align="right">ESI No.</td><td align="left">
 										    <input type="text" required name="esi" id="esi" class="form-control"></td>
                                             <td align="right">PF No.</td><td>
@@ -438,10 +439,10 @@ xmlhttp.send();
                                         </tr>
 										
                                         <tr><td align="right">Photo</td><td align="left">
-										<input type="file"   name="$fileName15" id="img1" class="form-control"/></td>
+										<input type="file"   name="$fileName15" id="img1" class="form-control"/></td>-->
                                         <td align="right">Email Id</td><td>
 										<input type="text" required name="email" id="email" class="form-control"></td>
-                                        </tr>
+                                        </tr> 
 
 										  <tr><td align="right">User Name</td><td align="left">
 										<input type="text" class="form-control" required  id="uname" name="uname" placeholder="Enter User Name">
@@ -450,12 +451,12 @@ xmlhttp.send();
 									    <input type="password" class="form-control" required id="pwd" name="pwd" placeholder="Enter Password">
 									</td>
                                         </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td></td>
                                         <td></td>
                                         <td align="right">Store Code</td><td align="left">
 										<textarea  required name="strcd" id="strcd" class="form-control"  rows="1.5" cols="20"></textarea></td>
-                                    </tr> 
+                                    </tr>  -->
                                     
                                           
                                         
@@ -539,7 +540,7 @@ Overflow-y:scroll;">
                                                         <th>Emp ID</th>
                                                         <th>Employee Name</th>
                                                        <th>Email</th>
-                                                       <th>Store Code</th>
+                                                       <!-- <th>Store Code</th> -->
                                                        <th>User Name</th>
                                                        <th>Password</th>
                                                        <th>Action</th>
@@ -572,7 +573,7 @@ Overflow-y:scroll;">
                                                         <td class="hidden-480"><?php echo $rs1['empid']; ?></td>
                                                         <td class="hidden-480"><?php echo $rs1['emp_name']; ?></td>
 														 <td class="hidden-480"><?php echo $rs1['emp_email']; ?></td>
-                                                         <td class="hidden-480"><?php echo $rs1['strcd']; ?></td>
+                                                         <!-- <td class="hidden-480"><?php echo $rs1['strcd']; ?></td> -->
                                                          <td class="hidden-480"><?php echo $rs1['username']; ?></td>
                                                          <td class="hidden-480"><?php echo $rs1['password']; ?></td>
                                                        

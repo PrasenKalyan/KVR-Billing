@@ -1,7 +1,7 @@
 <?php //include('config.php');
 session_start();
 $stn="KL";
-//include('dbconnection/connection.php');
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -70,7 +70,7 @@ $tsname=$_SESSION['user'];
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#">KL Approved Amount List</a>
+                                <a href="#">KL Request Amount List</a>
                             </li>
                           
                             <!--<li class="active">Blank Page</li>-->
@@ -91,7 +91,7 @@ $tsname=$_SESSION['user'];
 
                                         
                                         <div class="table-header">
-                                       KL Approved Amount List
+                                       KL Request Amount List
                                         </div>
 
                                         <!-- div.table-responsive -->
@@ -206,11 +206,11 @@ $tsname=$_SESSION['user'];
 													
 													//$y="select * from klrequest_amnt where  confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												
-												    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')){
+												    
 													$y="select * from klrequest_amnt where  confirm='Yes' and status=''  order by id desc";    
-													}else{
-													    $y="select * from klrequest_amnt where  confirm='Yes' and status=''  and user='$tsname'  order by id desc";
-													}
+													
+													    // $y="select * from klrequest_amnt where  confirm='Yes' and status=''  and user='$tsname'  order by id desc";
+													
 													
 												    
 												    
@@ -271,7 +271,7 @@ $tsname=$_SESSION['user'];
 												  
 												  <?php $ree= $rs1['req_amnt']; ?>
 												  
-											
+												   
 												    <td class="hidden-480"><?php echo $rs1['req_amnt']+$rs1['gstamt'];
 												     $reqam=$reqam+$rs1['req_amnt']+$rs1['gstamt'];
 												    ?></td>
@@ -280,8 +280,8 @@ $tsname=$_SESSION['user'];
 												  <td class="hidden-480"><?php echo $r1['bal']; 
 												    $bala=$bala+$r1['bal'];
 												  ?></td>
-												  <td class="hidden-480"><?php echo $rs1['gsttype'];  ?></td>
-												 <td class="hidden-480"><?php 
+												  <td class="hidden-480"><?php echo $r1['gsttype'];  ?></td>
+												  <td class="hidden-480"><?php 
 												  
 												     echo $rs1['gstamt'];
                                                         
@@ -291,9 +291,8 @@ $tsname=$_SESSION['user'];
 												     $adamt="select sum(approve_amnt) as req_amnt from klrequest_amnt where quet_num='$qtno'and  status='Amount Transferred' and   confirm='Yes'" ;
 												      $ads=mysqli_query($link,$adamt) or die(mysqli_error($link));
 												      $ads1=mysqli_fetch_array($ads);
-												     echo $adsd=$ads1['req_amnt'];
+												      echo $adsd=$ads1['req_amnt'];
 												      $ada=$ada+$adsd;
-												      echo $r1['approve_amt'];
 												      ?>
 												      
 												  </td>
@@ -337,14 +336,13 @@ $tsname=$_SESSION['user'];
                                                        
                                                       
                                                     <td class="hidden-480">
-                                                    <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='sumanthpotluri')){ ?>  
+                                                     
                                                     <a href="kledit_request1.php?id=<?php echo $rs1['id'] ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{ ?>
-                                                        <img src="images/edit.gif">
                                                         
-                                                        <?php }?>
+                                                        
+                                                       
                                                         
                                                         
                                                         </td>
@@ -373,7 +371,7 @@ $tsname=$_SESSION['user'];
                                                     <th>Amount</th>
                                                 </tr>
                                                 <?php 
-                                            if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')){
+                                            if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='sumanthpotluri')){
 											    	$y="select distinct ac_det from klrequest_amnt where confirm='Yes' and status='' ";
 											}else{
 											    	$y="select distinct ac_det from klrequest_amnt where  user='$tsname' and  confirm='Yes' and status='' ";

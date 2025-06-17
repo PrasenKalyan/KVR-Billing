@@ -1,6 +1,6 @@
 <?php //include('config.php');
 session_start();
-//include('dbconnection/connection.php');
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
@@ -197,11 +197,11 @@ $tsname=$_SESSION['user'];
 													
 												//	$y="select * from odrequest_amnt where  confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												
-												    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='odbilling') or ($tsname=='sumanthpotluri')  or ($tsname=='JFMOD22232823')){
+												    
 													$y="select * from odrequest_amnt where  confirm='Yes' and status!='Amount Transferred'  order by id desc";    
-													}else{
-													    $y="select * from odrequest_amnt where  confirm='Yes' and status!='Amount Transferred' and user='$tsname'  order by id desc";
-													}
+													// }else{
+													//     $y="select * from odrequest_amnt where  confirm='Yes' and status!='Amount Transferred' and user='$tsname'  order by id desc";
+													// }
 													
 												    
 												    
@@ -339,15 +339,12 @@ $tsname=$_SESSION['user'];
                                                       
                                                     <td class="hidden-480">
                                                     
-                                                   <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri')){ ?>  
+                                                     
                                                     
                                                     <a href="odedit_request1.php?id=<?php echo $rs1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
                                                         
-                                                        <?php }?>
                                                     
                                                         
                                                         

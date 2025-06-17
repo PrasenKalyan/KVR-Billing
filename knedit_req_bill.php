@@ -288,8 +288,18 @@ xmlhttp.send();
 										
 										</td>
                                         </tr>
-                                        <tr><td align="right">Upload File</td><td align="left">
+                                        <tr><td align="right">Upload File1</td><td align="left">
 									<input type="file" name="ufile" id="ufile" class="form-control"/>
+										
+										</td>
+                                        </tr>
+										<tr><td align="right">Upload File2</td><td align="left">
+									<input type="file" name="ufile1" id="ufile1" class="form-control"/>
+										
+										</td>
+                                        </tr>
+										<tr><td align="right">Upload File3</td><td align="left">
+									<input type="file" name="ufile2" id="ufile2" class="form-control"/>
 										
 										</td>
                                         </tr>
@@ -337,10 +347,40 @@ xmlhttp.send();
                                         	$iname1 = ($iname1);
                                         	}else{
                                         	 $iname1 = ($img1);
-                                        	}		
+                                        	}
+											$iname = $_FILES['ufile1']['name'];
+                                        			 if($iname!= ""){
+                                        	$code = md5(rand());
+                                        	 $iname =$code. $_FILES['ufile1']['name'];
+                                        	$tmp = $_FILES['ufile1']['tmp_name'];
+                                        	 $dir = "upload";
+                                        		       $destination =  $dir . '/' . $iname;
+                                        		         move_uploaded_file($tmp, $destination);
+                                        	 $iname2 =$code. $_FILES['ufile1']['name'];
+                                        	$iname2 = ($iname2);
+											
+                                        	}else{
+                                        	 $iname2 = ($img2);
+                                        	}
+											$iname = $_FILES['ufile2']['name'];
+                                        			 if($iname!= ""){
+                                        	$code = md5(rand());
+                                        	 $iname =$code. $_FILES['ufile2']['name'];
+                                        	$tmp = $_FILES['ufile2']['tmp_name'];
+                                        	 $dir = "upload";
+                                        		       $destination =  $dir . '/' . $iname;
+                                        		         move_uploaded_file($tmp, $destination);
+                                        	 $iname3 =$code. $_FILES['ufile2']['name'];
+                                        	$iname3 = ($iname3);
+											
+                                        	}else{
+                                        	 $iname3 = ($img3);
+                                        	}
+											
+
 												if(($req=="") or ($req=="No")){
 
-												$sq=mysqli_query($link,"update  knrequest_amnt set bill_status='payment pending',req='$req',note='$note',docr_status='' where quet_num='$qt_no'");
+												$sq=mysqli_query($link,"update  knrequest_amnt set bill_status='payment pending',req='$req',note='$note',not_file='$iname1',not_file1='$iname2',not_file2='$iname3',docr_status='' where quet_num='$qt_no'");
 												$k2=mysqli_query($link,"select * from knqot_bill where quet_num='$qt_no'") or die(mysqli_error($link));
 									            if(mysqli_num_rows($k2)==0)
 									            {
@@ -352,7 +392,7 @@ xmlhttp.send();
 												$s=mysqli_query($link,"update add_knqot set
 												bill_rec_date='$bill_date',invoice_no='$inv_no',invoice_date='$inv_date',inv_sub_date='$inv_sub_date',invoice_status='$st',status='To Be Raise Invoice' where quet_num='$qt_no'");
 												}else{
-												    	$sq=mysqli_query($link,"update  knrequest_amnt set bill_status='payment pending',req='$req',note='$note',docr_status='',not_file='$iname1' where quet_num='$qt_no'");
+												    	$sq=mysqli_query($link,"update  knrequest_amnt set bill_status='payment pending',req='$req',note='$note',docr_status='',not_file='$iname1',not_file1='$iname2',not_file2='$iname3' where quet_num='$qt_no'");
 											//	$sq=mysqli_query($link,"insert into tnqot_bill (quet_num,bill_date,inv_num,inv_date,note,inv_sub_date,status,state,user)
 											//	values('$qt_no','$bill_date','$inv_no','$inv_date','$note','$inv_sub_date','payment pending','$state','$name')");
 										

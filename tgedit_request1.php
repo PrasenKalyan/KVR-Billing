@@ -225,13 +225,13 @@ xmlhttp.send();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"> Ts Request Amount </a>
+                                <a href="#"> TG Amount Approved List </a>
                             </li>
                             <li>
-                                <a href="qot_list.php">Ts Request Amount List</a>
+                                <a href="qot_list.php">TG Amount Approved List</a>
                             </li>
                             <li>
-                                <a href="">Edit Request Amount</a>
+                                <a href="">Edit Amount Approved</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -243,7 +243,7 @@ xmlhttp.send();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                Edit Request Amount
+                                Edit Amount Approved
 
                             </h1>
                         </div>
@@ -351,7 +351,7 @@ foreach($array as $value)
 										</td>	
                                         <td align="right">Remarks</td><td align="left">
 										<input type="text" name="remarks1" 
-										id="remarks1" readonly  class="form-control"  value="<?php echo $r['remarks'];?>">
+										id="remarks1" class="form-control"  value="<?php echo $r['remarks'];?>">
 										
 										</td>	
                                         </tr>
@@ -364,11 +364,11 @@ foreach($array as $value)
                                         </tr>
 										
 									<?php $idd=$r1['id'];?>
-										<tr><td align="right" colspan="2">Qutation Print(Click Print Button to view Qutation Print)   <?php if($state=='AP'){ ?>
+										<tr><td align="right" colspan="2">Quotation Print(Click Print Button to view Quotation Print)   <?php if($state=='AP'){ ?>
 										<a onclick="window.open('tgqut_print.php?id=<?php echo $idd;?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" class="btn btn-primary btn-xs">
 										<img src="images/printer.png"></a>
 										<?php } else { ?>
-										<a onclick="window.open('tgqut_print1.php?id=<?php echo $idd;?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" class="btn btn-primary btn-xs">
+										<a onclick="window.open('tgqut_print.php?id=<?php echo $idd;?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')" class="btn btn-primary btn-xs">
 										<img src="images/printer.png">
 										
 										<?php }											?></td><td align="left">

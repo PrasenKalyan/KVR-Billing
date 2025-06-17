@@ -105,21 +105,21 @@ $objPHPExcel->getActiveSheet()->getStyle("A6:S6")->getFill()->setFillType(PHPExc
         $objPHPExcel->getActiveSheet()->getColumnDimension('R')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('S')->setWidth(22);
 $objPHPExcel->getActiveSheet()->getStyle("A6:S6")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$result			=	$db->query($y) or die(mysql_error());
+$result			=	$db->query($y) or die(mysqli_close($link));
 $i=1;
 $rowCount	=	7;
 while($row	=	$result->fetch_assoc()){
     $q=$row['quet_num'];
    $k= "select * from ".$request_amnt." where quet_num='$q'";
-   $result1	=$db->query($k) or die(mysql_error());
+   $result1	=$db->query($k) or die(mysqli_close($link));
    $row1	=	$result1->fetch_assoc();
    $qtno=$row1['quet_num'];
   $u= "select * from ".$qottable." where quet_num='$qtno'";
-  $result2	=$db->query($u) or die(mysql_error());
+  $result2	=$db->query($u) or die(mysqli_close($link));
    $row2=$result2->fetch_assoc();
    $store_code=$row2['store_code'];
    $ds="select * from dpr where store_code='$store_code'";
-	$result10=$db->query($ds) or die(mysql_error());
+	$result10=$db->query($ds) or die(mysqli_close($link));
 	$row10=$result10->fetch_assoc();
 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, mb_strtoupper($i,'UTF-8'));
 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, mb_strtoupper($row1['state'],'UTF-8'));

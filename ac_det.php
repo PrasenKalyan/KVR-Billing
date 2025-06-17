@@ -241,7 +241,7 @@ include'dbfiles/iqry_ac_det.php';
 													} else {
 														  $q="select * from ac_det ";
 													}
-                                                    $rs= mysqli_query($link, $q) or die(mysqli_error());
+                                                    $rs= mysqli_query($link, $q) or die(mysqli_close($link));
                                                     $i=1;
                                                     while($rs1= mysqli_fetch_array($rs)){
                                                     

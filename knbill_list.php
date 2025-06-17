@@ -123,6 +123,7 @@ include'dbfiles/org.php';
 				</div>
 										
 										</form>
+                                        
                                   
                                         <div style="overflow-x:auto;">
                                             <table id="myTable" class="table table-striped table-bordered table-hover">
@@ -152,10 +153,10 @@ include'dbfiles/org.php';
                                                         <th>Tot Gst</th>
                                                         <th>Total</th>
 														<th>Whom To be Invest</th>
-													    <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+													    
 
 													    <th>Transfer Amount</th>
-													    <?php } ?>
+													    
                                                         <th>Amount Transferred Date</th>
                                                         <th>Ageing</th>
                                                         <th>user</th>
@@ -169,27 +170,29 @@ include'dbfiles/org.php';
                                                 <tbody>
 												
 												<?php 
+
+                                                
+										$results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
+                                                
+                                        
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="SELECT distinct quet_num,user FROM `knrequest_amnt` where  (status='Amount Transferred'  and bill_status=''   or docr_status='Cancel') and   quet_num like  '%$bsearch%' limit 30
-											 
-											  ";
+											 $y="SELECT distinct quet_num,state,transfer_date,user FROM `knrequest_amnt` where status='Amount Transferred'  and bill_status='' and quet_num like  '%$bsearch%' ORDER BY id desc";
 											} else {
-											    
-											    
-											    
-													  //$y="SELECT distinct quet_num,state,transfer_date FROM `klrequest_amnt` where  status='Amount Transferred' and bill_status=''     ";
+                                                
+									
+										// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')or ($tsname=='naiduys')){
+											         $y="SELECT distinct quet_num,user FROM `knrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel' order by id desc LIMIT $start_from, ".$results_per_page ;
+											    // }else{
+											    //      $y="SELECT distinct quet_num,user FROM `knrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel' ORDER BY id desc LIMIT $start_from, ".$results_per_page ;
+											    // }
 										
+                                            }
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')or ($tsname=='naiduys')){
-											         $y="SELECT distinct quet_num,user FROM `knrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel' limit 30    ";
-											    }else{
-											         $y="SELECT distinct quet_num,user FROM `knrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel' limit 30 ";
-											    }
-										
-										
-										
-											}
+											
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
 											$i=1;
 												$ro=0;
@@ -280,7 +283,7 @@ include'dbfiles/org.php';
 														   ?>
 														  
 														  </td>
-														 <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+														 
  <td class="hidden-480"><?php 
                                                         
                                                         $a="select sum(approve_amnt) as req_amnt from knrequest_amnt where quet_num='$qtno' and  confirm='Yes' ";
@@ -294,7 +297,7 @@ include'dbfiles/org.php';
                                                         echo $req_amnt; ?></td>
                                            
 													    
-													    <?php } ?>  
+													     
                                                        
                                                         
                                                        
@@ -337,20 +340,19 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao')or ($tsname=='sumanthpotluri')or ($tsname=='knbilling') ){ ?>
+                                                             
                                                             
                                                             <a href="knedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
+                                                        
+                                                        
+                                                         
                                                         <a href="knwtsedit1_qot.php?id=<?php echo $qtno; ?>">
                                                         <span class="glyphicon glyphicon-plus-sign btn-lg"></span></a>
-                                                       <?php }else{ ?>
+                                                       
                                                          <!--<span class="glyphicon glyphicon-plus-sign btn-lg"></span>-->
-                                                    <?php    } ?>
+                                                    
                                                         </td>
 														
 														
@@ -359,14 +361,12 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                                        
 														<td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
+														    
                                                             
                                                             <a href="knedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
+                                                        
 
 														    
 														</td>
@@ -399,7 +399,26 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                                 </tbody>
                                             </table>
 										</div>
-											
+											<div align="center">		
+<?php 
+$sql = "SELECT COUNT(id) AS total FROM knrequest_amnt";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_assoc($result);
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+
+
+
+echo "<ul class='pagination'>";
+echo "<li><a href='knbill_list.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+
+echo "<li><a>".$page."</></li>";
+
+echo "<li><a href='knbill_list.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+echo "</ul>";
+?>
+												
+</div>
 											
                                         </div>
                                     </div>

@@ -365,13 +365,13 @@ calculateTotal1();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#">Ap & Ts Quotations</a>
+                                <a href="#">Ap Quotations</a>
                             </li>
                             <li>
-                                <a href="qot_list.php"> Quotations List</a>
+                                <a href="qot_list.php"> AP Quotations List</a>
                             </li>
                             <li>
-                                <a href="">Edit Quotations</a>
+                                <a href="">Edit AP Quotations</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -383,7 +383,7 @@ calculateTotal1();
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                Edit Quotations
+                                Edit AP Quotations
 
                             </h1>
                         </div>
@@ -472,8 +472,15 @@ $a="select * from dpr where store_code='$str'";
 										
 										   <tr><td align="right">Fault Description</td><td align="left">
 										<textarea  required name="falt_desc" id="falt_no" class="form-control" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?>><?php echo $r['falt_desc'];?></textarea></td>
-                                       
+                                       <td align="right">Format Type</td><td align="left">
+										<input type="text" required name="frm_type" id="frm_type" class="form-control" value="<?php echo $r['frm_type'];?>" /></td>
                                         </tr>
+                                        
+										
+										<tr>
+											<td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text" name="vendor" id="vendor" class="form-control" value="<?php echo $r['vendor'];?>" /></td>
+										</tr>
 										 <tr><td align="right">Type of Work</td><td align="left">
 										<input type="text" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?> name="type_of_work" 
 										id="type_of_work"  class="form-control" value="<?php echo $r['type_of_work'];?>"></td>	
@@ -530,7 +537,7 @@ $a="select * from dpr where store_code='$str'";
 										?>
                                         
                                         <div class="table-header">
-                                         Items  List
+                                         Items List
                                         </div>
                                         
                                         <?php 
@@ -561,6 +568,7 @@ $a="select * from dpr where store_code='$str'";
                                              <tr>
 														<th>C</th>
 														<th>ID</th>
+														<th>Product Type</th>
 													    <th> Description</th>
                                                         <th> Service Id</th>
                                                          <th> Brand/Make</th>
@@ -597,15 +605,13 @@ $a="select * from dpr where store_code='$str'";
 													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $i; ?>"></td>
                                                     <td width="20px;">
 													
-												<?php if($rono!=''){ ?>
 												
-											<?php	}else{ ?>	
-													<a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_tgline.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>'><input type="button" class="btn btn-danger" value="Delete"></button>
+												
+												
+													<a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_line.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>'><input type="button" class="btn btn-danger" value="Delete"></button>
 							</a>
 							
-							<?php }?>
-							
-							
+													
 							
 							<input type="hidden" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?> name="sno[]" style="width:30px;" value="<?php echo $rs1['sno']; ?>">
 							<input type="hidden"  name="id1[]" style="width:30px;" value="<?php echo $rs1['id1']; ?>">
@@ -667,15 +673,7 @@ $a="select * from dpr where store_code='$str'";
 													   </td>
                                                         
                                                        <?php /*?>  <input type="hidden" name="gst[]" readonly  value="<?php echo $rs1['cgst']; ?>" id="gst<?php echo $i?>" /><?php */?>
-                                                      
-                                                      
-
-                                                      
-                                                      
-                                                     
                                                         </tr>
-                                                        
-                                                    
                                                     <?php 
 													
 											$i++;
@@ -736,7 +734,8 @@ $(".addmore").on('click',function(){
     data +="<td><input type='checkbox' class='case'/></td>";
 	
     data +="<td><input type='hidden' name='id1[]' id='id1"+i+"' style='width:30px;' data-row='"+i+"' value='<?php echo $id ?>'><input type='hidden' name='id5[]' id='id5"+i+"' style='width:30px;' data-row='"+i+"' value=''><input data-row='"+i+"' type='text' name='sno[]' id='sno"+i+"' style='width:30px;' value=''></td>";          
-   data +="<td><input type='text' name='pname[]'  id='pname"+i+"' data-row='"+i+"' style='width:150px;' class='form-control pname"+i+"'  onkeyup='s2("+i+")' onclick='showUser(this.value,"+i+")'><div id='suggesstion-box"+i+"'></div>";
+	data +="<td><select name='productype[]'  id='productype"+i+"' value='' style='width:70px;' data-row='"+i+"'><option value='plumbing'>Plumbing</option><option value='carpentory'>Carpentory</option><option value='electrical'>Electrical</option><option selected value='service'>Service</option></select></td>";
+	data +="<td><input type='text' name='pname[]'  id='pname"+i+"' data-row='"+i+"' style='width:150px;' class='form-control pname"+i+"'  onkeyup='s2("+i+")' onclick='showUser(this.value,"+i+")'><div id='suggesstion-box"+i+"'></div>";
 	data +="</td>";
 data +="<td><input type='text' name='serv_num[]' data-row='"+i+"' value='' style='width:60px;'  class='' id='serv_num"+i+"' /> </td>";          
   data +="<td><input type='text' name='brand[]' required data-row='"+i+"' value='' style='width:60px;'  class='' id='brand"+i+"' /> </td>";          
@@ -827,6 +826,7 @@ $(".delete").on('click', function() {
 	calculateTotal2();
 	calculateTotal3();
 });
+
 
 </script>
 <script src="assets/js/jquery-2.1.4.min.js"></script>

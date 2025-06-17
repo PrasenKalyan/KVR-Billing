@@ -159,6 +159,7 @@ include'dbfiles/org.php';
                                                        
                                                       <th>User</th>
                                                     <th>Edit</th>
+                                                    <th>Document Download</th>
                                                     <th>Invoice PDF</th>
                                                            <th>Tax Invoice</th>
                                                     </tr>
@@ -166,18 +167,18 @@ include'dbfiles/org.php';
                                                 <tbody>
 							
 												<?php 
-												$results_per_page = 100;
+												$results_per_page = 50;
 										if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; };
                                         $start_from = ($page-1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
 											 $y="SELECT * FROM tgqot_bill where status='payment pending'  and quet_num like  '%$bsearch%'  ";
 											} else {
-													if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='tgbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
+											// 		if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='tgbilling') or  ($tsname=='Srujith.Nimmagadda') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys') ){
 											         $y="SELECT * FROM tgqot_bill where status='payment pending'  order by id asc  LIMIT $start_from,$results_per_page  ";
-											    }else{
-											         $y="SELECT * FROM tgqot_bill where status='payment pending' and user='$tsadmin' order by id asc  LIMIT $start_from,$results_per_page ";
-											    }
+											    // }else{
+											    //      $y="SELECT * FROM tgqot_bill where status='payment pending' and user='$tsadmin' order by id asc  LIMIT $start_from,$results_per_page ";
+											    // }
 												
 											}
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -259,34 +260,37 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                                          	else
                                                             echo $rss1['emp_name']; ?></td>
                                                         <td class="hidden-480">
-                                                        <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='tgbilling')){ ?>    
+                                                           
                                                             <a href="tgedit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="tgraise_delete.php?id=<?php echo $rs1['id'];?>">
                                                         <img src="images/Icon_Delete.png"></a>
-                                                        
-                                                        <?php }else{ ?>
-                                                        
-                                                        <img src="images/edit.gif">
-                                                        
-                                                         <img src="images/Icon_Delete.png">
-                                                        <?php }?>
                                                                                             
                                                         </td>
                                                         <td class="hidden-480">
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='apbilling')or ($tsname=='sumanthpotluri')){ ?>
+                                                            
+                                                            <a href="tgdoc.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                             <a href="tgdoc1.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file1']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="tgdoc2.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file2']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+                                                       
+                                                         </td>
+                                                        <td class="hidden-480">
+                                                             
                                                             <a href="tggenerateinvoice.php?id=<?php echo $rs1['quet_num']; ?>">
                                                          <img src="images/pdf_icon.gif" width="30" height="30"></a>
-                                                          <?php }else{?>
-                                                       <img src="images/pdf_icon.gif">
-                                                       <?php }?>
+                                                          
+                                                       
                                                          </td>
                                                          <td class="hidden-480">
-                                                              <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='apbilling')or ($tsname=='sumanthpotluri')){ ?><a href="tggenerateexcel.php?id=<?php echo $rs1['quet_num']; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
-                                                                  <?php }else{?>
-                                                       <img src="images/xl.jpg">
-                                                       <?php }?>
+                                                              <a href="tggenerateexcel.php?id=<?php echo $rs1['quet_num']; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
+                                                                  
+                                                       
                                                           </td>
 														
                                                     </tr>

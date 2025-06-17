@@ -372,7 +372,7 @@ xmlhttp.send();*/
 						 $r=mysqli_fetch_array($ssq);
 						$cnt1=$r['cnt'];
 						
-						 $cnt=  20250000+1+$cnt1;
+						 $cnt=  25260900+1+$cnt1;
 						
 						?>
                         
@@ -432,7 +432,7 @@ function toggleQuote() {
 
 <?php
 include_once('dbconnection/connection1.php');
-$sql="select distinct store_code from dpr where state='KN' ";  // Query to collect records
+$sql="select distinct store_code from dpr where state='Karnataka' ";  // Query to collect records
 $r1=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r1)) {
 echo  "<option value=\"$row[store_code]\"/>"; // Format for adding options 
@@ -490,6 +490,8 @@ include_once('dbconnection/connection.php');
                                         </tr>
                                          <tr><td align="right">Format Type</td><td align="left">
 										<input type="text" required name="frm_type" id="frm_type" class="form-control"></td>
+                                        <td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text"  name="vendor" id="vendor" class="form-control"></td>
                                         
                                         </tr>
 

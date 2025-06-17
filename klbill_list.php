@@ -111,14 +111,15 @@ include'dbfiles/org.php';
                   
                 <input type="text" class="form-control pull-right" id="myInput" onkeyup="myFunction()" name="search" placeholder="Search  ">
                   </div>
-                  <div class="col-sm-2"><b><a href="qut_kldoc_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
-			<!--	   <div class="col-sm-3">
+                  <div class="col-sm-3">
                   
                <button class="btn btn-info" type="submit" name="bsearch" id="bsearch">
                                                 <i class="ace-icon fa fa-search bigger-110"></i>
                                                 Search
                                             </button>
-                  </div>-->
+                  </div>
+                  <div class="col-sm-2"><b><a href="qut_kldoc_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
+			
 				</div>
 										
 										</form>
@@ -150,19 +151,17 @@ include'dbfiles/org.php';
                                                         <th>Tot Gst</th>
                                                         <th>Total</th>
 														<th>Whom To be Invest</th>
-													     <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar')  or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+													     
 
 													    <th>Transfer Amount</th>
-													    <?php } ?>
+													   
                                                         <th>Amount Transferred Date</th>
                                                         <th>Ageing</th>
                                                         <th>user</th>
                                                          <th>Edit</th>
                                                          <th>Cancel</th>
                                                           <th>NotRequireEdit</th>
-														<?php if( ($tsname=='admin') or ($tsname=='durgarao')  ){?>
-
-														<?php }?>
+														
                                                     </tr>
                                                 </thead>
 
@@ -171,7 +170,7 @@ include'dbfiles/org.php';
 												<?php 
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="SELECT distinct quet_num,state,transfer_date,user FROM `klrequest_amnt`  where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
+											 $y="SELECT distinct quet_num,state,transfer_date,user FROM `klrequest_amnt` where status='Amount Transferred' and bill_status='' and  quet_num like  '%$bsearch%'  ";
 											} else {
 											    
 											    
@@ -179,11 +178,11 @@ include'dbfiles/org.php';
 													  //$y="SELECT distinct quet_num,state,transfer_date FROM `klrequest_amnt` where  status='Amount Transferred' and bill_status=''     ";
 										
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys')){
+										
 											         $y="SELECT distinct quet_num,user FROM `klrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel'    ";
-											    }else{
-											         $y="SELECT distinct quet_num,user FROM `klrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel'  ";
-											    }
+											    // }else{
+											    //      $y="SELECT distinct quet_num,user FROM `klrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel'  ";
+											    // }
 										
 										
 										
@@ -278,7 +277,7 @@ include'dbfiles/org.php';
 														   ?>
 														  
 														  </td>
-														   <?php if( ($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='Sulfeekhar') or ($tsname=='manikandan') or ($tsname=='sumanthpotluri') ){?>
+														   
  <td class="hidden-480"><?php 
                                                         
                                                         $a="select sum(approve_amnt) as req_amnt from klrequest_amnt where quet_num='$qtno' and  confirm='Yes' ";
@@ -300,7 +299,7 @@ include'dbfiles/org.php';
                                                         
                                                         echo $req_amnt; ?></td>
 													    
-													    <?php } ?>
+													    
                                                        
                                            
                                                         
@@ -342,32 +341,28 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='klbilling')or ($tsname=='sumanthpotluri') ){ ?>
+                                                             
                                                             
                                                             <a href="kledit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+                                                        
+                                                         
                                                         <a href="klwtsedit1_qot.php?id=<?php echo $qtno; ?>">
                                                         <span class="glyphicon glyphicon-plus-sign btn-lg"></span></a>
-                                                       <?php }else{ ?>
+                                                       
                                                          <!--<span class="glyphicon glyphicon-plus-sign btn-lg"></span>-->
-                                                    <?php    } ?>
+                                                    
                                                         </td>
 														 <!--status starts-->
                                                         <td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+														    
                                                             
                                                             <a href="kledit_status.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/cancel.png"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/cancel.png">
-                                                        <?php }?>
+                                                        
 
 														    
 														</td> 

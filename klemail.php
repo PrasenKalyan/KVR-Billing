@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>JYOTHI BILLING</title>
+<title>KVR BEST</title>
  <script type="text/javascript">
             function printt()
             {
@@ -420,7 +420,9 @@ $i++; }
 $body=iconv("UTF-8","UTF-8//IGNORE",$body);
 
 include('mpdf/mpdf.php');
+require_once __DIR__ . '/vendor/autoload.php';
 $mpdf=new \mPDF('c','A4','','',10,10,10,10,0,0);
+$mpdf = new \Mpdf\Mpdf();
 $mpdf->writeHTML($body);
 $mpdf->Output($qtno,'F');
 error_reporting(E_ALL);

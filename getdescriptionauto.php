@@ -3,7 +3,7 @@ include('dbconnection/connection.php');
 $keyword=$_GET["keyword"];
 $id=$_GET["id"];
 
-    $query =mysqli_query($link,"SELECT   mdescription  FROM   ritems WHERE mdescription LIKE '$keyword%' ");
+    $query =mysqli_query($link,"SELECT mdescription  FROM  ritems WHERE mdescription LIKE '$keyword%' ");
 ?>
 <ul id="country-list">
 <?php

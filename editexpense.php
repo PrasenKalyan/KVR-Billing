@@ -285,10 +285,10 @@ $(document).on('keyup ','.tet8',function(){
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#">Add Expenses</a>
+                                <a href="#">Edit Expenses</a>
                             </li>
                             <li>
-                                <a href="#">Add Expenses</a>
+                                <a href="#">Edit Expenses</a>
                             </li>
                             <!--<li class="active">Blank Page</li>-->
                         </ul><!-- /.breadcrumb -->
@@ -300,7 +300,7 @@ $(document).on('keyup ','.tet8',function(){
                         <!-- /.ace-settings-container -->
                         <div class="page-header">
                             <h1 align="center">
-                                 Add Expenses
+                                 Edit Expenses
 
                             </h1>
                         </div>
@@ -330,7 +330,7 @@ $(document).on('keyup ','.tet8',function(){
 										     <option value="AP" <?php if($m1['state']=="AP"){echo 'selected';} ?>>AP</option>
 										     <option value="TG" <?php if($m1['state']=="TG"){echo 'selected';} ?>>TG</option>
 										     <option value="KL" <?php if($m1['state']=="KL"){echo 'selected';} ?>>KL</option>
-										     <option value="TN" <?php if($m1['state']=="TN"){echo 'selected';} ?>>TN</option>
+										     <option value="OD" <?php if($m1['state']=="OD"){echo 'selected';} ?>>OD</option>
 										     <option value="KN" <?php if($m1['state']=="KN"){echo 'selected';} ?>>KN</option>
 										 </select> 
 										 </td>
@@ -343,12 +343,13 @@ $(document).on('keyup ','.tet8',function(){
                                        </td>
                                        </tr>
                                         
-                                        <tr>
-                                                 <td align="right">Exp Description</td>
-                                                 <td>
-                                              <textarea  name="expdesc" id="expdesc" rows="4"  required class="form-control"><?php echo $m1['expdesc'] ?></textarea>
-										 </td>
-										 </tr>
+                                        
+                                         <tr>
+                                            <td align="right">Quotation Number</td>
+                                            <td>
+                                                <input type="text" name="quet_no" id="quet_no" readonly class="form-control" value="<?php echo $m1['quet_no']?>">
+                                            </td>
+                                         </tr>
                                          <tr>
                                                  <td align="right">Type Of Payment</td>
                                                  <td>
@@ -389,10 +390,17 @@ $(document).on('keyup ','.tet8',function(){
 										     <option value="">Select Status</option>
 										     <option value="Pending" <?php if($m1['status']=="Pending"){echo 'selected';} ?>>Pending</option>
 										     <option value="Approved" <?php if($m1['status']=="Approved"){echo 'selected';} ?>>Approved</option>
-										     <option value="Rejected" <?php if($m1['status']=="Rejected"){echo 'selected';} ?>>Rejected</option>
-										     <option value="Deposited" <?php if($m1['status']=="Deposited"){echo 'selected';} ?>>Deposited</option>
+										     <!-- <option value="Rejected" <?php if($m1['status']=="Rejected"){echo 'selected';} ?>>Rejected</option>
+										     <option value="Deposited" <?php if($m1['status']=="Deposited"){echo 'selected';} ?>>Deposited</option> -->
 										     
 										 </select> 
+                                         
+										 </td>
+										 </tr>
+                                         <tr>
+                                                 <td align="right">Exp Description</td>
+                                                 <td>
+                                              <textarea  name="expdesc" id="expdesc" rows="4"  required class="form-control"><?php echo $m1['expdesc'] ?></textarea>
 										 </td>
 										 </tr>
 										 <?php }?>
@@ -425,6 +433,7 @@ $(document).on('keyup ','.tet8',function(){
                                             $date=$_POST['date'];
                                             $state=$_POST['state'];
                                             $expdesc=$_POST['expdesc'];
+                                            $q=$_POST['quet_no'];
                                             $payment_type = $_POST['payment_type'];
                                             $amount=$_POST['amount'];
                                             $user=$_POST['user'];
@@ -445,7 +454,7 @@ $(document).on('keyup ','.tet8',function(){
 	
 	
 	
-	                                        $kl=mysqli_query($link,"update  expenses set edate='$date',state='$state',expdesc='$expdesc', payment_type = '$payment_type',amount='$amount',file='$iname5',status='$status' where id='$id2'") or die(mysqli_error($link));
+	                                        $kl=mysqli_query($link,"update  expenses set edate='$date',state='$state',expdesc='$expdesc',quet_no='$q', payment_type = '$payment_type',amount='$amount',file='$iname5',status='$status' where id='$id2'") or die(mysqli_error($link));
 	                                        if($kl){
 	                                            print "<script>";
         print "alert('Successfully Updated ');";

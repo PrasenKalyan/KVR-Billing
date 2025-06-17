@@ -484,6 +484,15 @@ $a="select * from dpr where store_code='$str'";
 										<textarea  required name="falt_desc" id="falt_no" class="form-control" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?>><?php echo $r['falt_desc'];?></textarea></td>
                                        
                                         </tr>
+										<tr>
+											<td align="right">Format Type</td><td align="left">
+										<input type="text" required name="frm_type" id="frm_type" class="form-control" value="<?php echo $r['frm_type'];?>" /></td>
+                                        </tr>
+										<tr>
+											<td align="right">Vendor Code & Server</td><td align="left">
+										<input type="text" name="vendor" id="vendor" class="form-control" value="<?php echo $r['vendor'];?>" /></td>
+										
+										</tr>
 										 <tr><td align="right">Type of Work</td><td align="left">
 										<input type="text" <?php if($rono!=''){ echo 'readonly'; }else { echo '';} ?> name="type_of_work" 
 										id="type_of_work"  class="form-control" value="<?php echo $r['type_of_work'];?>"></td>	
@@ -598,7 +607,7 @@ $a="select * from dpr where store_code='$str'";
                                                         <th>SAC</th>
                                                         <th>Item Category</th>-->
                                               
-											<?php   $id=count($_POST['id']);
+											<?php 
 											 $id1=$_GET['id'];
 											 $aa="select * from add_odqot1 where id1='$id1'";
 												$sq=mysqli_query($link,$aa);
@@ -608,7 +617,7 @@ $a="select * from dpr where store_code='$str'";
 													?>
                                                     <tr>
 													
-													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $cnt; ?>"></td>
+													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $i; ?>"></td>
                                                     <td width="20px;">
 													
 												<?php if($rono!=' '){ ?>

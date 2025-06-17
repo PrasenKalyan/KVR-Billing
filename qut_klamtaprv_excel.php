@@ -13,7 +13,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:X1');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('0000FF');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'JYOTHI FACILITY MANAGEMENT PVT.LTD');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT.LTD');
 $objPHPExcel->getActiveSheet()->getStyle("A1:X1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $objPHPExcel->getActiveSheet()->mergeCells('A4:X4');
 $objPHPExcel->getActiveSheet()->getStyle("A4:X4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)

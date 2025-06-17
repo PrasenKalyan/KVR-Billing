@@ -1,60 +1,11 @@
 <?php //include('config.php');
 session_start();
-//include('dbconnection/connection.php');
+$stn="AP";
+include('dbconnection/connection.php');
 if($_SESSION['user'])
 {
 $name=$_SESSION['user'];
 $tsname=$_SESSION['user'];
-include('dbconnection/connection.php');
-	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$request_amnt ='request_amnt';
-        $stn='ap';
-	 
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qottable1 ='add_tgqot1';
-		$request_amnt ='tgrequest_amnt';
-        $stn='tg';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qottable1 ='add_tnqot1';
-	  $request_amnt ='tnrequest_amnt';
-      $stn='tn';
-
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qottable1 ='add_klqot1';
-		$request_amnt ='klrequest_amnt';
-        $stn='kl';
-
-	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qottable1 ='add_knqot1';
-	  $request_amnt ='knrequest_amnt';
-      $stn='kn';
-
-	
-	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qottable1 ='add_odqot1';
-	  $request_amnt ='odrequest_amnt';	
-      $stn='od';
-
-	}
 //include('org1.php');
 //$y=mysqli_query($link,"select * from employee where emp_name='$name'");
 //$y1=mysqli_fetch_array($y);
@@ -119,7 +70,7 @@ include('dbconnection/connection.php');
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state; ?> Approved Amount List</a>
+                                <a href="#"><?php echo $stn; ?> Approved Amount List</a>
                             </li>
                           
                             <!--<li class="active">Blank Page</li>-->
@@ -239,20 +190,19 @@ include('dbconnection/connection.php');
 												
 												<?php 
 											include('dbconnection/connection.php');
-                                            $state=$_GET['state'];
 									if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
 										
-											 $y="select * from ".$request_amnt." where  quet_num like '%$bsearch%' or ac_det like '%$bsearch%'  and confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
+											 $y="select * from request_amnt where  quet_num like '%$bsearch%' or ac_det like '%$bsearch%'  and confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												} else {
 													
 												//	$y="select * from ".$request_amnt." where  confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												
-												    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname=='sumanthpotluri')){
-													$y="select * from ".$request_amnt." where  confirm='Yes' and status=''  order by id desc";    
-													}else{
-													    $y="select * from ".$request_amnt." where  confirm='Yes' and status='' and user='$tsname'  order by id desc";
-													}
+												    // if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$state.'billing') or ($tsname=='sumanthpotluri')){
+													$y="select * from request_amnt where  confirm='Yes' and status=''  order by id desc";    
+													// }else{
+													//     $y="select * from request_amnt where  confirm='Yes' and status='' and user='$tsname'  order by id desc";
+													// }
 													
 												    
 												    
@@ -274,7 +224,7 @@ include('dbconnection/connection.php');
 											while($rs1=mysqli_fetch_array($t)){
 											    $tid=$rs1['id'];
 							$qtno=$rs1['quet_num'];
-						$a="select store_code,ro_no,ro_date,falt_desc,tot_base,tot_ser,tot_gst,adv_amnt,adv_amnt1,adv_amnt2,gst_type,net,bal from ".$qottable." where quet_num='$qtno'";
+						$a="select store_code,ro_no,ro_date,falt_desc,tot_base,tot_ser,tot_gst,adv_amnt,adv_amnt1,adv_amnt2,gst_type,net,bal from add_qot where quet_num='$qtno'";
 							$ssq=mysqli_query($link,$a);
 							$r1=mysqli_fetch_array($ssq);
 							$str_code=$r1['store_code'];
@@ -337,7 +287,7 @@ include('dbconnection/connection.php');
 												  
 												  <td>
 												      <?php
-												     $adamt="select sum(approve_amnt) as req_amnt from ".$request_amnt." where quet_num='$qtno'and  status='Amount Transferred' and   confirm='Yes'" ;
+												     $adamt="select sum(approve_amnt) as req_amnt from request_amnt where quet_num='$qtno'and  status='Amount Transferred' and   confirm='Yes'" ;
 												      $ads=mysqli_query($link,$adamt) or die(mysqli_error($link));
 												      $ads1=mysqli_fetch_array($ads);
 												      echo $adsd=$ads1['req_amnt'];
@@ -347,7 +297,7 @@ include('dbconnection/connection.php');
 												  </td>
                                       <td class="hidden-480"><?php 
 									 $ac=$rs1['ac_det'];
-									 $a="select sum(approve_amnt) as req_amnt from ".$request_amnt." where quet_num='$qtno'and id='$tid' and status!='Amount Transferred' and   confirm='Yes' and ac_det='$ac' ";
+									 $a="select sum(approve_amnt) as req_amnt from request_amnt where quet_num='$qtno'and id='$tid' and status!='Amount Transferred' and   confirm='Yes' and ac_det='$ac' ";
 														  $sr1=mysqli_query($link,$a);
 										  $r2=mysqli_fetch_array($sr1);
 														    //$r2['quet_num'];
@@ -390,15 +340,12 @@ include('dbconnection/connection.php');
                                                       
                                                     <td class="hidden-480">
                                                     
-                                                   <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')or ($tsname=='sumanthpotluri')){ ?>  
+                                                     
                                                     
                                                     <a href="edit_request1.php?id=<?php echo $rs1['id'];?>&state=<?php echo $state; ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
                                                         
-                                                        <?php }?>
                                                     
                                                         
                                                         
@@ -427,11 +374,10 @@ include('dbconnection/connection.php');
                                                     <th>Amount</th>
                                                 </tr>
                                                 <?php 
-                                                    $state=$_GET['state'];
                                             if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname==$stn.'billing') or ($tsname=='sumanthpotluri')){
-											    	$y="select distinct ac_det from ".$request_amnt." where confirm='Yes' and status!='Amount Transferred'  ";
+											    	$y="select distinct ac_det from request_amnt where confirm='Yes' and status!='Amount Transferred'  ";
 											}else{
-											    	$y="select distinct ac_det from ".$request_amnt." where  user='$tsname'and   confirm='Yes' and status!='Amount Transferred'";
+											    	$y="select distinct ac_det from request_amnt where  user='$tsname'and   confirm='Yes' and status!='Amount Transferred'";
 											}
 											
 											$uy=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -443,7 +389,7 @@ include('dbconnection/connection.php');
 											    
 											    $yu=mysqli_query($link,"select * from ac_det where name='$acd'");
 											    $yu1=mysqli_fetch_array($yu);
-											    $mu=mysqli_query($link,"select sum(approve_amnt) as amt from ".$request_amnt." where ac_det='$acd' and status!='Amount Transferred' and confirm='Yes'");
+											    $mu=mysqli_query($link,"select sum(approve_amnt) as amt from request_amnt where ac_det='$acd' and status!='Amount Transferred' and confirm='Yes'");
 											    $mu1=mysqli_fetch_array($mu);
 											    $mut=$mut+$mu1['amt'];
 											?>    

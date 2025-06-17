@@ -76,7 +76,7 @@ $sqq=mysqli_query($link,"select max(id) as ids from ".$qottable);
 	$idd=$rr['ids'];
 	
 	 $qt_nox=19201259+1+$idd;
-	 $qt_no="QJIS$state.$qt_nox";  
+	 $qt_no="QKVR$state.$qt_nox";  
 	
 	$ac=mysqli_query($link,"update ".$qottable." set quet_num='$qt_no' where id='$sno'");
 	 

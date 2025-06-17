@@ -632,7 +632,7 @@ calculateTotal22();
                                                         <th>SAC</th>
                                                         <th>Item Category</th>-->
                                               
-											<?php   $id=count($_REQUEST['id']);
+											<?php  
 											 $id1=$_GET['id'];
 										     $aa="select * from add_klqot1 where id1='$id1'";
 												$sq=mysqli_query($link,$aa);
@@ -642,7 +642,7 @@ calculateTotal22();
 													?>
                                                     <tr>
 													
-													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $cnt; ?>"></td>
+													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $i; ?>"></td>
                                                     <td width="20px;">
 													
 													<?php if($rono!=''){ }else{ ?>

@@ -255,11 +255,10 @@ xmlhttp.send();
 														  <th>Status</th>
 														   <th>User</th>
                                                      		 <th>Edit</th>
-        													  <?php if(($tsname!="admin")  ){}else{ ?>
-        													  <th>RONo Edit</th>
-        													  <?php }?>
-													         <th>Email</th>
-														     <th>Print</th> <th>Quotation</th>
+        													  
+													         <!-- <th>Email</th> -->
+														     <th>Print</th>
+                                                              <th>Quotation</th>
 															 <th>Bill of Supply</th><th>Miscllenious</th>
 														     <th>Pdf Download</th>
                                                         
@@ -480,43 +479,22 @@ $r1=mysqli_fetch_array($ssq1);
                                                         
                                                         
                                                         
-                                                        <?php 
-                                                
-                                                if($tsname=='admin'){ ?>
+                                                        
                                                         <a href="odedit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                           <?php     }else{
-                                               echo $user;
-                                               echo $tsname;
-                                               if($tsname==$user){ ?>
-                                                   <a href="odedit_qot.php?id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                              <?php  }else{ ?>
+                                          
                                                
-                                                        <img src="images/edit.gif">
-                                          <?php }
-                                           }
-                                                ?>        
+                                                             
                                                 
                                                         
                                                         
                                                         </td>
                                                         <?php if(($tsname!="admin")){}else{ ?>
-                                                        <td> 
                                                         
-                                                                
-                                                        <a href="odeditrono_qot.php?id=<?php echo $rs1['id']; ?>">
-                                                        <img src="images/edit.gif"></a>
-                                            
-                                               
-                                                        
-                                                        
-                                                        
-                                                        </td>
                                                         <?php }?>
-														 <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="odemail.php?id=<?php echo $rs1['id'];?>"
+														 <!-- <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="odemail.php?id=<?php echo $rs1['id'];?>"
 												   class="">
-                                                        <img src="images/email.png" width="20" height="20"></a></td>
+                                                        <img src="images/email.png" width="20" height="20"></a></td> -->
 														
 														 <td class="hidden-480">
 														 
@@ -524,7 +502,7 @@ $r1=mysqli_fetch_array($ssq1);
 												   class="btn btn-primary btn-xs"><img src="images/printer.png"></a>
                                                         </td> 
                                                         
-                                                         <td class="hidden-480"><a href="odqut_excel.php?id=<?php echo $rs1['id']; ?>">
+                                                         <td class="hidden-480"><a href="qut_excel.php?id=<?php echo $rs1['id']; ?>&state=OD">
                                                         <img src="images/xl.jpg" width="20" height="20"></a></td>
                                                         
                                                         <td class="hidden-480"><a href="odqut_excel_bill.php?id=<?php echo $rs1['id']; ?>">

@@ -209,6 +209,7 @@ $tyamt=$t1['amount'];
                                                     
                                                         <th>User</th>
 													 <th>Edit</th>
+                                                     <th>Work Status</th>
 													 <th>Email</th>
 														     <th>Print</th> 
 														     
@@ -261,7 +262,7 @@ echo "</datalist>";?></datalist></th>
 <?php  
 $sql="SELECT distinct a.coordinator FROM add_tgqot b,dpr a where b.store_code=a.store_code";
   // Query to collect records
-$r=mysqli_query($link,$sql) or die(mysqli_error());
+$r=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r)) {
 echo  "<option value=\"$row[coordinator]\"/>"; // Format for adding options 
 }
@@ -274,7 +275,7 @@ echo "</datalist>";?></datalist></th>
 <?php  
 $sql="SELECT distinct a.superwisor FROM add_tgqot b,dpr a where b.store_code=a.store_code";
   // Query to collect records
-$r=mysqli_query($link,$sql) or die(mysqli_error());
+$r=mysqli_query($link,$sql) or die(mysqli_close());
 while ($row=mysqli_fetch_array($r)) {
 echo  "<option value=\"$row[superwisor]\"/>"; // Format for adding options 
 }
@@ -287,7 +288,7 @@ echo "</datalist>";?></datalist></th>
 <?php  
 $sql="SELECT distinct a.city FROM add_tgqot b,dpr a where b.store_code=a.store_code";
   // Query to collect records
-$r=mysqli_query($link,$sql) or die(mysqli_error());
+$r=mysqli_query($link,$sql) or die(mysqli_close($link));
 while ($row=mysqli_fetch_array($r)) {
 echo  "<option value=\"$row[city]\"/>"; // Format for adding options 
 }
@@ -371,28 +372,28 @@ $start_from = ($page-1) * $results_per_page;
 												
 												else {
 													
-												if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='tgbilling') or ($tsname=='rasheed') or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') ){
+												
 													 $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page;   
 													
 												     $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' or docr_status='Cancel'  ";
 												    
-												}else{
-													    $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												 $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
-													}
+												// }else{
+												// 	    $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+												//  $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
+												// 	}
 																										 
 												}
+                                            
 											 
-											 
-											 	if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='tgbilling') ){
+											 	// if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='tgbilling') ){
 												//	 $y="SELECT * FROM ".$datatable." where status='work to be started'   ORDER BY id desc LIMIT $start_from, ".$results_per_page;   
 													
-												     $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' or docr_status='Cancel'  ";
+												    //  $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' or docr_status='Cancel'  ";
 												    
-												}else{
-													   // $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
-												 $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
-													}
+												// }else{
+												// 	   // $y="SELECT * FROM ".$datatable." where status='work to be started' and ses='$tsname'  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+												//  $y10="SELECT  sum(approve_amnt) as amnt FROM `tgrequest_amnt` where  status='Amount Transferred' and confirm='Yes'  and bill_status='' and user='$tsname' or docr_status='Cancel'  ";
+													// }
 											 
 											 
 											$t=mysqli_query($link,$y) or die(mysqli_error($link));
@@ -483,29 +484,22 @@ $r1=mysqli_fetch_array($ssq1);
                                                         	 
                                                     <td class="hidden-480">
                                                         
-                                                         <?php 	if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='rasheed')or ($tsname=='tgbilling') or ($tsname=='sanjay')or ($tsname=='naiduys') ){ ?>
+                                                         
                                                         <a href="tgwtsedit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
-                                                    <?php    }else{
-                                                    if($tsname==$ses){
-                                                        
-                                                        if($yamt > $tdamt){ ?>
-                                                        <img src="images/edit.gif"> 
-                                                        <?php  }else{ ?>
+                                                        <a href="workstatus3.php?id=<?php echo $rs1['quet_num']; ?>" onclick="return confirm('Are you sure you want to cancel this Quotation?')"> 
+                                                        <span class="glyphicon glyphicon-remove btn-lg"></span></a>
+                                                   
                                                         
                                                         <a href="tgwtsedit_qot.php?id=<?php echo $rs1['id']; ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }
                                                         
-                                                    }
-                                                    
-                                                    
-                                                     }?>
                                                         
                                                         
                                                         
                                                         </td>
+                                                        <td class="hidden-480"><?php echo $rs1 ['wd'];?></td>
 														 <td class="hidden-480"><a onclick="return confirm('Are you sure you want to send the Email?');" href="tgqotpdfcheck.php?id=<?php echo $rs1['id'];?>&name1=<?php echo $r1['coordinator'];?>&name2=<?php echo $r1['superwisor'];?>"
 												   class="">
                                                         <img src="images/email.png" width="20" height="20"></a></td>
@@ -515,6 +509,7 @@ $r1=mysqli_fetch_array($ssq1);
                                                    <a onclick="window.open('tgqut_print.php?id=<?php echo $rs1['id'];?>','mywindow','width=700,height=500,toolbar=no,menubar=no,scrollbars=yes')"
 												   class="btn btn-primary btn-xs"><img src="images/printer.png"></a>
                                                         </td> 
+                                                        
                                                     <td class="hidden-480">
                                                        <a href="tgqot_pdf.php?id=<?php echo $rs1['id'];?>"
 												   class=""><img src="images/pdf_icon.gif" width="30" height="30"></a>

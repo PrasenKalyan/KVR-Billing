@@ -112,6 +112,12 @@ include'dbfiles/org.php';
                   
               <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search   " onkeyup="myFunction()">
              </div>
+             
+             <div class = "col-sm-3">
+                <button class="btn btn-info" type="submit" name = "bsearch" id = "bsearch">
+                    <i class = "ace-icon fa fa-search bigger-110"></i>Search
+                </button>
+             </div>
              <div class="col-sm-2"><b><a href="qut_klgst_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
             	</div>
 										

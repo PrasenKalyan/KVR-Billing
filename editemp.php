@@ -115,27 +115,27 @@ $rw=mysqli_fetch_array($res) or die(mysqli_error($link));
 											<tr>
 											    <td align="right">Name of Employee </td>
 											    <td><input  type="text"    class="form-control" value="<?php echo $rw['emp_name']?>" required name="empname" id="empname"></td>
-											    <td align="right">DOB</td>
-											     <td><input type="date" value="<?php echo $rw['DOB']?>"  required name="dob" id="dob" class="form-control"></td>
+											    <!-- <td align="right">DOB</td>
+											     <td><input type="date" value="<?php echo $rw['DOB']?>"  required name="dob" id="dob" class="form-control"></td> -->
 											</tr>
 											  <tr><td align="right">Gender</td><td align="left">
 											
 
   <label><input type="radio" name="gender" value="Male" value=" <?php if($gender=="Male"){echo 'checked';} ?>">Male</label>
-  <label><input type="radio" name="gender" value="female" value=" <?php if($gender=="feMale"){echo 'checked';} ?>">feMale</label>
+  <label><input type="radio" name="gender" value="female" value=" <?php if($gender=="feMale"){echo 'checked';} ?>">Female</label>
   
 											</td>
 											
                                             
                                         
 											  
-                                        <td align="right">Marital Status</td>
+                                        <!-- <td align="right">Marital Status</td>
 										<td>
 										<input type="radio" id="married" name="marstatus" value="<?php echo $maritalstatus ?>">
   <label for="married">Married</label>
   <input type="radio" id="unmarried" name="marstatus" value="<?php echo $rw['maritalstatus'] ?>">
   <label for="unmarried">unmarried</label>
-										</td>
+										</td> -->
                                         </tr>
 											
                                             <tr>
@@ -144,29 +144,30 @@ $rw=mysqli_fetch_array($res) or die(mysqli_error($link));
 											<input  type="number" value="<?php echo $rw['contactno']?>"  class="form-control" name="conno" id="conno"></td>
                                       
 											
-											<td align="right">Alternate Contact No. </td><td align="left">
+											<!-- <td align="right">Alternate Contact No. </td><td align="left">
 											<input type="number" class="form-control"  value="<?php echo $rw['alternateno']?>" id="aconno" name="aconno">
 											
-											</td>
+											</td> -->
 </tr>
                                         
-                                        <tr><td align="right">Adharcard No</td><td align="left">
+                                        <!-- <tr><td align="right">Adharcard No</td><td align="left">
 										 <input  type="number" value="<?php echo $rw['adharcardno']?>"  class="form-control" name="adhar" id="adhar"></td>
 										 
                                         <td align="right">Address</td><td align="left">
 										
 										<input type="text"  required name="address" id="address" class="form-control" value="<?php echo $rw['address']?>"></td>
-                                        </tr>
+                                        </tr> -->
                                         
 										
-										 <tr><td align="right">City</td><td align="left">
-										 <input  type="text" value="<?php echo $rw['city']?>"  class="form-control" name="city" id="city"></td>
+										 <tr>
                                         <td align="right">State</td><td>
 										<input type="text" required name="state" id="state" class="form-control" value="<?php echo $rw['state']?>"></td>
+                                        <td align="right">City</td><td align="left">
+										 <input  type="text" value="<?php echo $rw['city']?>"  class="form-control" name="city" id="city"></td>
                                         </tr>
 										
 										
-										 <tr><td align="right">Qualification</td><td align="left">
+										 <!-- <tr><td align="right">Qualification</td><td align="left">
 										<input type="text" required name="qua" id="qua" class="form-control" value="<?php echo $rw['qualification']?>"></td>
                                        <td align="right">Experience</td><td>
 										<input type="text" required name="exp" id="exp" class="form-control" value="<?php echo $rw['experience']?>"></td>
@@ -185,7 +186,7 @@ $rw=mysqli_fetch_array($res) or die(mysqli_error($link));
                                         </tr>
 										
                                         <tr><td align="right">Photo</td><td align="left">
-										<input type="file"   name="empfile" id="img1" class="form-control"/></td>
+										<input type="file"   name="empfile" id="img1" class="form-control"/></td> -->
                                         <td align="right">Email Id</td><td>
 										<input type="text" required name="email" id="email" class="form-control"  value="<?php echo $emp_email?>"></td>
                                         </tr>
@@ -197,8 +198,8 @@ $rw=mysqli_fetch_array($res) or die(mysqli_error($link));
 									</td>
                                         </tr>
 
-                                        <td align="right">Store Code</td><td align="left">
-									<input  required name="strcd" id="strcd" class="form-control" value="<?php echo $rw['strcd']?>"  rows="1.5" cols="20"/></td>
+                                        <!-- <td align="right">Store Code</td><td align="left">
+									<input  required name="strcd" id="strcd" class="form-control" value="<?php echo $rw['strcd']?>"  rows="1.5" cols="20"/></td> -->
 										
                                         
                                         </table>

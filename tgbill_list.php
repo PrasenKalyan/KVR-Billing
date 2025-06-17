@@ -176,11 +176,11 @@ include'dbfiles/org.php';
 													  //$y="SELECT distinct quet_num,state,transfer_date FROM `klrequest_amnt` where  status='Amount Transferred' and bill_status=''     ";
 										
 										
-										if(($tsname=='admin') or ($tsname=='durgarao') or  ($tsname=='rasheed') or ($tsname=='accounts') or ($tsname=='tgbilling')or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') ){
+										// if(($tsname=='admin') or ($tsname=='durgarao') or  ($tsname=='rasheed') or ($tsname=='accounts') or ($tsname=='tgbilling')or ($tsname=='sumanthpotluri') or ($tsname=='naiduys') ){
 											         $y="SELECT  distinct quet_num,user FROM `tgrequest_amnt` where  status='Amount Transferred' and bill_status=''  or docr_status='Cancel'    limit 30";
-											    }else{
-											         $y="SELECT distinct quet_num,user FROM `tgrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel' limit 30 ";
-											    }
+											    // }else{
+											    //      $y="SELECT distinct quet_num,user FROM `tgrequest_amnt` where  status='Amount Transferred'  and bill_status=''   and user='$tsname'  or docr_status='Cancel' limit 30 ";
+											    // }
 										
 										
 										
@@ -341,46 +341,46 @@ echo date('d-m-Y', strtotime($d)); }?></td>
 														  
                                                         <td class="hidden-480">
                                                             
-                                                             <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='tgbilling') ){ ?>
+                                                             <!-- <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='tgbilling') ){ ?> -->
                                                             
                                                             <a href="tgedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
-                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) ){ ?>
+                                                        <!-- <?php }else{?>
+                                                        <img src="images/edit.gif"> -->
+                                                        <!-- <?php }?>
+                                                         <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) ){ ?> -->
                                                         <a href="tgwtsedit1_qot.php?id=<?php echo $qtno; ?>">
                                                         <span class="glyphicon glyphicon-plus-sign btn-lg"></span></a>
-                                                       <?php }else{ ?>
+                                                       <!-- <?php }else{ ?> -->
                                                          <!--<span class="glyphicon glyphicon-plus-sign btn-lg"></span>-->
-                                                    <?php    } ?>
+                                                    <!-- <?php    } ?> -->
                                                         </td>
 														 <!--status starts-->
                                                         <td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?>
+														    <!-- <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) or ($tsname=='sumanthpotluri')){ ?> -->
                                                             
                                                             <a href="tsedit_status.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/cancel.png"></a>
                                                         
-                                                        <?php }else{?>
+                                                        <!-- <?php }else{?>
                                                         <img src="images/cancel.png">
-                                                        <?php }?>
+                                                        <?php }?> -->
 
 														    
 														</td> 
                                                        
 															<td>
 														    
-														    <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) ){ ?>
+														    <!-- <?php if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname==$ses) ){ ?> -->
                                                             
                                                             <a href="tgedit_req_bill.php?id=<?php echo $rs1['quet_num']; ?>&id1=<?php echo $r1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
+                                                        <!-- <?php }else{?>
                                                         <img src="images/edit.gif">
-                                                        <?php }?>
+                                                        <?php }?> -->
 
 														    
 														</td>

@@ -206,11 +206,11 @@ $tsname=$_SESSION['user'];
 													
 												//	$y="select * from tgrequest_amnt where  confirm='Yes' and status!='Amount Transferred' group by ac_det order by id desc";
 												
-												  if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='tgbilling')or ($tsname=='sumanthpotluri')){
+												  
 													$y="select * from tgrequest_amnt where  confirm='Yes' and status='' order by id desc";    
-													}else{
-													    $y="select * from tgrequest_amnt where  confirm='Yes' and status='' and user='$tsname'  order by id desc";
-													}
+													// }else{
+													//     $y="select * from tgrequest_amnt where  confirm='Yes' and status='' and user='$tsname'  order by id desc";
+													// }
 												    
 												    
 												}
@@ -333,14 +333,12 @@ $tsname=$_SESSION['user'];
                                                       
                                                     <td class="hidden-480">
                                                     
-                                                    <?php    if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')){ ?>  
+                                                      
                                                     
                                                     <a href="tgedit_request1.php?id=<?php echo $rs1['id'] ?>">
                                                         <img src="images/edit.gif"></a>
                                                         
-                                                        <?php }else{?>
-                                                        <img src="images/edit.gif">
-                                                        <?php }?>
+                                                        
                                                         
                                                         
                                                         </td>

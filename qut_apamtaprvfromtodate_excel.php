@@ -60,7 +60,7 @@ $objPHPExcel->getActiveSheet()->mergeCells('A1:AC1');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)
         ->getStartColor()->setRGB('800000');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getFont()->setBold(true)->getColor()->setRGB('ffffff');
-$objPHPExcel->getActiveSheet()->setCellValue('A1', 'JTECHNO ASSOCIATES');
+$objPHPExcel->getActiveSheet()->setCellValue('A1', 'KVR BEST PROPERTY MANAGEMENT PVT,LTD');
 $objPHPExcel->getActiveSheet()->getStyle("A1:AC1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 $objPHPExcel->getActiveSheet()->mergeCells('A4:AC4');
 $objPHPExcel->getActiveSheet()->getStyle("A4:AC4")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)

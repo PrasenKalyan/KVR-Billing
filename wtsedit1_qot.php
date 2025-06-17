@@ -8,43 +8,7 @@ if($_SESSION['user'])
 include'dbfiles/org.php';
 include('dbconnection/connection.php');
 	$state=$_GET['state'];
-
-	if($state=='AP'){
-		$qottable ='add_qot';
-		$qottable1 ='add_qot1';
-		$request_amnt ='request_amnt';
-       
-	}
-	elseif($state=='TG'){
-		$qottable ='add_tgqot';
-		$qottable1 ='add_tgqot1';
-		$request_amnt ='tgrequest_amnt';
-
-	 
-	}
-	 elseif($state=='TN'){
-	  $qottable ='add_tnqot';
-	  $qottable1 ='add_tnqot1';
-	  $request_amnt ='tnrequest_amnt';
-	
-	}
-	elseif($state=='KL'){
-		$qottable ='add_klqot';
-		$qottable1 ='add_klqot1';
-		$request_amnt ='klrequest_amnt';	
-	  
-	}
-	else if($state=='KN'){
-	  $qottable ='add_knqot';
-	  $qottable1 ='add_knqot1';
-	  $request_amnt ='knrequest_amnt';
-      	
-	}
-	elseif($state=='OD'){
-	  $qottable ='add_odqot';
-	  $qottable1 ='add_odqot1';
-	  $request_amnt ='odrequest_amnt';	
-	}
+	$stn="AP";
 //include'dbfiles/iqry_acyear.php';
 ?>
 <!DOCTYPE html>
@@ -452,10 +416,10 @@ calculateTotal22();
                             </li>
 								<li>
                                 <i class="ace-icon fa fa-cog home-icon"></i>
-                                <a href="#"><?php echo $state; ?> Quotations</a>
+                                <a href="#"><?php echo $stn; ?> Quotations</a>
                             </li>
                             <li>
-                                <a href="qot_list.php?state=<?php echo $state; ?>"> Quotations List</a>
+                                <a href="qot_list.php?state=<?php echo $dtn; ?>"> Quotations List</a>
                             </li>
                             <li>
                                 <a href="">Edit Quotations</a>
@@ -475,19 +439,19 @@ calculateTotal22();
                             </h1>
                         </div>
                   <?php  $qtno=$_GET['id'];
-                  $k=mysqli_query($link,"select id from ".$request_amnt." where quet_num='$qtno'") or die(mysqli_error($link));
+                  $k=mysqli_query($link,"select id from request_amnt where quet_num='$qtno'") or die(mysqli_error($link));
 while($k1=mysqli_fetch_array($k)){
 $klarray[]=$k1['id'];
 }
 
-						$sq=mysqli_query($link,"select * from ".$qottable." where quet_num='$qtno'");
+						$sq=mysqli_query($link,"select * from add_qot where quet_num='$qtno'");
 						$r=mysqli_fetch_array($sq);
 						$rono=$r['ro_no'];
 						$bal=$r['bal'];
 						$id=$r['id'];
 						$qtno=$r['quet_num'];
 						
-						$y=mysqli_query($link,"select * from ".$request_amnt." where quet_num='$qtno' order by id desc limit 1");
+						$y=mysqli_query($link,"select * from request_amnt where quet_num='$qtno' order by id desc limit 1");
 						$y1=mysqli_fetch_array($y);
 						$ystatus=$y1['confirm'];
 						?>             <!-- PAGE CONTENT BEGINS -->
@@ -723,9 +687,9 @@ $klarray[]=$k1['id'];
                                                         <th>SAC</th>
                                                         <th>Item Category</th>-->
                                               
-											<?php   $id=count($_REQUEST['id']);
+											<?php 
 											 $id1=$r['id'];
-										     $aa="select * from ".$qottable1." where id1='$id1'";
+										     $aa="select * from add_qot1 where id1='$id1'";
 												$sq=mysqli_query($link,$aa);
 												$i=1;
 												while($rs1=mysqli_fetch_array($sq)){
@@ -733,13 +697,12 @@ $klarray[]=$k1['id'];
 													?>
                                                     <tr>
 													
-													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $cnt; ?>"></td>
+													<td><?php echo $i;?> <input type="hidden" name="cnt" id="cnt" value="<?php echo $i; ?>"></td>
                                                     <td width="20px;">
 													
 													<?php if($rono!=''){ }else{ ?>
 													    
-													<a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_line.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>&state=<?php echo $state; ?>'><input type="button" class="btn btn-danger" value="Delete"></button>
-							</a>
+													<a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_line.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>'><input type="button" class="btn btn-danger" value="Delete"></button></a>
 							<?php }?>
 							<input type="hidden" name="sno[]" style="width:30px;" value="<?php echo $rs1['sno']; ?>">
 							<input type="hidden" name="id1[]" style="width:30px;" value="<?php echo $rs1['id1']; ?>">

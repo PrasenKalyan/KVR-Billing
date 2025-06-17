@@ -110,6 +110,13 @@ include'dbfiles/org.php';
                   
                 <input type="text" class="form-control pull-right" id="myInput" name="search" placeholder="Search By Quotation Name No  " onkeyup="myFunction()">
                   </div>
+                  <div class="col-sm-3">
+                  
+               <button class="btn btn-info" type="submit" name="bsearch" id="bsearch">
+                                                <i class="ace-icon fa fa-search bigger-110"></i>
+                                                Search
+                                            </button>
+                  </div>
                   <div class="col-sm-2"><b><a href="qut_knpr_excel.php?user=<?php echo $tsname ?>" class="btn btn-primary btn-xs">XL Download</a></b></div>
 			<!--	   <div class="col-sm-3">
                   
@@ -141,17 +148,17 @@ include'dbfiles/org.php';
 													<th>Inv Sub Mon</th>
 													<th>State</th>
 													<th>Fomate</th>
-													<th>Gst 28%</th>
+													<!-- <th>Gst 28%</th> -->
 													<th>Gst 18%</th>
-													<th>Gst 12%</th>
+													<!-- <th>Gst 12%</th>
 													<th>Gst 5%</th>
-													<th>Gst 0%</th>
+													<th>Gst 0%</th> -->
 													<th>Total Base</th>
-													<th>Gst(28%) Amt</th>
+													<!-- <th>Gst(28%) Amt</th> -->
 													<th>Gst(18%) Amt</th>
-													<th>Gst(12%) Amt</th>
+													<!-- <th>Gst(12%) Amt</th>
 													<th>Gst(5%) Amt</th>
-													<th>Gst(0%) Amt</th>
+													<th>Gst(0%) Amt</th> -->
 													<th>Total Gst</th>
                                                     <th>Total Amount </th>
                                                     <th>Tds</th>
@@ -178,18 +185,23 @@ include'dbfiles/org.php';
                                                 <tbody>
 												
 												<?php 
+                                                 $results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
 											if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											$ssq1="select * from payment  ";
+											$y="select * from payment  ";
 													  } else {
 													     //if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='klbilling')){
-													         $ssq1="select * from knpayment  order by id desc ";
+													        //  $ssq1="select * from knpayment  order by id desc ";
 													      //}else{
 													        //  $ssq1="select * from klpayment  order by id desc ";
 													     // }
+                                                         $y="SELECT * FROM knpayment ORDER BY id desc LIMIT $start_from, ".$results_per_page;
 														
-													  }
-											$t=mysqli_query($link,$ssq1) or die(mysqli_error($link));
+                                                      }
+											$t=mysqli_query($link,$y) or die(mysqli_error($link));
 											$i=1;
 											$g128=0;
 											$g118=0;
@@ -231,13 +243,13 @@ include'dbfiles/org.php';
 														<td><?php echo date('M',strtotime($yu1['inv_sub_date'])) ?></td>
 														<td>AP</td>
 														<td><?php echo $yu1['ftype']; ?></td>
-													    <td><?php echo $gst28=$yu1['gst28'];
+													    <!-- <td><?php echo $gst28=$yu1['gst28'];
 													    $g128=$gst28+$g128;
-													    ?></td>
+													    ?></td> -->
 														<td><?php echo $gst18=$yu1['gst18'];
 														$g118=$gst18+$g118;
 														?></td>
-														<td><?php echo $gst12=$yu1['gst12']; 
+														<!-- <td><?php echo $gst12=$yu1['gst12']; 
 														$g112=$gst12+$g112;
 														?></td>
 														<td><?php echo $gst5=$yu1['gst5'];
@@ -245,17 +257,17 @@ include'dbfiles/org.php';
 														?></td>
 														<td><?php echo $gst0=$yu1['gst0'];
 														$g10=$gst0+$g10;
-														?></td>
+														?></td> -->
 														<td><?php echo $tbase=$yu1['tbase'];
 														$tbs=$tbase+$tbs;
 														?></td>	
-														<td><?php echo $g28=($gst28*28)/100;
+														<!-- <td><?php echo $g28=($gst28*28)/100;
 														$gt28=$gt28+$g28;
-														?></td>
+														?></td> -->
 														<td><?php echo $g18=($gst18*18)/100;
 														$gt18=$gt18+$g18;
 														?></td>
-														<td><?php echo $g12=($gst12*12)/100;
+														<!-- <td><?php echo $g12=($gst12*12)/100;
 														$gt12=$gt12+$g12;
 														?></td>
 														<td><?php echo $g5=($gst5*5)/100;
@@ -263,7 +275,7 @@ include'dbfiles/org.php';
 														?></td>
 														<td><?php echo $g0=($gst0*0)/100;
 														$gt0=$gt0+$g0;
-														?></td>
+														?></td> -->
                                                        <td><?php echo $gtot=$g28+$g18+$g12+$g5+$g0;
                                                        $tg=$tg+$gtot;?></td>
                                                       <td><?php echo  $tt=$tbase+$gtot;
@@ -329,17 +341,17 @@ include'dbfiles/org.php';
 											
 											<tr>
 											    <td colspan="8">Total</td>
-											    <td><?php echo $g128; ?></td>
+											    <!-- <td><?php echo $g128; ?></td> -->
 											    <td><?php echo $g118; ?></td>
-											    <td><?php echo $g112; ?></td>
+											    <!-- <td><?php echo $g112; ?></td>
 											    <td><?php echo $g15; ?></td>
-											    <td><?php echo $g10; ?></td>
+											    <td><?php echo $g10; ?></td> -->
 											    <td><?php echo $tbs; ?></td>
-											     <td><?php echo $gt28; ?></td>
+											     <!-- <td><?php echo $gt28; ?></td> -->
 											    <td><?php echo $gt18; ?></td>
-											    <td><?php echo $gt12; ?></td>
+											    <!-- <td><?php echo $gt12; ?></td>
 											    <td><?php echo $gt5; ?></td>
-											    <td><?php echo $gt0; ?></td>
+											    <td><?php echo $gt0; ?></td> -->
 											    <td><?php echo $tg; ?></td>
 											    <td><?php echo $tamt; ?></td>
 											    <td><?php echo $tds; ?></td>
@@ -354,7 +366,24 @@ include'dbfiles/org.php';
                                             </table>
 											</div>
 											<div align="center">		
-								
+<?php 
+$sql = "SELECT COUNT(id) AS total FROM knpayment";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_assoc($result);
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+
+
+
+echo "<ul class='pagination'>";
+echo "<li><a href='knbill_list4.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+
+echo "<li><a>".$page."</></li>";
+
+echo "<li><a href='knbill_list4.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+echo "</ul>";
+?>
+												
 </div>
 											
                                         </div>

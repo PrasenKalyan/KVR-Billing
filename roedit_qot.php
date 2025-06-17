@@ -323,8 +323,17 @@ $("#submit").prop('disabled',true);
                                        <td align="right">PO Type</td><td align="left">
 										<select name="po_type" class="form-control">
 										<option value="<?php echo $r['po_type'];?>"><?php echo $r['po_type'];?></option>
-										<option value="416">416</option>
-										<option value="417">417</option>
+										<!-- <option value="416">416</option>
+										<option value="417">417</option> -->
+                                        <option value="419">419</option>
+                                        <option value="433">433</option>
+                                        <option value="444">444</option>
+										<option value="451">451</option>
+                                        <option value="452">452</option>
+										<option value="454">454</option>
+                                        <option value="455">455</option>
+                                        <option value="RP5">RP5</option>
+
 
 </select>	</td>								
                                         </tr>
@@ -417,8 +426,8 @@ $("#submit").prop('disabled',true);
                                                     <td width="20px;">
 													
 													
-												<!--	<a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_line.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>'><input type="button" class="btn btn-danger" value="Delete"></button>
-							</a>--><input type="hidden" name="sno[]" style="width:30px;" value="<?php echo $rs1['sno']; ?>">
+												<!-- <a onclick="return confirm('Are you sure you want to delete this item?');" href='delete_line.php?id=<?php echo $rs1['id']; ?>&id1=<?php echo $rs1['id1'];?>'><input type="button" class="btn btn-danger" value="Delete"></button> -->
+							</a><input type="hidden" name="sno[]" style="width:30px;" value="<?php echo $rs1['sno']; ?>">
 							<input type="hidden" name="id1[]" style="width:30px;" value="<?php echo $rs1['id1']; ?>">
 							<input type="hidden" name="id5[]" style="width:30px;" value="<?php echo $rs1['id']; ?>">
 													

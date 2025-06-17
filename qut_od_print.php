@@ -183,7 +183,7 @@ $invdate = date('d-M-y', strtotime( $invdate1 ));
 include_once('dbconnection/connection.php');
 $bid=$r['id'];
 
-	 $aa="select * from add_odqot where status = 'work to be started' order by id desc ";
+	 $aa="select * from add_odqot order by id desc ";
  
 $t=mysqli_query($link,$aa) or die(mysqli_error($link));
 $i=1;

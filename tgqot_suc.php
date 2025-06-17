@@ -96,10 +96,17 @@ $falt_desc=$_POST['falt_desc'];
 
     $sqq=mysqli_query($link,"select `count` as ids from qutcount where state='TS' ");
 	$rr=mysqli_fetch_array($sqq);
-    $idd=$rr['ids'];
+	$idd=$rr['ids'];
 	$cc=$idd+1;
-	 $qt_nox=25260000+1+$idd;
-	 $qt_no="QJTTG$qt_nox";  
+	$service = $_POST['service']; 
+	if ($service == "House Cleaning") {
+		$qt_nox = 20250000 + 1 + $idd;
+		$qt_no = "QHCTG" . $qt_nox;
+	} else {
+		
+		$qt_nox = 20250000 + 1 + $idd;
+		$qt_no = "QKVRTG" . $qt_nox;
+	}   
 	 
 	 
 	  if($qt_no1!=''){
@@ -437,7 +444,7 @@ $productype=$_POST['productype'][$i];
 	//exit;
 	if($sq){
 	print "<script>";
-	print "alert('Sucessfully Updated');";
+	print "alert('Successfully Updated');";
 	print "self.location='tgqot_list.php';";
 	print "</script>";
 

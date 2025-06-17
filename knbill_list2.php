@@ -149,9 +149,6 @@ include'dbfiles/org.php';
                                                         <th>Ro Num</th>
                                                         <th>Ro Date</th>
                                                         <th>Fault Description</th>
-                                                    
-                                                     
-                                                        
                                                         <th>Bill Received Date</th>
                                                         <th>Ro Amount</th>
                                                        <th>Tot Service Amount</th>
@@ -159,10 +156,9 @@ include'dbfiles/org.php';
                                                        <th>Total Amount</th>
                                                        <th>User</th>
                                                       <th>Edit</th>
-														
-                                                          
-                                                        
-                                                      
+                                                      <th>Document Download</th>
+                                                      <!-- <th>Invoice PDF</th>
+                                                      <th>Invoice Excel</th> -->
                                                       
                                                     </tr>
                                                 </thead>
@@ -170,17 +166,40 @@ include'dbfiles/org.php';
                                                 <tbody>
 												
 												<?php 
-											if(isset($_POST['bsearch'])){
+                                                $results_per_page = 30;
+
+$page = isset($_GET["page"]) && is_numeric($_GET["page"]) ? (int)$_GET["page"] : 1;
+$start_from = ($page - 1) * $results_per_page;
+
+											// if(isset($_POST['bsearch'])){
+											// 	$bsearch=$_POST['search'];
+											//  $y="SELECT * FROM knqot_bill where status='payment pending'  and quet_num like  '%$bsearch%' order by id desc";
+											    // }else{
+											         
+											    // }
+											    
+											    //   if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')or ($tsname=='naiduys')){
+											    
+												// 	 $y="SELECT * FROM knqot_bill where status='payment pending' order by id desc";
+											//     }else{
+											//          $y="SELECT * FROM knqot_bill  ORDER BY id desc LIMIT $start_from, ".$results_per_page;
+											//     }
+											    
+											    
+                                             
+											    
+											// }
+                                            if(isset($_POST['bsearch'])){
 												$bsearch=$_POST['search'];
-											 $y="SELECT * FROM knqot_bill where status='payment pending'  and quet_num like  '%$bsearch%' limit 30 ";
+											 $y="SELECT * FROM knqot_bill where status='payment pending'  and quet_num like  '%$bsearch%' order by id desc ";
 											} else {
 											    
-											      if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts')  or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')or ($tsname=='naiduys')){
+											    //   if(($tsname=='admin') or ($tsname=='durgarao') or ($tsname=='accounts') or ($tsname=='knbilling') or ($tsname=='sumanthpotluri')or ($tsname=='naiduys')){
 											    
-													 $y="SELECT * FROM knqot_bill where status='payment pending' limit 30  ";
-											      }else{
-											         $y="SELECT * FROM knqot_bill where status='payment pending' and user='$tsadmin' limit 30 ";
-											    }
+													 $y="SELECT * FROM knqot_bill where status='payment pending' ORDER BY id desc LIMIT $start_from, ".$results_per_page;   
+											    //   }else{
+											    //      $y="SELECT * FROM knqot_bill where status='payment pending' and user='$tsadmin'  ";
+											    // }
 											    
 											    
 											    
@@ -284,24 +303,49 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                                             echo $rss1['emp_name']; ?></td>
                                                         <td class="hidden-480">
                                                             
-                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')   or ($tsname=='sumanthpotluri')or ($tsname=='knbilling')){ ?>
+                                                             
                                                              <a href="knedit_req_bill2.php?id=<?php echo $q; ?>&id1=<?php echo $rs1['id'];?>">
                                                         <img src="images/edit.gif"></a>
                                                         
                                                         <a href="knraise_delete.php?id=<?php echo $rs1['id'];?>">
                                                         <img src="images/Icon_Delete.png"></a>
 														
-                                                       <?php }else{?>
-                                                       <img src="images/edit.gif">
-                                                       <img src="images/Icon_Delete.png">
-                                                       <?php }?>
+                                                       
                                                            
                                                         
                                                         
                                                         
                                                         </td>
-														
+                                                        <td class="hidden-480">
+                                                            
+                                                            <a href="kndoc.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="kndoc1.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file1']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+
+                                                         <a href="kndoc2.php?id=<?php echo $rs1['quet_num'];?>&file=<?php echo urlencode($rs2['not_file2']); ?>">
+                                                         <img src="images/xl.jpg" width="20" height="20"></a>
+                                                             
                                                        
+                                                         </td>
+														
+                                                       <!-- <td class="hidden-480">
+                                                             <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='apbilling')or ($tsname=='sumanthpotluri')){ ?>
+                                                            <a href="kngenerateinvoice.php?id=<?php echo $rs1['quet_num']; ?>">
+                                                         <img src="images/pdf_icon.gif" width="30" height="30"></a>
+                                                          <?php }else{?>
+                                                       <img src="images/pdf_icon.gif">
+                                                       <?php }?>
+                                                         </td>
+                                                         <td class="hidden-480">
+                                                              <?php  if(($tsname=='admin') or ($tsname=='durgarao')  or ($tsname=='apbilling')or ($tsname=='sumanthpotluri')){ ?><a href="kngenerateexcel.php?id=<?php echo $rs1['quet_num']; ?>"><img src="images/xl.jpg" width="20" height="20"></a>
+                                                                  <?php }else{?>
+                                                       <img src="images/xl.jpg">
+                                                       <?php }?>
+                                                          </td> -->
+														
+                                                    </tr></tr>
 														
 														
 													
@@ -328,7 +372,24 @@ echo date('d-m-Y', strtotime($d)); }?></td>
                                             </table>
 											</div>
 											<div align="center">		
-							
+<?php 
+$sql = "SELECT COUNT(id) AS total FROM knqot_bill";
+$result = mysqli_query($link,$sql);
+$row = mysqli_fetch_assoc($result);
+$total_pages = ceil($row["total"] / $results_per_page); // calculate total pages with results
+  
+
+
+
+echo "<ul class='pagination'>";
+echo "<li><a href='knbill_list2.php?page=".($page-1)."' class='button'>Previous</a></li>"; 
+
+echo "<li><a>".$page."</></li>";
+
+echo "<li><a href='knbill_list2.php?page=".($page+1)."' class='button'>NEXT</a></li>";
+echo "</ul>";
+?>
+												
 </div>
 											
                                         </div>
@@ -612,7 +673,7 @@ session_destroy();
 session_unset();
 
 header('Location:index.php?authentication failed');
-
 }
+
 
 ?>

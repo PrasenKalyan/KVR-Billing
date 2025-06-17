@@ -449,7 +449,7 @@ $productype=$_POST['productype'][$i];
 	//exit;
 	if($res){
 	print "<script>";
-	print "alert('Sucessfully Updated');";
+	print "alert('Successfully Updated');";
 	print "self.location='knqot_list.php';";
 	print "</script>";
 
